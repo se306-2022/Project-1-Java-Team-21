@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "556762508647",
-    "project_id": "sneakerhub-6fb23",
-    "storage_bucket": "sneakerhub-6fb23.appspot.com"
+    "project_number": "676490795475",
+    "project_id": "sneakerhub-d375b",
+    "storage_bucket": "sneakerhub-d375b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:556762508647:android:ca51696022963aa452d3c2",
+        "mobilesdk_app_id": "1:676490795475:android:ea94f692770c4ac8637726",
         "android_client_info": {
           "package_name": "com.group21.sneakerhub"
         }
       },
       "oauth_client": [
         {
-          "client_id": "556762508647-i9aeuj9as1fkbtn7r55dub2srchdsium.apps.googleusercontent.com",
+          "client_id": "676490795475-oqeqo4qljfcj5rm4594f2e6dkae0uomh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAjc6fQu2AAiIrXNk_BuPRryfdz0tChSBc"
+          "current_key": "AIzaSyCrKQbHQ1PWEwuMvrYT4jxx0mJSDfRA_Jg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "556762508647-i9aeuj9as1fkbtn7r55dub2srchdsium.apps.googleusercontent.com",
+              "client_id": "676490795475-oqeqo4qljfcj5rm4594f2e6dkae0uomh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
