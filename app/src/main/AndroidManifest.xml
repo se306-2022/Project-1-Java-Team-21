@@ -14,7 +14,22 @@
         android:theme="@style/Theme.SneakerHub"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".views.searchResultListActivity.SearchResultListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.searchFIlterActivity.SearchFilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.listActivity.ListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.favouriteActivity.FavouriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.detailsActivity.DetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.mainActivity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
