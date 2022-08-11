@@ -22,23 +22,15 @@ public class Category extends Entity {
         this.layout = layout;
     }
 
-
-    /**
-     * Getters
-     */
-
     public String GetURI() {
         return this.imageURI;
     }
-
 
     public String GetColour(){
         return this.colour;
     }
 
-
-    public String GetLayout(){
+    public String getLayoutInformation() {
         return this.layout;
     }
-
 }

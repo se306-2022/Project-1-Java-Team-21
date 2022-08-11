@@ -6,6 +6,8 @@ import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.repository.CategoryRepository;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
         // test Category Respository class
         CategoryRepository cr = CategoryRepository.getInstance();
+        //get all categories as a list
+        cr.getCategories();
 
         // have to test getCategoryById on a new thread
         // because the tasks class prevents the method from being called on the main thread
@@ -23,11 +27,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Category category = cr.getCategoryById(312412);
+                Category category = cr.getCategoryById("Adidas");
                 System.out.println(category.GetName());
                 System.out.println(category.GetColour());
                 System.out.println(category.GetId());
-                System.out.println(category.GetLayout());
                 System.out.println(category.GetURI());
             }
 
@@ -40,5 +43,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
     }
 }
