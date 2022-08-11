@@ -23,7 +23,7 @@ public class CategoryRepository implements ICategoryRepository{
 
 
     List<Category> categoryList;
-    //private static CategoryRepository categoriesRepo;
+    private static CategoryRepository categoriesRepo;
     /**
      * Create instance of the firestone database.
      * Should be limited to only one instance.
@@ -34,17 +34,17 @@ public class CategoryRepository implements ICategoryRepository{
      * Using singleton design pattern limit the number of instances
      * created to only one.
      */
-    /*
+
     private CategoryRepository() {
         db = FirebaseFirestore.getInstance();
     }
-    */
+
     /**
      * Any other class that wants to use this class does so by calling this getter method.
      * If there already exists an instance, the getter returns it, if not then it creates one.
      * @return
      */
-    /*
+
     public static CategoryRepository getInstance() {
 
         // create object if it's not already created
@@ -55,12 +55,7 @@ public class CategoryRepository implements ICategoryRepository{
         // returns the singleton object
         return categoriesRepo;
     }
-    */
 
-    // required for the firestore connection
-    public CategoryRepository(){
-
-    }
 
 
     /**
@@ -69,7 +64,6 @@ public class CategoryRepository implements ICategoryRepository{
 
     public void getCategories(){
         categoryList = new ArrayList<Category>();
-        db = FirebaseFirestore.getInstance();
 
         db.collection("Categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -91,13 +85,12 @@ public class CategoryRepository implements ICategoryRepository{
                     System.out.println("Loading Category collection failed from Firestore!");
             }
         });
-
-
-
     }
 
-
-    public void printCategories(){
+    /**
+     * Test method to see that data is actually fetched and stored in the list
+     */
+    private void printCategories(){
         for (Category category : categoryList){
             System.out.println(category.GetName());
             System.out.println(category.GetColour());
@@ -107,13 +100,5 @@ public class CategoryRepository implements ICategoryRepository{
         }
     }
 
-    public void print(){
-        System.out.println("Hello");
-    }
-
-
-    /**
-     * Fetch all the
-     */
 
 }

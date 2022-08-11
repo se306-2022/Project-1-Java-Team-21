@@ -16,10 +16,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CategoryRepository cr = new CategoryRepository();
+        // test Category Respository class
+        CategoryRepository cr = CategoryRepository.getInstance();
         cr.getCategories();
-
-        cr.print();
 
 
     }

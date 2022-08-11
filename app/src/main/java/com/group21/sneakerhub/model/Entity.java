@@ -1,20 +1,14 @@
 package com.group21.sneakerhub.model;
 
 public abstract class Entity {
-    protected String name;
-    protected int Id;
+    public String name;
+    public int id;
 
-    public Entity(String name, int Id) {
-        this.name = name;
-        this.Id = Id;
-    }
-
-
-    protected String GetName() {
+    public String GetName() {
         return this.name;
     }
 
-    protected int GetId(){
-        return this.Id;
+    public int GetId(){
+        return this.id;
     }
 }
