@@ -1,20 +1,25 @@
 package com.group21.sneakerhub.repository;
 
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
+import androidx.annotation.NonNull;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.group21.sneakerhub.usecases.getCategories.GetCategories;
-
+import com.group21.sneakerhub.model.Adidas;
+import com.group21.sneakerhub.model.AirJordan;
+import com.group21.sneakerhub.model.Category;
+import com.group21.sneakerhub.model.Nike;
+import com.group21.sneakerhub.model.Vans;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-public class CategoryRepository implements ICategoryRepository{
+public class CategoryRepository implements ICategoryRepository {
 
-
-    List<String> CategoriesList = new ArrayList<String>();
+    private List<Category> categoryList;
     private static CategoryRepository categoriesRepo;
+
     /**
      * Create instance of the firestone database.
      * Should be limited to only one instance.
@@ -35,6 +40,7 @@ public class CategoryRepository implements ICategoryRepository{
      * If there already exists an instance, the getter returns it, if not then it creates one.
      * @return
      */
+
     public static CategoryRepository getInstance() {
 
         // create object if it's not already created
@@ -46,35 +52,71 @@ public class CategoryRepository implements ICategoryRepository{
         return categoriesRepo;
     }
 
+
+
     /**
      * Fetch all the Documents inside the categories collection
      */
 
-    public void getCategories(){
-        db.collection("Categories").addSnapshotListener(new EventListener<QuerySnapshot>() {
+    @Override
+    public List<Category> getCategories(){
+        categoryList = new ArrayList<Category>();
+
+        db.collection("Categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                if (e != null) {
-                    System.out.println(e.getMessage());
-                }
-                CategoriesList.clear();
-                for (DocumentSnapshot doc : documentSnapshots) {
-                    CategoriesList.add(doc.getString("name"));
-                }
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    QuerySnapshot results = task.getResult();
+                    for (Category categoryItem : task.getResult().toObjects(Category.class)) {
+                        categoryList.add(categoryItem);
+
+                    }
+                    if (categoryList.size() > 0) {
+                        //System.out.println("Success !!!");
+                        printCategories(categoryList);
+
+                    } else
+                        System.out.println("The Collection was empty!");
+
+                } else
+                    System.out.println("Loading Category collection failed from Firestore!");
             }
         });
-    }
 
-
-    public void printCategories(){
-        for (String categoryNames : CategoriesList){
-            System.out.println(categoryNames);
-        }
+        return categoryList;
     }
 
 
     /**
-     * Fetch all the
+     * Get a specific Category document by querying its id field
+     * and map it to a single Category object
      */
+    @Override
+    public Category getCategoryById(long inputId){
+        try {
+            Category selectedCategory = Tasks.await(db.collection("Categories").document(String.valueOf(inputId)).get()).toObject(Category.class);
+            return selectedCategory;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        } catch (InterruptedException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Test method to see that data is actually fetched and stored in the list
+     */
+    private void printCategories(List<Category> categoryList){
+        for (Category category : categoryList){
+            System.out.println(category.GetName());
+            System.out.println(category.GetColour());
+            System.out.println(category.GetId());
+            System.out.println(category.GetLayout());
+            System.out.println(category.GetURI());
+        }
+    }
+
 
 }
