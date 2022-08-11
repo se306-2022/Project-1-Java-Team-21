@@ -16,7 +16,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="16dp"
+        android:paddingVertical="10dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -40,6 +40,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginBottom="8dp"/>
+
         <android.widget.SearchView
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -48,6 +49,237 @@
             android:paddingVertical="10dp"
             android:clickable="true"
             android:focusedByDefault="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Brand"
+            android:paddingLeft="14dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"/>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Air Jordan"
+                android:textOff="Air Jordan"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"
+                android:layout_marginRight="20dp"/>
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Nike"
+                android:textOff="Nike"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Vans"
+                android:textOff="Vans"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"
+                android:layout_marginRight="20dp"/>
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Adidas"
+                android:textOff="Adidas"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Colour"
+            android:paddingLeft="14dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="White"
+                android:textOff="White"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"
+                android:layout_marginRight="20dp"/>
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Black"
+                android:textOff="Black"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"
+                android:layout_marginRight="20dp"/>
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Red"
+                android:textOff="Red"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Blue"
+                android:textOff="Blue"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"
+                android:layout_marginRight="20dp"/>
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Yellow"
+                android:textOff="Yellow"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"
+                android:layout_marginRight="20dp"/>
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Orange"
+                android:textOff="Orange"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Purple"
+                android:textOff="Purple"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"
+                android:layout_marginRight="20dp"/>
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Green"
+                android:textOff="Green"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"
+                android:layout_marginRight="20dp"/>
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textOn="Grey"
+                android:textOff="Grey"
+                android:textSize="14dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_border"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:paddingLeft="14dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$0"
+                android:paddingRight="120dp"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$1000"
+                android:paddingLeft="120dp"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/range_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:values="@array/initial_slider_values"
+            android:valueFrom="0.0"
+            android:valueTo="1000.0"
+            android:stepSize="100.0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/button_id"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Submit"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:backgroundTint="#ff0000"/>
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -61,4 +293,5 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation"/>
+
 </LinearLayout>
