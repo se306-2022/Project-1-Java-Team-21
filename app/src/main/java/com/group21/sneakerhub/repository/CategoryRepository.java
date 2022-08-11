@@ -1,36 +1,25 @@
 package com.group21.sneakerhub.repository;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.group21.sneakerhub.model.Adidas;
 import com.group21.sneakerhub.model.AirJordan;
 import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.model.Nike;
-import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.model.Vans;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class CategoryRepository implements ICategoryRepository{
-    private Category category;
-    private Nike nike;
-    private AirJordan airJordan;
-    private Adidas adidas;
-    private Vans vans;
+public class CategoryRepository implements ICategoryRepository {
+
     private List<Category> categoryList;
     private static CategoryRepository categoriesRepo;
-    private static final String TAG = "CategoryRepository";
+
     /**
      * Create instance of the firestone database.
      * Should be limited to only one instance.
@@ -69,6 +58,7 @@ public class CategoryRepository implements ICategoryRepository{
      * Fetch all the Documents inside the categories collection
      */
 
+    @Override
     public List<Category> getCategories(){
         categoryList = new ArrayList<Category>();
 
@@ -101,7 +91,7 @@ public class CategoryRepository implements ICategoryRepository{
      * Get a specific Category document by querying its id field
      * and map it to a single Category object
      */
-
+    @Override
     public Category getCategoryById(long inputId){
         try {
             Category selectedCategory = Tasks.await(db.collection("Categories").document(String.valueOf(inputId)).get()).toObject(Category.class);
