@@ -1,29 +1,36 @@
 package com.group21.sneakerhub.repository;
 
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.group21.sneakerhub.model.Adidas;
+import com.group21.sneakerhub.model.AirJordan;
 import com.group21.sneakerhub.model.Category;
-
+import com.group21.sneakerhub.model.Nike;
+import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.model.Vans;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class CategoryRepository implements ICategoryRepository{
-
-
-    List<Category> categoryList;
+    private Category category;
+    private Nike nike;
+    private AirJordan airJordan;
+    private Adidas adidas;
+    private Vans vans;
+    private List<Category> categoryList;
     private static CategoryRepository categoriesRepo;
+    private static final String TAG = "CategoryRepository";
     /**
      * Create instance of the firestone database.
      * Should be limited to only one instance.
@@ -62,7 +69,7 @@ public class CategoryRepository implements ICategoryRepository{
      * Fetch all the Documents inside the categories collection
      */
 
-    public void getCategories(){
+    public List<Category> getCategories(){
         categoryList = new ArrayList<Category>();
 
         db.collection("Categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -75,8 +82,8 @@ public class CategoryRepository implements ICategoryRepository{
 
                     }
                     if (categoryList.size() > 0) {
-                        System.out.println("Success !!!");
-                        printCategories();
+                        //System.out.println("Success !!!");
+                        printCategories(categoryList);
 
                     } else
                         System.out.println("The Collection was empty!");
@@ -85,12 +92,33 @@ public class CategoryRepository implements ICategoryRepository{
                     System.out.println("Loading Category collection failed from Firestore!");
             }
         });
+
+        return categoryList;
+    }
+
+
+    /**
+     * Get a specific Category document by querying its id field
+     * and map it to a single Category object
+     */
+
+    public Category getCategoryById(long inputId){
+        try {
+            Category selectedCategory = Tasks.await(db.collection("Categories").document(String.valueOf(inputId)).get()).toObject(Category.class);
+            return selectedCategory;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        } catch (InterruptedException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
      * Test method to see that data is actually fetched and stored in the list
      */
-    private void printCategories(){
+    private void printCategories(List<Category> categoryList){
         for (Category category : categoryList){
             System.out.println(category.GetName());
             System.out.println(category.GetColour());
