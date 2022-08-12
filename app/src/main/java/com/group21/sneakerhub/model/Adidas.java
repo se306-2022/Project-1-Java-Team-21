@@ -7,6 +7,5 @@ public class Adidas extends Category {
     }
 
     public void AdidasLayoutInformation(){
-
     }
 }

@@ -7,6 +7,5 @@ public class Nike extends Category {
     }
 
     public void NikeLayoutInformation(){
-
     }
 }

@@ -7,6 +7,5 @@ public class Vans extends Category{
     }
 
     public void VansLayoutInformation(){
-
     }
 }
