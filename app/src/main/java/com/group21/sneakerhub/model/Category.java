@@ -14,7 +14,7 @@ public class Category extends Entity {
     public Category(){
     }
 
-    public Category(String name, int id, String imageURI, String colour, String layout) {
+    public Category(String name, long id, String imageURI, String colour, String layout) {
         this.name = name;
         this.id = id;
         this.imageURI = imageURI;
@@ -22,23 +22,15 @@ public class Category extends Entity {
         this.layout = layout;
     }
 
-
-    /**
-     * Getters
-     */
-
     public String GetURI() {
         return this.imageURI;
     }
-
 
     public String GetColour(){
         return this.colour;
     }
 
-
-    public String GetLayout(){
+    public String getLayoutInformation() {
         return this.layout;
     }
-
 }
