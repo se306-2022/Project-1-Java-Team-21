@@ -80,8 +80,8 @@ public class CategoryRepository implements ICategoryRepository {
 
                     }
                     if (categoryList.size() > 0) {
-                        System.out.println("Success !!!");
-                        printCategories(categoryList);
+//                        System.out.println("Success !!!");
+//                        printCategories(categoryList);
 
                     } else
                         System.out.println("The Collection was empty!");

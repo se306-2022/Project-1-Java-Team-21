@@ -95,7 +95,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public List<Product> getDefaultColourProducts() {
         try {
-            return Tasks.await(db.collection(COLLECTION_NAME).whereEqualTo("isDefault", true).get()).toObjects(Product.class);
+            return Tasks.await(db.collection(COLLECTION_NAME).whereEqualTo("isFirst", true).get()).toObjects(Product.class);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
