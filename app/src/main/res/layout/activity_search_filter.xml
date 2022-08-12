@@ -45,10 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:id="@+id/menu_search"
-            android:background="#F5F5F5"
+            android:background="@drawable/search_style"
             android:paddingVertical="10dp"
-            android:clickable="true"
-            android:focusedByDefault="true"/>
+            android:clickable="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -261,10 +260,10 @@
             android:id="@+id/range_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:values="@array/initial_slider_values"
+            android:stepSize="100.0"
             android:valueFrom="0.0"
             android:valueTo="1000.0"
-            android:stepSize="100.0" />
+            app:values="@array/initial_slider_values" />
 
         <LinearLayout
             android:layout_width="match_parent"
