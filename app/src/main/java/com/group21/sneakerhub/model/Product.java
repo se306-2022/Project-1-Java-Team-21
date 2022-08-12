@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class Product extends Entity {
+
     private long categoryId;
     private double price;
     private String color;
@@ -15,8 +16,7 @@ public class Product extends Entity {
     private String description;
     private List<String> features;
 
-    public Product() {
-    }
+    public Product() {}
 
     public Product(long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features) {
         this.id = id;
@@ -84,5 +84,6 @@ public class Product extends Entity {
         this.isFavourite = !this.isFavourite;
         return this.isFavourite;
     }
+
 
 }

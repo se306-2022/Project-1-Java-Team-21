@@ -1,14 +1,36 @@
 package com.group21.sneakerhub.model;
 
-public abstract class Category extends Entity {
-    private String imageURI;
-    private String colour;
+import com.google.firebase.firestore.Exclude;
 
-    public String getImageURI() {
-        return imageURI;
+public class Category extends Entity {
+
+    public String imageURI;
+    public String colour;
+    public String layout;
+
+    /**
+     * No argument, empty constructor as required by firestone
+     */
+    public Category(){
     }
 
-    public String getColour() {
-        return colour;
+    public Category(String name, int id, String imageURI, String colour, String layout) {
+        this.name = name;
+        this.id = id;
+        this.imageURI = imageURI;
+        this.colour = colour;
+        this.layout = layout;
+    }
+
+    public String GetURI() {
+        return this.imageURI;
+    }
+
+    public String GetColour(){
+        return this.colour;
+    }
+
+    public String getLayoutInformation() {
+        return this.layout;
     }
 }

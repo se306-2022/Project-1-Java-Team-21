@@ -2,9 +2,10 @@ package com.group21.sneakerhub.model;
 
 public class Adidas extends Category {
 
-    private String AdidasLayout;
+    public Adidas(String name, int Id, String URI, String colour, String layout) {
+        super(name, Id, URI, colour,layout);
+    }
 
-    public String getAdidasLayout() {
-        return AdidasLayout;
+    public void AdidasLayoutInformation(){
     }
 }
