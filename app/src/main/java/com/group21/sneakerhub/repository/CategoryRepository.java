@@ -4,10 +4,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.group21.sneakerhub.model.Adidas;
 import com.group21.sneakerhub.model.AirJordan;
@@ -71,14 +68,14 @@ public class CategoryRepository implements ICategoryRepository {
                 if (task.isSuccessful()) {
                     QuerySnapshot results = task.getResult();
                     for (Category categoryItem : task.getResult().toObjects(Category.class)) {
-                        if (categoryItem.GetName().equals("Nike")){
-                            categoryList.add(new Nike(categoryItem.GetName(), categoryItem.GetId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
-                        } else if (categoryItem.GetName().equals("Adidas")){
-                            categoryList.add(new Adidas(categoryItem.GetName(), categoryItem.GetId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
-                        } else if (categoryItem.GetName().equals("Vans")){
-                            categoryList.add(new Vans(categoryItem.GetName(), categoryItem.GetId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
-                        } else if (categoryItem.GetName().equals("AirJordan")){
-                            categoryList.add(new AirJordan(categoryItem.GetName(), categoryItem.GetId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        if (categoryItem.getName().equals("Nike")){
+                            categoryList.add(new Nike(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        } else if (categoryItem.getName().equals("Adidas")){
+                            categoryList.add(new Adidas(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        } else if (categoryItem.getName().equals("Vans")){
+                            categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        } else if (categoryItem.getName().equals("AirJordan")){
+                            categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
                         }
 
                     }
@@ -120,9 +117,9 @@ public class CategoryRepository implements ICategoryRepository {
      */
     private void printCategories(List<Category> categoryList){
         for (Category category : categoryList){
-            System.out.println(category.GetName());
+            System.out.println(category.getName());
             System.out.println(category.GetColour());
-            System.out.println(category.GetId());
+            System.out.println(category.getId());
             System.out.println(category.GetURI());
             System.out.println(category.getLayoutInformation());
         }

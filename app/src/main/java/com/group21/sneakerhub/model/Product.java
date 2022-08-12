@@ -15,10 +15,11 @@ public class Product extends Entity {
     private List<String> imageUrls;
     private String description;
     private List<String> features;
+    private boolean isDefault;
 
     public Product() {}
 
-    public Product(long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features) {
+    public Product(long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isDefault) {
         this.id = id;
         this.name = name;
         this.categoryId = categoryId;
@@ -31,6 +32,7 @@ public class Product extends Entity {
         this.imageUrls = imageUrls;
         this.description = description;
         this.features = features;
+        this.isDefault = isDefault;
     }
 
     public long getCategoryId() {
@@ -85,5 +87,7 @@ public class Product extends Entity {
         return this.isFavourite;
     }
 
-
+    public boolean getIsDefault() {
+        return isDefault;
+    }
 }
