@@ -71,6 +71,7 @@
                 android:textOn="Air Jordan"
                 android:textOff="Air Jordan"
                 android:textSize="14dp"
+                android:onClick="brandsEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
                 android:layout_marginRight="20dp"/>
@@ -81,6 +82,7 @@
                 android:textOn="Nike"
                 android:textOff="Nike"
                 android:textSize="14dp"
+                android:onClick="brandsEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
         </LinearLayout>
@@ -95,6 +97,7 @@
                 android:layout_height="35dp"
                 android:textOn="Vans"
                 android:textOff="Vans"
+                android:onClick="brandsEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
@@ -105,6 +108,7 @@
                 android:layout_height="35dp"
                 android:textOn="Adidas"
                 android:textOff="Adidas"
+                android:onClick="brandsEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
@@ -131,6 +135,7 @@
                 android:textOn="White"
                 android:textOff="White"
                 android:textSize="14dp"
+                android:onClick="coloursEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
                 android:layout_marginRight="20dp"/>
@@ -141,6 +146,7 @@
                 android:textOn="Black"
                 android:textOff="Black"
                 android:textSize="14dp"
+                android:onClick="coloursEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
                 android:layout_marginRight="20dp"/>
@@ -150,6 +156,7 @@
                 android:layout_height="35dp"
                 android:textOn="Red"
                 android:textOff="Red"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
@@ -166,6 +173,7 @@
                 android:textOn="Blue"
                 android:textOff="Blue"
                 android:textSize="14dp"
+                android:onClick="coloursEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
                 android:layout_marginRight="20dp"/>
@@ -175,6 +183,7 @@
                 android:layout_height="35dp"
                 android:textOn="Yellow"
                 android:textOff="Yellow"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
@@ -185,6 +194,7 @@
                 android:layout_height="35dp"
                 android:textOn="Orange"
                 android:textOff="Orange"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
@@ -200,6 +210,7 @@
                 android:layout_height="35dp"
                 android:textOn="Purple"
                 android:textOff="Purple"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
@@ -210,6 +221,7 @@
                 android:layout_height="35dp"
                 android:textOn="Green"
                 android:textOff="Green"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
@@ -220,6 +232,7 @@
                 android:layout_height="35dp"
                 android:textOn="Grey"
                 android:textOff="Grey"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
@@ -246,14 +259,16 @@
                 android:text="$0"
                 android:paddingRight="120dp"
                 android:textSize="14sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:id="@+id/slider_text_min"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$1000"
                 android:paddingLeft="120dp"
                 android:textSize="14sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:id="@+id/slider_text_max"/>
         </LinearLayout>
 
         <com.google.android.material.slider.RangeSlider
