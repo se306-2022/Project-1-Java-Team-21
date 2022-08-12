@@ -1,12 +1,17 @@
 package com.group21.sneakerhub.views.mainActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import com.group21.sneakerhub.R;
-import com.group21.sneakerhub.model.Category;
-import com.group21.sneakerhub.repository.CategoryRepository;
 
-import java.util.List;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.group21.sneakerhub.R;
+import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
+import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -16,34 +21,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // test Category Respository class
-        CategoryRepository cr = CategoryRepository.getInstance();
-        //get all categories as a list
-        cr.getCategories();
+        // Initialize and assign object for nav bar
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        // have to test getCategoryById on a new thread
-        // because the tasks class prevents the method from being called on the main thread
-        Thread thread1 = new Thread(new Runnable(){
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.home);
+
+        // implement event listener
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void run() {
-
-                Category category = cr.getCategoryById("Adidas");
-                System.out.println(category.GetName());
-                System.out.println(category.GetColour());
-                System.out.println(category.GetId());
-                System.out.println(category.GetURI());
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.search:
+                        startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.favourite:
+                        startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.home:
+                        return true;
+                }
+                return false;
             }
-
         });
-
-        thread1.start();
-
-        try {
-            thread1.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
 
     }
 }
