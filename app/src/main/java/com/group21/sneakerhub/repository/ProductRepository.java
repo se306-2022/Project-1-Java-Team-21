@@ -66,7 +66,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public void updateProductIsFavourite(Product product) {
         try{
-            Tasks.await(db.collection("products").document(String.valueOf(product.getId())).update("isFavourite", product.getIsFavourite()));
+            Tasks.await(db.collection("products").document(String.valueOf(product.GetId())).update("isFavourite", product.getIsFavourite()));
         }catch (ExecutionException | InterruptedException e){
             e.printStackTrace();
         }
@@ -76,7 +76,7 @@ public class ProductRepository implements IProductRepository{
     public void updateProductRating(Product product) {
         try{
             // update the rating and numberOfUsersRated of the product
-            Tasks.await(db.collection("products").document(String.valueOf(product.getId())).update("rating", product.getRating(),"numberOfUsersRated", product.getNumberOfUsersRated()));
+            Tasks.await(db.collection("products").document(String.valueOf(product.GetId())).update("rating", product.getRating(),"numberOfUsersRated", product.getNumberOfUsersRated()));
         }catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }

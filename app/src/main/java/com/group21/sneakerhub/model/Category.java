@@ -14,7 +14,7 @@ public class Category extends Entity {
     public Category(){
     }
 
-    public Category(String name, int id, String imageURI, String colour, String layout) {
+    public Category(String name, long id, String imageURI, String colour, String layout) {
         this.name = name;
         this.id = id;
         this.imageURI = imageURI;
