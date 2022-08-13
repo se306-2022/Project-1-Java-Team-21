@@ -15,12 +15,14 @@ public class Product extends Entity {
     private String description;
     private List<String> features;
     private boolean isFirst;
+    private String imageURL; // only for test
 
     public Product() {}
 
-    public Product(long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isFirst) {
-        this.id = id;
+    public Product(String name, long id, long categoryId, String imageURL, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isFirst) {
         this.name = name;
+        this.id = id;
+        this.imageURL = imageURL; // just for test
         this.categoryId = categoryId;
         this.price = price;
         this.color = color;
@@ -53,6 +55,14 @@ public class Product extends Entity {
     public double getRating() {
         // gets the rating to the nearest 0.5
         return Math.round(rating * 2) / 2.0;
+    }
+
+    /**
+     * Creating this getter just for testing list view,delete later
+     * @return
+     */
+    public String getImageURL(){
+        return this.imageURL;
     }
 
     public int getNumberOfUsersRated() {

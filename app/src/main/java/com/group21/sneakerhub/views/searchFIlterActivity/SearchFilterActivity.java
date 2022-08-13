@@ -112,13 +112,13 @@ public class SearchFilterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // create an intent that navigates to NumbersActivity class
-                Intent numbersIntent = new Intent(getBaseContext(), SearchResultListActivity.class);
+                Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
                 //set data across to the other activity
                 // sent in a key, value format, with the key being the first argument
                 // many different types of data can be sent
-                numbersIntent.putExtra("messageFromMainActivity","This message came from the main activity");
+                searchResults.putExtra("messageFromMainActivity","This message came from the main activity");
                 //start the activity
-                startActivity(numbersIntent);
+                startActivity(searchResults);
             }
         });
 
