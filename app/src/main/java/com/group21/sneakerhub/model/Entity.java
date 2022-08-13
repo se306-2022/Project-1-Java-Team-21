@@ -5,11 +5,11 @@ public abstract class Entity {
     public String name;
     public long id;
 
-    public String GetName() {
+    public String getName() {
         return this.name;
     }
 
-    public long GetId(){
+    public long getId(){
         return this.id;
     }
 }

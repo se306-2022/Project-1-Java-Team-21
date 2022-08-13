@@ -1,6 +1,7 @@
 package com.group21.sneakerhub.repository;
 
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.group21.sneakerhub.model.Product;
 
@@ -8,15 +9,14 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ProductRepository implements IProductRepository{
-    private FirebaseFirestore db;
+    private final FirebaseFirestore db;
     private static ProductRepository instance;
-
-    private ProductRepository(){
+    private static final String COLLECTION_NAME = "Products";
+    public ProductRepository(){
         db = FirebaseFirestore.getInstance();
     }
 
-    @Override
-    public ProductRepository getInstance() {
+    public static ProductRepository getInstance(){
         if(instance == null){
             instance = new ProductRepository();
         }
@@ -26,7 +26,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public List<Product> getProducts() {
         try {
-            return Tasks.await(db.collection("products").get()).toObjects(Product.class);
+            return Tasks.await(db.collection(COLLECTION_NAME).get()).toObjects(Product.class);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -36,7 +36,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public Product getProductById(long id) {
         try {
-            return Tasks.await(db.collection("products").document(String.valueOf(id)).get()).toObject(Product.class);
+            return Tasks.await(db.collection(COLLECTION_NAME).document(String.valueOf(id)).get()).toObject(Product.class);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -46,7 +46,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public List<Product> getProductsByCategoryId(long id) {
         try {
-            return Tasks.await(db.collection("products").whereEqualTo("categoryId", id).get()).toObjects(Product.class);
+            return Tasks.await(db.collection(COLLECTION_NAME).whereEqualTo("categoryId", id).get()).toObjects(Product.class);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -56,7 +56,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public List<Product> getFavouriteProducts() {
         try {
-            return Tasks.await(db.collection("products").whereEqualTo("isFavourite", true).get()).toObjects(Product.class);
+            return Tasks.await(db.collection(COLLECTION_NAME).whereEqualTo("isFavourite", true).get()).toObjects(Product.class);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -66,7 +66,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public void updateProductIsFavourite(Product product) {
         try{
-            Tasks.await(db.collection("products").document(String.valueOf(product.GetId())).update("isFavourite", product.getIsFavourite()));
+            Tasks.await(db.collection(COLLECTION_NAME).document(String.valueOf(product.getId())).update("isFavourite", product.getIsFavourite()));
         }catch (ExecutionException | InterruptedException e){
             e.printStackTrace();
         }
@@ -76,9 +76,29 @@ public class ProductRepository implements IProductRepository{
     public void updateProductRating(Product product) {
         try{
             // update the rating and numberOfUsersRated of the product
-            Tasks.await(db.collection("products").document(String.valueOf(product.GetId())).update("rating", product.getRating(),"numberOfUsersRated", product.getNumberOfUsersRated()));
+            Tasks.await(db.collection(COLLECTION_NAME).document(String.valueOf(product.getId())).update("rating", product.getRating(),"numberOfUsersRated", product.getNumberOfUsersRated()));
         }catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Product> getTrendingProducts() {
+        try {
+            return Tasks.await(db.collection(COLLECTION_NAME).whereGreaterThan("numberOfUsersRated", 0).orderBy("rating").get()).toObjects(Product.class);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Product> getDefaultColourProducts() {
+        try {
+            return Tasks.await(db.collection(COLLECTION_NAME).whereEqualTo("isFirst", true).get()).toObjects(Product.class);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
