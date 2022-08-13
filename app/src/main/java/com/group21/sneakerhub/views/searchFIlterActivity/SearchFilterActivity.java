@@ -2,6 +2,7 @@ package com.group21.sneakerhub.views.searchFIlterActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -53,6 +54,9 @@ public class SearchFilterActivity extends AppCompatActivity {
         retrieveDataFromDb();
 
         vh = new ViewHolder();
+
+        // instantiate the viewmodel class
+        SearchFilterViewModel viewModel = new ViewModelProvider(this).get(SearchFilterViewModel.class);
 
         // Set Home selected
         vh.bottomNavigationView.setSelectedItemId(R.id.search);
@@ -154,6 +158,7 @@ public class SearchFilterActivity extends AppCompatActivity {
             // when user hits return the final search string is returned
             @Override
             public boolean onQueryTextSubmit(String query) {
+                // send to viewmodel
                 doMySearch(query);
                 return false;
             }
