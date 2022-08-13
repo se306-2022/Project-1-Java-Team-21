@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.317" />
         <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/button_border.xml" value="0.136" />
         <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_favourite.xml" value="0.296" />
         <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_home.xml" value="0.296" />
         <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_launcher_background.xml" value="0.296" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_search.xml" value="0.317" />
         <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/search_style.xml" value="0.296" />
         <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/selector.xml" value="0.2925" />
         <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/togglebutton_on.xml" value="0.136" />

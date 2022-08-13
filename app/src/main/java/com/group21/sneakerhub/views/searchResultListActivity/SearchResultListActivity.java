@@ -65,21 +65,21 @@ public class SearchResultListActivity extends AppCompatActivity {
         List<String> features = new ArrayList<String>();
         features.add("very nice");
 
-        productList.add(new Product("ar1",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar2",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar3",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar4",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar5",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar6",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar7",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar8",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar9",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar10",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar11",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar12",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar13",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar14",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar15",1,1,"icon0",20.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("Adidas Yeezy 450",1,1,"yeezy_img_1",200.22,"Wine Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("Air Force One",1,1,"airforce_1",230.00,"Snow White",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar3",1,1,"yeezy_img_1",200.22,"Orange",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar4",1,1,"yeezy_img_1",219.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar5",1,1,"yeezy_img_1",200.22,"Zebra",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar6",1,1,"yeezy_img_1",300.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar7",1,1,"yeezy_img_1",200.22,"Crimson",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar8",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar9",1,1,"yeezy_img_1",400.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar10",1,1,"yeezy_img_1",200.22,"Indigo",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar11",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar12",1,1,"yeezy_img_1",200.2222,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar13",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar14",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
+        productList.add(new Product("ar15",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
 
         // declaring the arrayadapter and setting the data
         // the second argument in the ArrayAdapter is the layout you want to use
