@@ -1,6 +1,5 @@
 package com.group21.sneakerhub.model;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class Product extends Entity {
@@ -15,10 +14,11 @@ public class Product extends Entity {
     private List<String> imageUrls;
     private String description;
     private List<String> features;
+    private boolean isFirst;
 
     public Product() {}
 
-    public Product(long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features) {
+    public Product(long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isFirst) {
         this.id = id;
         this.name = name;
         this.categoryId = categoryId;
@@ -31,6 +31,7 @@ public class Product extends Entity {
         this.imageUrls = imageUrls;
         this.description = description;
         this.features = features;
+        this.isFirst = isFirst;
     }
 
     public long getCategoryId() {
@@ -79,11 +80,12 @@ public class Product extends Entity {
         this.numberOfUsersRated++;
     }
 
-    public boolean changeIsFavourite () {
+    public void changeIsFavourite () {
         // toggle isFavourite and return the new value
         this.isFavourite = !this.isFavourite;
-        return this.isFavourite;
     }
 
-
+    public boolean getIsFirst() {
+        return isFirst;
+    }
 }
