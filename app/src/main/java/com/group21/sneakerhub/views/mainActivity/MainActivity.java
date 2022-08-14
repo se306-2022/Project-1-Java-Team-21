@@ -2,16 +2,26 @@ package com.group21.sneakerhub.views.mainActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
+import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.usecases.getFavouriteProducts.GetFavouriteProducts;
+import com.group21.sneakerhub.usecases.getFavouriteProducts.IGetFavouriteProducts;
+import com.group21.sneakerhub.usecases.getTrendingProducts.GetTrendingProducts;
+import com.group21.sneakerhub.usecases.getTrendingProducts.IGetTrendingProducts;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +30,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+//
+//        mainViewModel.isLoading.observe(this, isLoading -> {
+//            if (isLoading) {
+//                findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+//            } else {
+//                findViewById(R.id.progress_bar).setVisibility(View.GONE);
+//            }
+//        });
+
+
+//        mainViewModel.getTrendingProducts().observe(this, products -> {
+//            for (Product product : products) {
+//                System.out.println(product.getName());
+//            }
+//        });
+//
+//        mainViewModel.getSearchedProducts("Air JORDan").observe(this, products -> {
+//            for (Product product : products) {
+//                System.out.println(product.getName());
+//            }
+//        });
+
+//        mainViewModel.getProductsByCategoryId(1).observe(this, products -> {
+//            for (Product product : products) {
+//                System.out.println(product.getName());
+//            }
+//        });
+
 
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
