@@ -85,7 +85,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public List<Product> getTrendingProducts() {
         try {
-            return Tasks.await(db.collection(COLLECTION_NAME).whereGreaterThan("numberOfUsersRated", 0).orderBy("rating").get()).toObjects(Product.class);
+            return Tasks.await(db.collection(COLLECTION_NAME).orderBy("rating").get()).toObjects(Product.class);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
