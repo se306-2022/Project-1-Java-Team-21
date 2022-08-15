@@ -2,6 +2,7 @@ package com.group21.sneakerhub.views.searchResultListActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -21,6 +22,8 @@ import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +38,6 @@ public class SearchResultListActivity extends AppCompatActivity {
         LinearLayout collapseItem1 = (LinearLayout) findViewById(R.id.collapse_item_1);
         TextView collapseItem2 = (TextView) findViewById(R.id.collapse_item_2);
         TextView collapseItem3 = (TextView) findViewById(R.id.collapse_item_3);
-
     }
 
 
@@ -48,50 +50,33 @@ public class SearchResultListActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-         /*
-            Getting the data and converting it to a list of Products, hard coded data for now
-         */
-        List<Product> productList = new ArrayList<Product>();
+        SearchResultListViewModel searchResultVM = new ViewModelProvider(this).get(SearchResultListViewModel.class);
 
-        // Product(long id, long categoryId, String imageURL, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated,
-        // boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isFirst)
 
-        List<Integer> availableSizes = new ArrayList<Integer>();
-        availableSizes.add(10);
-        availableSizes.add(11);
-        availableSizes.add(12);
+        Intent intent = getIntent();
+        String query = intent.getStringExtra("query");
+        ArrayList<String> colours = intent.getStringArrayListExtra("colours");
+        ArrayList<String> brands = intent.getStringArrayListExtra("brands");
+        int lowerPrice = intent.getIntExtra("lowerPrice",0);
+        int upperPrice = intent.getIntExtra("upperPrice",0);
 
-        List<String> imageUrls = new ArrayList<String>();
-        imageUrls.add("dqwdw");
+        searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults ->{
+            for (Product product : searchResults){
+                System.out.println(product.getName());
+            }
+        });
 
-        List<String> features = new ArrayList<String>();
-        features.add("very nice");
-
-        productList.add(new Product("Adidas Yeezy 450",1,1,"yeezy_img_1",200.22,"Wine Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("Air Force One",1,1,"airforce_1",230.00,"Snow White",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar3",1,1,"yeezy_img_1",200.22,"Orange",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar4",1,1,"yeezy_img_1",219.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar5",1,1,"yeezy_img_1",200.22,"Zebra",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar6",1,1,"yeezy_img_1",300.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar7",1,1,"yeezy_img_1",200.22,"Crimson",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar8",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar9",1,1,"yeezy_img_1",400.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar10",1,1,"yeezy_img_1",200.22,"Indigo",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar11",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar12",1,1,"yeezy_img_1",200.2222,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar13",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar14",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar15",1,1,"yeezy_img_1",200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-
+        List<Product> searchResults = new ArrayList<>();
         // declaring the arrayadapter and setting the data
         // the second argument in the ArrayAdapter is the layout you want to use
         // we use the custom one we made in the layout folder
         // simple arrayadapter takes list of strings as its default input
-        CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results,productList);
+        CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results,searchResults);
 
         // getting a reference to the ListView and setting its adapter
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(itemsAdapter);
+
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
 
@@ -101,6 +86,25 @@ public class SearchResultListActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnScrollListener(new OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem != 0){
+                    vh.collapseItem1.setVisibility(View.GONE);
+                    vh.collapseItem2.setVisibility(View.GONE);
+                    vh.collapseItem3.setVisibility(View.GONE);
+                } else {
+                    vh.collapseItem1.setVisibility(View.VISIBLE);
+                    vh.collapseItem2.setVisibility(View.VISIBLE);
+                    vh.collapseItem3.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         vh.bottomNavigationView.setSelectedItemId(R.id.search);
 
@@ -122,26 +126,6 @@ public class SearchResultListActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                 }
                 return false;
-            }
-        });
-
-        listView.setOnScrollListener(new OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (firstVisibleItem != 0){
-                    vh.collapseItem1.setVisibility(View.GONE);
-                    vh.collapseItem2.setVisibility(View.GONE);
-                   vh.collapseItem3.setVisibility(View.GONE);
-                } else {
-                    vh.collapseItem1.setVisibility(View.VISIBLE);
-                    vh.collapseItem2.setVisibility(View.VISIBLE);
-                    vh.collapseItem3.setVisibility(View.VISIBLE);
-                }
             }
         });
 

@@ -109,9 +109,10 @@ public class SearchFilterActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    System.out.println("hi");
                     Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
                     searchResults.putExtra("isFilters", false);
-                    searchResults.putExtra("finalQuerystring", searchFilterVM.getFinalQueryString());
+                    searchResults.putExtra("finalQueryString", searchFilterVM.getFinalQueryString());
                 }
                 return false;
             }

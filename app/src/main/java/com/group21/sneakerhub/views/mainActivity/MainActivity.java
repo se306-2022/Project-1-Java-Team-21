@@ -30,38 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        /*
-        mainViewModel.isLoading.observe(this, isLoading -> {
-            if (isLoading) {
-
-            } else {
-
-            }
-        });
-
-
-        mainViewModel.getTrendingProducts().observe(this, products -> {
-            for (Product product : products) {
-                System.out.println(product.getName());
-            }
-        });
-
-        mainViewModel.getSearchedProducts("Air JORDan").observe(this, products -> {
-            for (Product product : products) {
-                System.out.println(product.getName());
-            }
-        });
-
-        mainViewModel.getProductsByCategoryId(1).observe(this, products -> {
-            for (Product product : products) {
-                System.out.println(product.getName());
-            }
-        });
-        */
-
-
-
-
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 

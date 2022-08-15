@@ -55,7 +55,7 @@ public class CustomListAdaptor extends ArrayAdapter {
         //setting the image view for the icon inside the about to be displayed list view
         ImageView iconImageView = (ImageView) currentListViewItem.findViewById(R.id.sneaker_preview_img);
         int i = mContext.getResources().getIdentifier(
-                currentProduct.getImageURL(), "drawable",
+                currentProduct.getImageUrls().get(0), "drawable",
                 mContext.getPackageName());
 
         //Setting the icon
