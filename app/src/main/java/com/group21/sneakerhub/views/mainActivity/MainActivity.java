@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 

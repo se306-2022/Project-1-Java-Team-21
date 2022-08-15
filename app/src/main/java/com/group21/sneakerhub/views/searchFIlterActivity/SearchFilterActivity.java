@@ -8,10 +8,12 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -22,6 +24,7 @@ import com.google.android.material.slider.RangeSlider;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
+import com.group21.sneakerhub.views.mainActivity.MainViewModel;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
 
 import java.util.ArrayList;
@@ -30,8 +33,7 @@ import java.util.List;
 public class SearchFilterActivity extends AppCompatActivity {
 
     ViewHolder vh;
-    ArrayList<String> brandNames;
-    ArrayList<String> colours;
+    SearchFilterViewModel searchFilterVM;
 
     class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -41,9 +43,8 @@ public class SearchFilterActivity extends AppCompatActivity {
         TextView sliderMinText = (TextView)  findViewById(R.id.slider_text_min);
         TextView sliderMaxText = (TextView)  findViewById(R.id.slider_text_max);
         Button submitButton = (Button) findViewById(R.id.button_id);
+        ImageButton backButton = (ImageButton) findViewById(R.id.back_arrow);
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +52,7 @@ public class SearchFilterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_filter);
         getSupportActionBar().hide();
 
-        // retrieve data from Viewholder for toggle button values here
-        retrieveDataFromDb();
+        searchFilterVM = new ViewModelProvider(this).get(SearchFilterViewModel.class);
 
         vh = new ViewHolder();
 
@@ -86,7 +86,8 @@ public class SearchFilterActivity extends AppCompatActivity {
             @Override
             public void onStartTrackingTouch(@NonNull RangeSlider slider) {
                 List<Float> rangeValues = slider.getValues();
-
+                searchFilterVM.setLowerPriceRange(Math.round(rangeValues.get(0)));
+                searchFilterVM.setUpperPriceRange(Math.round(rangeValues.get(1)));
                 vh.sliderMinText.setText(rangeValues.get(0).toString());
                 vh.sliderMaxText.setText(rangeValues.get(1).toString());
             }
@@ -99,6 +100,23 @@ public class SearchFilterActivity extends AppCompatActivity {
                 vh.sliderMaxText.setText(rangeValues.get(1).toString());
             }
         });
+
+        /**
+         * Enter/return key listener for the search view, if the user doesnt want to use
+         * the filters and just wants to search by query string
+         */
+        vh.searchView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
+                    searchResults.putExtra("isFilters", false);
+                    searchResults.putExtra("finalQuerystring", searchFilterVM.getFinalQueryString());
+                }
+                return false;
+            }
+        });
+
 
         /**
          * Event handler for submit, this will change the activity to the searchResultsListActivity and
@@ -117,34 +135,33 @@ public class SearchFilterActivity extends AppCompatActivity {
                 //set data across to the other activity
                 // sent in a key, value format, with the key being the first argument
                 // many different types of data can be sent
-                searchResults.putExtra("messageFromMainActivity","This message came from the main activity");
+                searchResults.putExtra("isFilters", true);
+
+                searchResults.putExtra("query",searchFilterVM.getLiveQueryString());
+                searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
+                searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
+
+                ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
+                searchResults.putExtra("colours",colours);
+
+                ArrayList<String> brands = (ArrayList<String>) searchFilterVM.getBrandNames();
+                searchResults.putExtra("brands",brands);
+
                 //start the activity
                 startActivity(searchResults);
             }
         });
 
-    }
+        /**
+         * back to the home screen button listener
+         */
+        vh.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
 
-    private void retrieveDataFromDb() {
-        // NOTE: instead of hard coding here the data should come from database
-        if (brandNames == null && colours == null) {
-            brandNames = new ArrayList<String>();
-            brandNames.add("Air Jordan");
-            brandNames.add("Nike");
-            brandNames.add("Vans");
-            brandNames.add("Adidas");
-
-            colours = new ArrayList<String>();
-            colours.add("White");
-            colours.add("Black");
-            colours.add("Red");
-            colours.add("Blue");
-            colours.add("Yellow");
-            colours.add("Orange");
-            colours.add("Purple");
-            colours.add("Green");
-            colours.add("Grey");
-        }
     }
 
     @Override
@@ -159,15 +176,14 @@ public class SearchFilterActivity extends AppCompatActivity {
             // when user hits return the final search string is returned
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // send to viewmodel
-                doMySearch(query);
+                searchFilterVM.setFinalQueryString(query);
                 return false;
             }
 
             // updates everytime a character changes in the searchbox
             @Override
             public boolean onQueryTextChange(String newText) {
-                doMySearch(newText);
+                searchFilterVM.setLiveQueryString(newText);
                 return false;
             }
         });
@@ -196,14 +212,14 @@ public class SearchFilterActivity extends AppCompatActivity {
         if(toggleButton.isChecked()){
             String text = toggleButton.getText().toString();
             // send text to viewmodel as the selected brand filter for searchfilterview
-            System.out.println("brand selected: " + text);
+            searchFilterVM.addBrand(text);
             toggleButton.setBackgroundResource(R.drawable.togglebutton_on);
             toggleButton.setTextColor(getResources().getColor(R.color.white));
 
         } else{
             String text = toggleButton.getText().toString();
             // retract text from viewmodel as it has been deselected
-            System.out.println("cancelled brand: " + text);
+            searchFilterVM.removeBrand(text);
             toggleButton.setBackgroundResource(R.drawable.button_border);
             toggleButton.setTextColor(getResources().getColor(R.color.black));
         }
@@ -221,21 +237,18 @@ public class SearchFilterActivity extends AppCompatActivity {
         if(toggleButton.isChecked()){
             String text = toggleButton.getText().toString();
             // send text to viewmodel as the selected colour filter for searchfilterview
-            System.out.println("selected colour: " + text);
+            searchFilterVM.addColour(text);
             toggleButton.setBackgroundResource(R.drawable.togglebutton_on);
             toggleButton.setTextColor(getResources().getColor(R.color.white));
 
         } else{
             String text = toggleButton.getText().toString();
             // retract text from viewmodel as it has been deselected
-            System.out.println("cancelled colour: " + text);
+            searchFilterVM.removeColour(text);
             toggleButton.setBackgroundResource(R.drawable.button_border);
             toggleButton.setTextColor(getResources().getColor(R.color.black));
         }
 
     }
-
-
-
 
 }

@@ -27,6 +27,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_left_arrow"
+                android:id="@+id/back_arrow"
                 android:scaleType="centerCrop"
                 android:backgroundTint="@color/white"/>
         </LinearLayout>

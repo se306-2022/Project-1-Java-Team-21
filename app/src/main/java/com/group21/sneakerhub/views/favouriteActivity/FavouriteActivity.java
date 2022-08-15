@@ -34,6 +34,7 @@ public class FavouriteActivity extends AppCompatActivity {
     private List<Product> productList = new ArrayList<Product>();
     class ViewHolder{
         ListView listView = (ListView) findViewById(R.id.list_favourites);
+        ToggleButton heartShoe = (ToggleButton) findViewById(R.id.heart_button);
 
     }
 
@@ -93,6 +94,7 @@ public class FavouriteActivity extends AppCompatActivity {
         });
 
 
+
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -128,21 +130,17 @@ public class FavouriteActivity extends AppCompatActivity {
         // use typecast to change v from a generic view to of type togglebutton
         ToggleButton toggleButton = (ToggleButton) v;
         if(toggleButton.isChecked()){
-            toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-
-            vh.listView.setOnItemClickListener((parent, view, position, id) -> {
-
-                currentItemSelectedName = productList.get(position).getName();
-            });
+            toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
 
             System.out.println(currentItemSelectedName);
 
         } else{
-            toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+            toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
             System.out.println("favourite button unclicked");
         }
 
     }
 
+    //ic_baseline_favorite_border_24
 
 }

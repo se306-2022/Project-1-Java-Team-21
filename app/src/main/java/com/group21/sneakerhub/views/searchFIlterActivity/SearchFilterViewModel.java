@@ -7,88 +7,76 @@ import java.util.List;
 
 public class SearchFilterViewModel extends ViewModel {
 
-    /**
-     * Fields
-     */
-    private List<Float> priceFilterValues;
-    private String QueryString;
-    private List<String> selectedBrands;
-    private List<String> selectedColours;
-    private boolean submitButtonPressed;
+    private volatile String liveQueryString;
+    private String finalQueryString;
+    private List<String> brandNames;
+    private List<String> colours;
+    private int lowerPriceRange;
+    private int UpperPriceRange;
 
-    /**
-     * Required getters and setters
-     * @return
-     */
-    public List<Float> getPriceFilterValues() {
-        return priceFilterValues;
+    public SearchFilterViewModel(){
+        brandNames = new ArrayList<String>();
+        colours = new ArrayList<String>();
     }
 
-    public String getQueryString() {
-        return QueryString;
+    public String getLiveQueryString() {
+        return liveQueryString;
     }
 
-    public List<String> getSelectedBrands() {
-        return selectedBrands;
+    public void setLiveQueryString(String liveQueryString) {
+        this.liveQueryString = liveQueryString;
     }
 
-    public List<String> getSelectedColours() {
-        return selectedColours;
+    public String getFinalQueryString() {
+        return finalQueryString;
     }
 
-    public boolean isSubmitButtonPressed() {
-        return submitButtonPressed;
+    public void setFinalQueryString(String finalQueryString) {
+        this.finalQueryString = finalQueryString;
     }
 
-    public void setPriceFilterValues(List<Float> priceFilterValues) {
-        this.priceFilterValues = priceFilterValues;
+    public List<String> getBrandNames() {
+        return brandNames;
     }
 
-    public void setQueryString(String queryString) {
-        QueryString = queryString;
+    public void removeColour(String colour){
+        colours.remove(colours.indexOf(colour));
     }
 
-    public void setSubmitButtonPressed(boolean submitButtonPressed) {
-        this.submitButtonPressed = submitButtonPressed;
+    public void removeBrand(String brand){
+        brandNames.remove(brandNames.indexOf(brand));
     }
 
-    /**
-     * Add to selected brands
-     */
-    public void addToBrands(String currentBrand){
-        if (selectedBrands == null){
-            selectedBrands = new ArrayList<String>();
+    public void addBrand(String brand){
+        if (!brandNames.contains(brand)){
+            brandNames.add(brand);
         }
-
-        selectedBrands.add(currentBrand);
-    }
-    /**
-     * Remove from selected brands
-     */
-
-    public void removeFromBrands(String currentBrand){
-        selectedBrands.remove(selectedBrands.indexOf(currentBrand));
     }
 
-    /**
-     * Add to selected colours
-     */
-    public void addToColours(String currentColour){
-        if (selectedColours == null){
-            selectedColours = new ArrayList<String>();
+    public void addColour(String colour){
+        if (!colours.contains(colour)){
+            colours.add(colour);
         }
-
-        selectedColours.add(currentColour);
     }
 
-    /**
-     * Remove to selected colours
-     */
-    public void removeFromColours(String currentColour){
-        selectedColours.remove(selectedColours.indexOf(currentColour));
+    public List<String> getColours() {
+        return colours;
     }
 
+    public int getLowerPriceRange() {
+        return lowerPriceRange;
+    }
 
+    public void setLowerPriceRange(int lowerPriceRange) {
+        this.lowerPriceRange = lowerPriceRange;
+    }
 
+    public int getUpperPriceRange() {
+        return UpperPriceRange;
+    }
+
+    public void setUpperPriceRange(int upperPriceRange) {
+        UpperPriceRange = upperPriceRange;
+    }
 
 }
