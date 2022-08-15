@@ -2,7 +2,6 @@ package com.group21.sneakerhub.views.mainActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,21 +15,15 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
-import com.group21.sneakerhub.model.Product;
-import com.group21.sneakerhub.usecases.getFavouriteProducts.GetFavouriteProducts;
-import com.group21.sneakerhub.usecases.getFavouriteProducts.IGetFavouriteProducts;
-import com.group21.sneakerhub.usecases.getTrendingProducts.GetTrendingProducts;
-import com.group21.sneakerhub.usecases.getTrendingProducts.IGetTrendingProducts;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
 
-    private MyRecyclerViewAdapter adapter;
+    private RecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +36,19 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
         viewColors.add(Color.YELLOW);
         viewColors.add(Color.MAGENTA);
         viewColors.add(Color.RED);
-        viewColors.add(Color.BLACK);
 
-        ArrayList<String> animalNames = new ArrayList<>();
-        animalNames.add("Air Jordan");
-        animalNames.add("Nike");
-        animalNames.add("Adidas");
-        animalNames.add("Vans");
-        animalNames.add("Goat");
+        ArrayList<String> brandNames = new ArrayList<>();
+        brandNames.add("Air Jordan");
+        brandNames.add("Nike");
+        brandNames.add("Adidas");
+        brandNames.add("Vans");
 
         // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvAnimals);
+        RecyclerView recyclerView = findViewById(R.id.rvBrands);
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        adapter = new MyRecyclerViewAdapter(this, viewColors, animalNames);
+        adapter = new RecyclerViewAdapter(this, viewColors, brandNames);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 

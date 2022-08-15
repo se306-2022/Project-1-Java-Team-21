@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsboldsemi"
             android:gravity="center"
-            android:paddingTop="50dp"
+            android:paddingTop="30dp"
             android:text="Sneaker Hub"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="41sp"
@@ -40,9 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/search_style"
             android:backgroundTint="#EAEAEA"
             android:clickable="true"
@@ -60,7 +60,8 @@
             android:textSize="32sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAnimals"
+            android:paddingLeft="25dp"
+            android:id="@+id/rvBrands"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

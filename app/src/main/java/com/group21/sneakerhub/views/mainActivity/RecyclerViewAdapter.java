@@ -13,18 +13,18 @@ import com.group21.sneakerhub.R;
 
 import java.util.List;
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private List<Integer> mViewColors;
-    private List<String> mAnimals;
+    private List<String> mBrands;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    MyRecyclerViewAdapter(Context context, List<Integer> colors, List<String> animals) {
+    RecyclerViewAdapter(Context context, List<Integer> colors, List<String> brands) {
         this.mInflater = LayoutInflater.from(context);
         this.mViewColors = colors;
-        this.mAnimals = animals;
+        this.mBrands = brands;
     }
 
     // inflates the row layout from xml when needed
@@ -39,15 +39,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int color = mViewColors.get(position);
-        String animal = mAnimals.get(position);
+        String brand = mBrands.get(position);
         holder.myView.setBackgroundColor(color);
-        holder.myTextView.setText(animal);
+        holder.myTextView.setText(brand);
     }
 
     // total number of rows
     @Override
     public int getItemCount() {
-        return mAnimals.size();
+        return mBrands.size();
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -58,7 +58,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         ViewHolder(View itemView) {
             super(itemView);
             myView = itemView.findViewById(R.id.colorView);
-            myTextView = itemView.findViewById(R.id.tvAnimalName);
+            myTextView = itemView.findViewById(R.id.tvBrandName);
             itemView.setOnClickListener(this);
         }
 
@@ -70,7 +70,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     // convenience method for getting data at click position
     public String getItem(int id) {
-        return mAnimals.get(id);
+        return mBrands.get(id);
     }
 
     // allows clicks events to be caught
