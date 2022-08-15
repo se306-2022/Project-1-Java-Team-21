@@ -3,11 +3,15 @@ package com.group21.sneakerhub.views.mainActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -24,12 +28,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+
+    private MyRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // data to populate the RecyclerView with
+        ArrayList<Integer> viewColors = new ArrayList<>();
+        viewColors.add(Color.BLUE);
+        viewColors.add(Color.YELLOW);
+        viewColors.add(Color.MAGENTA);
+        viewColors.add(Color.RED);
+        viewColors.add(Color.BLACK);
+
+        ArrayList<String> animalNames = new ArrayList<>();
+        animalNames.add("Air Jordan");
+        animalNames.add("Nike");
+        animalNames.add("Adidas");
+        animalNames.add("Vans");
+        animalNames.add("Goat");
+
+        // set up the RecyclerView
+        RecyclerView recyclerView = findViewById(R.id.rvAnimals);
+        LinearLayoutManager horizontalLayoutManager
+                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        adapter = new MyRecyclerViewAdapter(this, viewColors, animalNames);
+        adapter.setClickListener(this);
+        recyclerView.setAdapter(adapter);
+
+
 
 //        MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 //
@@ -87,5 +119,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
     }
 }
