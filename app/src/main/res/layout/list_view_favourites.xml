@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="4dp"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="8dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants" >
+
+        <TextView
+            android:id="@+id/shoe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yeezy Boost 350"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ToggleButton
+            android:id="@+id/heart_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:background="@drawable/ic_baseline_favorite_border_24"
+            android:onClick="heartButtonToggle"
+            android:textOff=""
+            android:textOn="" />
+
+        <TextView
+            android:id="@+id/shoe_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shoe_name"
+            android:layout_alignParentLeft="true"
+            android:text="Available in X colours"
+            android:textColor="#3a3b3c"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/sneaker_preview_img"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/shoe_description"
+            android:scaleType="centerInside"
+            android:src="@drawable/yeezy_img_1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$450.00 +"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/sneaker_preview_img"
+            android:id="@+id/price_text"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#3a3b3c"/>
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -5,9 +5,11 @@ import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,18 +73,7 @@ public class CustomListAdaptor extends ArrayAdapter {
         TextView priceTextView = (TextView) currentListViewItem.findViewById(R.id.price_text);
         priceTextView.setText(String.valueOf(currentProduct.getPrice()) + "+");
 
-        /*
-        Add a onclick listener on the entire cardview
 
-        //Setting the image click handler for the play button
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-        */
         return currentListViewItem;
     }
 }

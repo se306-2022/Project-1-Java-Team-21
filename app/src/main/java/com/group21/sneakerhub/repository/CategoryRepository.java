@@ -100,16 +100,16 @@ public class CategoryRepository implements ICategoryRepository {
      */
     @Override
     public Category getCategoryById(String inputId){
-        try {
-            Category selectedCategory = Tasks.await(db.collection("Categories").document(inputId).get()).toObject(Category.class);
-            return selectedCategory;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            return null;
-        } catch (InterruptedException e){
-            e.printStackTrace();
-            return null;
-        }
+            try {
+                Category selectedCategory = Tasks.await(db.collection("Categories").document(inputId).get()).toObject(Category.class);
+                return selectedCategory;
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+                return null;
+            } catch (InterruptedException e){
+                e.printStackTrace();
+                return null;
+            }
     }
 
     /**

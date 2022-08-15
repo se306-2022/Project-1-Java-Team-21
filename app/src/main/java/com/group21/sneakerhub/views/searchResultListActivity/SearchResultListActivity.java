@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,7 +32,6 @@ public class SearchResultListActivity extends AppCompatActivity {
     class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
-        ListView list = (ListView) findViewById(R.id.list);
         LinearLayout collapseItem1 = (LinearLayout) findViewById(R.id.collapse_item_1);
         TextView collapseItem2 = (TextView) findViewById(R.id.collapse_item_2);
         TextView collapseItem3 = (TextView) findViewById(R.id.collapse_item_3);
@@ -43,8 +43,10 @@ public class SearchResultListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result_list);
+        // hide the top tool bar in the activity
+        getSupportActionBar().hide();
 
-        ViewHolder vh = new ViewHolder();
+        vh = new ViewHolder();
 
          /*
             Getting the data and converting it to a list of Products, hard coded data for now
@@ -91,6 +93,14 @@ public class SearchResultListActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(itemsAdapter);
 
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+
+            System.out.println("hi");
+            if (position == 0){
+                System.out.println("Adidas Yeezy 450");
+            }
+        });
+
 
         vh.bottomNavigationView.setSelectedItemId(R.id.search);
 
@@ -126,7 +136,7 @@ public class SearchResultListActivity extends AppCompatActivity {
                 if (firstVisibleItem != 0){
                     vh.collapseItem1.setVisibility(View.GONE);
                     vh.collapseItem2.setVisibility(View.GONE);
-                    vh.collapseItem3.setVisibility(View.GONE);
+                   vh.collapseItem3.setVisibility(View.GONE);
                 } else {
                     vh.collapseItem1.setVisibility(View.VISIBLE);
                     vh.collapseItem2.setVisibility(View.VISIBLE);
@@ -137,7 +147,6 @@ public class SearchResultListActivity extends AppCompatActivity {
 
     }
 
-    // not working for some reason
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
