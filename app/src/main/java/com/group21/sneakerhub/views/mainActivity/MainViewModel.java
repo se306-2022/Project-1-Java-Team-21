@@ -1,7 +1,5 @@
 package com.group21.sneakerhub.views.mainActivity;
 
-import static java.lang.Thread.sleep;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

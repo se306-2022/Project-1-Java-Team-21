@@ -23,6 +23,15 @@ public class SearchProductWithFilter implements ISearchProductWithFIlter{
         List<Product> products = productRepository.getProducts();
         Set<Integer> unwantedProductIndex = new HashSet<>();
 
+        System.out.println("use case");
+        System.out.println(brandNames.get(0));
+       // System.out.println(brandNames.get(1));
+        System.out.println(colors.get(0));
+      //  System.out.println(colors.get(1));
+        System.out.println(search);
+        System.out.println(fromPrice);
+        System.out.println(toPrice);
+
         Product product;
         for (int i = 0; i < products.size(); i++) {
             product = products.get(i);
@@ -39,6 +48,10 @@ public class SearchProductWithFilter implements ISearchProductWithFIlter{
                 for(Category category: categories){
                     brandIdtoNameMap.put(category.getId(), category.getName());
                 }
+                System.out.println("map values:");
+                for (String values : brandIdtoNameMap.values())
+                    System.out.println(values);
+                System.out.println("==================================");
 
                 if(!brandNames.contains(brandIdtoNameMap.get(product.getCategoryId()))) {
                     unwantedProductIndex.add(i);
@@ -64,6 +77,11 @@ public class SearchProductWithFilter implements ISearchProductWithFIlter{
                 filteredProducts.add(products.get(i));
             }
         }
+
+        for (Integer itnnqw : unwantedProductIndex){
+            System.out.println(itnnqw);
+        }
+        //System.out.println(filteredProducts.get(0));
         return filteredProducts;
     }
 }
