@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.group21.sneakerhub.R;
@@ -34,7 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recyclerview_item, parent, false);
+        View view = mInflater.inflate(R.layout.recyclerview_categories, parent, false);
         return new ViewHolder(view);
     }
 
@@ -44,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         int color = mViewColors.get(position);
         String brand = mBrands.get(position);
         int image = mImages.get(position);
-        holder.myView.setBackgroundColor(color);
+        holder.myView.setCardBackgroundColor(color);
         holder.myTextView.setText(brand);
         holder.myImageView.setImageResource(image);
     }
@@ -57,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        View myView;
+        CardView myView;
         TextView myTextView;
         ImageView myImageView;
 

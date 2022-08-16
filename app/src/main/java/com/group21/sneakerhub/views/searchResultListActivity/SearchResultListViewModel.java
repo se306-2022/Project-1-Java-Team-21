@@ -12,6 +12,8 @@ import com.group21.sneakerhub.usecases.searchProducts.SearchProducts;
 
 import java.util.List;
 
+// FOLLOW THIS FORMAT
+
 public class SearchResultListViewModel extends ViewModel {
     // fields
     MutableLiveData<List<Product>> searchResults;

@@ -3,13 +3,17 @@ package com.group21.sneakerhub.views.mainActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -69,10 +73,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
         // data to populate the RecyclerView with
         ArrayList<Integer> viewColors = new ArrayList<>();
-        viewColors.add(Color.BLUE);
-        viewColors.add(Color.YELLOW);
-        viewColors.add(Color.MAGENTA);
-        viewColors.add(Color.RED);
+        viewColors.add(Color.rgb(242,228,255));
+        viewColors.add(Color.rgb(255,199,195));
+        viewColors.add(Color.rgb(218,255,208));
+        viewColors.add(Color.rgb(195,226,255));
 
         ArrayList<Integer> brandImages = new ArrayList<>();
         brandImages.add(R.drawable.airjordan_logo);
