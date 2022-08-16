@@ -60,37 +60,28 @@ public class CategoryRepository implements ICategoryRepository {
 
     @Override
     public List<Category> getCategories(){
-        categoryList = new ArrayList<Category>();
-
-        db.collection("Categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    QuerySnapshot results = task.getResult();
-                    for (Category categoryItem : task.getResult().toObjects(Category.class)) {
-                        if (categoryItem.getName().equals("Nike")){
-                            categoryList.add(new Nike(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
-                        } else if (categoryItem.getName().equals("Adidas")){
-                            categoryList.add(new Adidas(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
-                        } else if (categoryItem.getName().equals("Vans")){
-                            categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
-                        } else if (categoryItem.getName().equals("AirJordan")){
-                            categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(),categoryItem.GetColour(), categoryItem.getLayoutInformation()));
-                        }
-
-                    }
-                    if (categoryList.size() > 0) {
-//                        System.out.println("Success !!!");
-//                        printCategories(categoryList);
-
-                    } else
-                        System.out.println("The Collection was empty!");
-
-                } else
-                    System.out.println("Loading Category collection failed from Firestore!");
+        try {
+            List<Category> categories = Tasks.await(db.collection("Categories").get()).toObjects(Category.class);
+            categoryList = new ArrayList<Category>();
+            for (Category categoryItem : categories) {
+                switch (categoryItem.getName()) {
+                    case "Nike":
+                        categoryList.add(new Nike(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        break;
+                    case "Adidas":
+                        categoryList.add(new Adidas(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        break;
+                    case "Vans":
+                        categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        break;
+                    case "AirJordan":
+                        categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        break;
+                }
             }
-        });
-
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
         return categoryList;
     }
 
@@ -100,16 +91,12 @@ public class CategoryRepository implements ICategoryRepository {
      */
     @Override
     public Category getCategoryById(String inputId){
-            try {
-                Category selectedCategory = Tasks.await(db.collection("Categories").document(inputId).get()).toObject(Category.class);
-                return selectedCategory;
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-                return null;
-            } catch (InterruptedException e){
-                e.printStackTrace();
-                return null;
-            }
+        try {
+            return Tasks.await(db.collection("Categories").document(inputId).get()).toObject(Category.class);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
@@ -18,8 +19,12 @@ import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
+
+    private RecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,60 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        // data to populate the RecyclerView with
+        ArrayList<Integer> viewColors = new ArrayList<>();
+        viewColors.add(Color.BLUE);
+        viewColors.add(Color.YELLOW);
+        viewColors.add(Color.MAGENTA);
+        viewColors.add(Color.RED);
+
+        ArrayList<String> brandNames = new ArrayList<>();
+        brandNames.add("Air Jordan");
+        brandNames.add("Nike");
+        brandNames.add("Adidas");
+        brandNames.add("Vans");
+
+        // set up the RecyclerView
+        RecyclerView recyclerView = findViewById(R.id.rvBrands);
+        LinearLayoutManager horizontalLayoutManager
+                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        adapter = new RecyclerViewAdapter(this, viewColors, brandNames);
+        adapter.setClickListener(this);
+        recyclerView.setAdapter(adapter);
+
+
+
+//        MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+//
+//        mainViewModel.isLoading.observe(this, isLoading -> {
+//            if (isLoading) {
+//                findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+//            } else {
+//                findViewById(R.id.progress_bar).setVisibility(View.GONE);
+//            }
+//        });
+
+
+//        mainViewModel.getTrendingProducts().observe(this, products -> {
+//            for (Product product : products) {
+//                System.out.println(product.getName());
+//            }
+//        });
+//
+//        mainViewModel.getSearchedProducts("Air JORDan").observe(this, products -> {
+//            for (Product product : products) {
+//                System.out.println(product.getName());
+//            }
+//        });
+
+//        mainViewModel.getProductsByCategoryId(1).observe(this, products -> {
+//            for (Product product : products) {
+//                System.out.println(product.getName());
+//            }
+//        });
+
+
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -88,6 +147,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
 }
