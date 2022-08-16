@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,14 +18,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<Integer> mViewColors;
     private List<String> mBrands;
+    private List<Integer> mImages;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    RecyclerViewAdapter(Context context, List<Integer> colors, List<String> brands) {
+    RecyclerViewAdapter(Context context, List<Integer> colors, List<String> brands, List<Integer> images) {
         this.mInflater = LayoutInflater.from(context);
         this.mViewColors = colors;
         this.mBrands = brands;
+        this.mImages = images;
     }
 
     // inflates the row layout from xml when needed
@@ -40,8 +43,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int color = mViewColors.get(position);
         String brand = mBrands.get(position);
+        int image = mImages.get(position);
         holder.myView.setBackgroundColor(color);
         holder.myTextView.setText(brand);
+        holder.myImageView.setImageResource(image);
     }
 
     // total number of rows
@@ -54,11 +59,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         View myView;
         TextView myTextView;
+        ImageView myImageView;
 
         ViewHolder(View itemView) {
             super(itemView);
-            myView = itemView.findViewById(R.id.colorView);
-            myTextView = itemView.findViewById(R.id.tvBrandName);
+            myView = itemView.findViewById(R.id.brand_color);
+            myTextView = itemView.findViewById(R.id.brand_name);
+            myImageView = itemView.findViewById(R.id.brand_image);
             itemView.setOnClickListener(this);
         }
 

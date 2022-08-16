@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         viewColors.add(Color.MAGENTA);
         viewColors.add(Color.RED);
 
+        ArrayList<Integer> brandImages = new ArrayList<>();
+        brandImages.add(R.drawable.airjordan_logo);
+        brandImages.add(R.drawable.nike_logo);
+        brandImages.add(R.drawable.adidas_logo);
+        brandImages.add(R.drawable.vans_logo);
+
         ArrayList<String> brandNames = new ArrayList<>();
         brandNames.add("Air Jordan");
         brandNames.add("Nike");
@@ -48,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        adapter = new RecyclerViewAdapter(this, viewColors, brandNames);
+        adapter = new RecyclerViewAdapter(this, viewColors, brandNames, brandImages);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
