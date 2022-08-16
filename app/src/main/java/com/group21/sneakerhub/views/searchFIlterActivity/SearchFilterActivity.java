@@ -172,6 +172,7 @@ public class SearchFilterActivity extends AppCompatActivity {
         //inflater.inflate(R.menu.options_menu, menu);
 
         vh.searchView.setQueryHint("Search for sneaker...");
+        vh.searchView.setSubmitButtonEnabled(false);
 
         vh.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // when user hits return the final search string is returned

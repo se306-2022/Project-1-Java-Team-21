@@ -37,7 +37,7 @@ public class SearchResultListViewModel extends ViewModel {
             Thread thread1 = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    searchProductWithFIlter.searchProductWithFIlter(search,brandNames,colors,fromPrice,toPrice);
+                    searchResults.postValue(searchProductWithFIlter.searchProductWithFIlter(search,brandNames,colors,fromPrice,toPrice));
                 }
             });
 

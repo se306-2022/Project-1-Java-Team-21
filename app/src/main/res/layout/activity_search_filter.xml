@@ -47,8 +47,7 @@
             android:layout_height="48dp"
             android:id="@+id/menu_search"
             android:background="@drawable/search_style"
-            android:paddingVertical="10dp"
-            android:clickable="true"/>
+            android:paddingVertical="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"

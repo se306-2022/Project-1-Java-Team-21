@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".views.detailsActivity.DetailsActivity">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Details activity"
+        android:textSize="60sp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

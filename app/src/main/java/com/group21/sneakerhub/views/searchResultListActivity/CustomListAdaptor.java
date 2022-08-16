@@ -73,6 +73,11 @@ public class CustomListAdaptor extends ArrayAdapter {
         TextView priceTextView = (TextView) currentListViewItem.findViewById(R.id.price_text);
         priceTextView.setText(String.valueOf(currentProduct.getPrice()) + "+");
 
+        // set tag for favourite button
+        ToggleButton favButton = (ToggleButton) currentListViewItem.findViewById(R.id.heart_button);
+        favButton.setTag(position);
+        System.out.println(favButton.getTag());
+
 
         return currentListViewItem;
     }
