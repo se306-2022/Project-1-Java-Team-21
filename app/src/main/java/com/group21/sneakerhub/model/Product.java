@@ -18,9 +18,9 @@ public class Product extends Entity {
 
     public Product() {}
 
-    public Product(long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isFirst) {
-        this.id = id;
+    public Product(String name, long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isFirst) {
         this.name = name;
+        this.id = id;
         this.categoryId = categoryId;
         this.price = price;
         this.color = color;

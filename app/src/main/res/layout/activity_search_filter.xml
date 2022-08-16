@@ -27,6 +27,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_left_arrow"
+                android:id="@+id/back_arrow"
                 android:scaleType="centerCrop"
                 android:backgroundTint="@color/white"/>
         </LinearLayout>
@@ -46,8 +47,7 @@
             android:layout_height="48dp"
             android:id="@+id/menu_search"
             android:background="@drawable/search_style"
-            android:paddingVertical="10dp"
-            android:clickable="true"/>
+            android:paddingVertical="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -306,6 +306,7 @@
         app:itemBackground="@color/black"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menu_navigation"/>
+        app:menu="@menu/menu_navigation"
+        app:labelVisibilityMode="unlabeled"/>
 
 </LinearLayout>

@@ -103,12 +103,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:visibility="visible"
         app:itemBackground="@color/black"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menu_navigation" >
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
-
+        app:menu="@menu/menu_navigation"
+        app:labelVisibilityMode="unlabeled" />
 
 </RelativeLayout>

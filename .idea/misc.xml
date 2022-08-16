@@ -3,19 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/button_border.xml" value="0.3445" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_favourite.xml" value="0.1215" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_home.xml" value="0.1195" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_search.xml" value="0.1195" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/search_style.xml" value="0.3905" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/selector.xml" value="0.159" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_favourite.xml" value="0.3428442028985507" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_list.xml" value="0.3428442028985507" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_search_filter.xml" value="0.5" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_search_result_list.xml" value="0.3428442028985507" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/menu/menu_navigation.xml" value="0.4140625" />
-        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/xml/searchable.xml" value="0.29981884057971014" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.317" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/button_border.xml" value="0.136" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.258" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_favourite.xml" value="0.296" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_home.xml" value="0.296" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_launcher_background.xml" value="0.296" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/ic_search.xml" value="0.317" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/search_style.xml" value="0.296" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/selector.xml" value="0.2925" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/drawable/togglebutton_on.xml" value="0.136" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_details.xml" value="0.36614583333333334" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_favourite.xml" value="0.2916666666666667" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_list.xml" value="0.36614583333333334" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_main.xml" value="0.2441123188405797" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_search_filter.xml" value="0.3328804347826087" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/activity_search_result_list.xml" value="0.5" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/list_view_favourites.xml" value="0.48257839721254353" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/layout/list_view_row_results.xml" value="0.2689969604863222" />
+        <entry key="..\:/Project-1-Java-Team-21/app/src/main/res/menu/menu_navigation.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/OEM/Documents/Project-1-Java-Team-21/app/src/main/res/layout/activity_main.xml" value="0.37817028985507245" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ibrah/Desktop/University/2022 Sem 2/SOFTENG 306/Project 1/GitHub Project/Project-1-Java-Team-21/app/src/main/res/drawable/ic_search.xml" value="0.191" />
