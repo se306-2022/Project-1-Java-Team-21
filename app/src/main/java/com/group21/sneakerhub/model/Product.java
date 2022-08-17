@@ -88,4 +88,12 @@ public class Product extends Entity {
     public boolean getIsFirst() {
         return isFirst;
     }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public boolean isFirst() {
+        return isFirst;
+    }
 }
