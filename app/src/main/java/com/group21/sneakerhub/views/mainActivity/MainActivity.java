@@ -24,6 +24,7 @@ import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
@@ -71,24 +72,76 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 //            }
 //        });
 
-        // data to populate the RecyclerView with
+
+        ArrayList<Product> products = new ArrayList<>();
+        List<Integer> sizes = new ArrayList<Integer>() {{
+            add(7);
+            add(8);
+        } };
+
+        List<String> featuress = new ArrayList<String>() {{
+            add("z");
+            add("b");
+        } };
+
+        List<String> images = new ArrayList<String>() {{
+            add("test_1");
+            add("test_11");
+        } };
+
+        List<String> images2 = new ArrayList<String>() {{
+            add("test_2");
+            add("test_11");
+        } };
+
+        List<String> images3 = new ArrayList<String>() {{
+            add("test_3");
+            add("test_11");
+        } };
+//
+        Product p1 = new Product("Air Jordan 4", 100, 1, 450.00, "White", sizes, 4.5, 7, false, images, "good",  featuress, true);
+        Product p2 = new Product("Yeezy 350", 100, 1, 520.00, "Black", sizes, 4.5, 7, false, images2, "good",  featuress, false);
+        Product p3 = new Product("Air Jordan 1", 100, 1, 550.00, "Red", sizes, 4.5, 7, false, images3, "good",  featuress, true);
+
+        ArrayList<String> brandNames = new ArrayList<>();
+        brandNames.add(p1.getName());
+        brandNames.add(p2.getName());
+        brandNames.add(p3.getName());
+
+        ArrayList<String> productColors = new ArrayList<>();
+        productColors.add(p1.getColor());
+        productColors.add(p2.getColor());
+        productColors.add(p3.getColor());
+
+        ArrayList<Double> productPrices = new ArrayList<>();
+        productPrices.add(p1.getPrice());
+        productPrices.add(p2.getPrice());
+        productPrices.add(p3.getPrice());
+
+        ArrayList<Integer> brandImages = new ArrayList<>();
+        brandImages.add(getResources().getIdentifier(p1.getImageUrls().get(0), "drawable", getPackageName()));
+        brandImages.add(getResources().getIdentifier(p2.getImageUrls().get(0), "drawable", getPackageName()));
+        brandImages.add(getResources().getIdentifier(p3.getImageUrls().get(0), "drawable", getPackageName()));
+
+         //data to populate the RecyclerView with
         ArrayList<Integer> viewColors = new ArrayList<>();
         viewColors.add(Color.rgb(242,228,255));
         viewColors.add(Color.rgb(255,199,195));
         viewColors.add(Color.rgb(218,255,208));
-        viewColors.add(Color.rgb(195,226,255));
+        //viewColors.add(Color.rgb(195,226,255));
 
-        ArrayList<Integer> brandImages = new ArrayList<>();
-        brandImages.add(R.drawable.airjordan_logo);
-        brandImages.add(R.drawable.nike_logo);
-        brandImages.add(R.drawable.adidas_logo);
-        brandImages.add(R.drawable.vans_logo);
+//        ArrayList<Integer> brandImages = new ArrayList<>();
+//        brandImages.add(R.drawable.airjordan_logo);
+//        brandImages.add(R.drawable.nike_logo);
+//        brandImages.add(R.drawable.adidas_logo);
+       // brandImages.add(R.drawable.vans_logo);
 
-        ArrayList<String> brandNames = new ArrayList<>();
-        brandNames.add("Air Jordan");
-        brandNames.add("Nike");
-        brandNames.add("Adidas");
-        brandNames.add("Vans");
+
+//        ArrayList<String> brandNames = new ArrayList<>();
+//        brandNames.add("Air Jordan");
+//        brandNames.add("Nike");
+//        brandNames.add("Adidas");
+       // brandNames.add("Vans");
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvBrands);
@@ -96,8 +149,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         adapter = new RecyclerViewAdapter(this, viewColors, brandNames, brandImages);
+        //adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+
+
+//        RecyclerView recyclerView = findViewById(R.id.rvFeatured);
+//        LinearLayoutManager verticalLayoutManager
+//                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+//        recyclerView.setLayoutManager(horizontalLayoutManager);
+//        adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
+//        //adapter = new RecyclerViewAdapter(this, viewColors, brandNames, brandImages);
+//        adapter.setClickListener(this);
+//        recyclerView.setAdapter(adapter);
 
 
 

@@ -23,6 +23,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
+    private List<Integer> mProductImages;
+    private List<String> mProductNames;
+    private List<String> mProductColors;
+    private List<Double> mProductPrices;
+
     // data is passed into the constructor
     RecyclerViewAdapter(Context context, List<Integer> colors, List<String> brands, List<Integer> images) {
         this.mInflater = LayoutInflater.from(context);
@@ -31,13 +36,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mImages = images;
     }
 
+
+//    RecyclerViewAdapter(Context context, List<Integer> productImages, List<String> productNames, List<String> productColors, List<Double> productPrices) {
+//        this.mInflater = LayoutInflater.from(context);
+//        //this.mProductImages = productImages;
+//        this.mProductNames = productNames;
+//        this.mProductColors = productColors;
+//        this.mProductPrices = productPrices;
+//    }
+
     // inflates the row layout from xml when needed
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recyclerview_categories, parent, false);
+        //View view2 = mInflater.inflate(R.layout.recyclerview_categories, parent, false);
+        View view = mInflater.inflate(R.layout.recyclerview_featured, parent, false);
         return new ViewHolder(view);
     }
+
 
     // binds the data to the view and textview in each row
     @Override
@@ -45,9 +61,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         int color = mViewColors.get(position);
         String brand = mBrands.get(position);
         int image = mImages.get(position);
+
+//        String name1 = mProductNames.get(position);
+//        //int image1 = mProductImages.get(position);
+//        String color1 = mProductColors.get(position);
+//        double price1 = mProductPrices.get(position);
+
         holder.myView.setCardBackgroundColor(color);
         holder.myTextView.setText(brand);
         holder.myImageView.setImageResource(image);
+
+        //holder.imageTV.setImageResource(image1);
+//        holder.colorTV.setText(color1);
+//        holder.nameTV.setText(name1);
+//        holder.priceTV.setText(String.valueOf(price1));
     }
 
     // total number of rows
@@ -62,11 +89,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView myTextView;
         ImageView myImageView;
 
+//        TextView priceTV;
+//        TextView colorTV;
+//        TextView nameTV;
+        //ImageView imageTV;
+
         ViewHolder(View itemView) {
             super(itemView);
             myView = itemView.findViewById(R.id.brand_color);
             myTextView = itemView.findViewById(R.id.brand_name);
             myImageView = itemView.findViewById(R.id.brand_image);
+
+//            priceTV = itemView.findViewById(R.id.price);
+//            colorTV = itemView.findViewById(R.id.textView8);
+//            //imageTV = itemView.findViewById(R.id.shoe_image);
+//            nameTV = itemView.findViewById(R.id.textView7);
             itemView.setOnClickListener(this);
         }
 
@@ -75,6 +112,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
+
 
     // convenience method for getting data at click position
     public String getItem(int id) {
