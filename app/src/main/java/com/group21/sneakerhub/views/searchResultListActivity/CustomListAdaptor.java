@@ -55,7 +55,7 @@ public class CustomListAdaptor extends ArrayAdapter {
         //setting the image view for the icon inside the about to be displayed list view
         ImageView iconImageView = (ImageView) currentListViewItem.findViewById(R.id.sneaker_preview_img);
         int i = mContext.getResources().getIdentifier(
-                currentProduct.getImageUrls().get(0), "drawable",
+                "s"+currentProduct.getImageUrls().get(0), "drawable",
                 mContext.getPackageName());
 
         //Setting the icon
@@ -74,9 +74,8 @@ public class CustomListAdaptor extends ArrayAdapter {
         priceTextView.setText(String.valueOf(currentProduct.getPrice()) + "+");
 
         // set tag for favourite button
-        ToggleButton favButton = (ToggleButton) currentListViewItem.findViewById(R.id.heart_button);
-        favButton.setTag(position);
-        System.out.println(favButton.getTag());
+       // ToggleButton favButton = (ToggleButton) currentListViewItem.findViewById(R.id.heart_button);
+       // favButton.setTag(position);
 
 
         return currentListViewItem;

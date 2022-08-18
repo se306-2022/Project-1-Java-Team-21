@@ -2,7 +2,10 @@ package com.group21.sneakerhub.views.favouriteActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -32,7 +35,7 @@ public class FavouriteActivity extends AppCompatActivity {
 
     ViewHolder vh;
     private String currentItemSelectedName;
-    List<Product> productList = new ArrayList<Product>();
+    private static List<Product> products;
 
     class ViewHolder{
         ListView listView = (ListView) findViewById(R.id.list_favourites);
@@ -49,54 +52,23 @@ public class FavouriteActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-         /*
-            Getting the data and converting it to a list of Products, hard coded data for now
-         */
 
-        // Product(long id, long categoryId, String imageURL, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated,
-        // boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isFirst)
+        FavouriteViewModel favouriteViewModel = new ViewModelProvider(this).get(FavouriteViewModel.class);
+        favouriteViewModel.getFavouriteProducts().observe(this, productList -> {
+            //products = productList;
+            // declaring the arrayadapter and setting the data
+            // the second argument in the ArrayAdapter is the layout you want to use
+            // we use the custom one we made in the layout folder
+            // simple arrayadapter takes list of strings as its default input
+            CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_favourites,productList);
 
-        List<Integer> availableSizes = new ArrayList<Integer>();
-        availableSizes.add(10);
-        availableSizes.add(11);
-        availableSizes.add(12);
+            // getting a reference to the ListView and setting its adapter
 
-        List<String> imageUrls = new ArrayList<String>();
-        imageUrls.add("yeezy_img_1");
+            vh.listView.setAdapter(itemsAdapter);
 
-        List<String> features = new ArrayList<String>();
-        features.add("very nice");
-
-        productList.add(new Product("Adidas Yeezy 450",1,1,200.22,"Wine Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("Air Force One",1,1,230.00,"Snow White",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar3",1,1,200.22,"Orange",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar4",1,1,219.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar5",1,1,200.22,"Zebra",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar6",1,1,300.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar7",1,1,200.22,"Crimson",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar8",1,1,200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar9",1,1,400.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar10",1,1,200.22,"Indigo",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar11",1,1,200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar12",1,1,200.2222,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar13",1,1,200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar14",1,1,200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-        productList.add(new Product("ar15",1,1,200.22,"Red",availableSizes,10.22,5,true,imageUrls, "very nice shoe", features, true));
-
-
-
-        // declaring the arrayadapter and setting the data
-        // the second argument in the ArrayAdapter is the layout you want to use
-        // we use the custom one we made in the layout folder
-        // simple arrayadapter takes list of strings as its default input
-        CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_favourites,productList);
-
-        // getting a reference to the ListView and setting its adapter
-
-        vh.listView.setAdapter(itemsAdapter);
-
-        vh.listView.setOnItemClickListener((parent, view, position, id) -> {
-            currentItemSelectedName = productList.get(position).getName();
+            vh.listView.setOnItemClickListener((parent, view, position, id) -> {
+                currentItemSelectedName = productList.get(position).getName();
+            });
         });
 
         // Initialize and assign object for nav bar
@@ -135,17 +107,31 @@ public class FavouriteActivity extends AppCompatActivity {
         ToggleButton toggleButton = (ToggleButton) v;
         if(toggleButton.isChecked()){
             toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
-            int index = Integer.parseInt(toggleButton.getTag().toString());
-            System.out.println(index);
-            System.out.println(productList.get(index).getName());
+           // int index = Integer.parseInt(toggleButton.getTag().toString());
+           // System.out.println(index);
+           // System.out.println(products.get(index).getName());
 
         } else{
             toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-            System.out.println("favourite button unclicked");
+
         }
 
     }
 
-    //ic_baseline_favorite_border_24
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // change visibility of toolbar
+            // reference has to be here, cant be in viewholder
+            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper_fav);
+            navBarWrapper.setVisibility(View.GONE);
+        } else {
+            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper_fav);
+            navBarWrapper.setVisibility(View.VISIBLE);
+        }
+    }
 
 }

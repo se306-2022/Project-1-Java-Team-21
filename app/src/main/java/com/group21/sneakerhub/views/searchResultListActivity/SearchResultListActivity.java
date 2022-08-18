@@ -51,11 +51,7 @@ public class SearchResultListActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-
-
-
         SearchResultListViewModel searchResultVM = new ViewModelProvider(this).get(SearchResultListViewModel.class);
-
 
         Intent intent = getIntent();
         String query = intent.getStringExtra("query");
@@ -64,17 +60,6 @@ public class SearchResultListActivity extends AppCompatActivity {
         int lowerPrice = intent.getIntExtra("lowerPrice",0);
         int upperPrice = intent.getIntExtra("upperPrice",0);
 
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String queryFinal = intent.getStringExtra(SearchManager.QUERY);
-            System.out.println("final query :" + queryFinal);
-        }
-
-        System.out.println("activity");
-        System.out.println(brands.get(0));
-        System.out.println(colours.get(0));
-        System.out.println(query);
-        System.out.println(lowerPrice);
-        System.out.println(upperPrice);
         ListView listView = (ListView) findViewById(R.id.list);
 
         searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults ->{
@@ -82,6 +67,10 @@ public class SearchResultListActivity extends AppCompatActivity {
 
             // getting a reference to the ListView and setting its adapter
             listView.setAdapter(itemsAdapter);
+
+            // set the header text based on the query
+            vh.collapseItem2.setText("Showing " + searchResults.size() + " search results for");
+            vh.collapseItem3.setText("'" + query + "'");
 
         });
 
