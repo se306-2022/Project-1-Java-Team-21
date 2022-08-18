@@ -20,6 +20,8 @@
             android:name=".views.searchResultListActivity.SearchResultListActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize"
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleInstance"
             />
         <activity
             android:name=".views.searchFIlterActivity.SearchFilterActivity"

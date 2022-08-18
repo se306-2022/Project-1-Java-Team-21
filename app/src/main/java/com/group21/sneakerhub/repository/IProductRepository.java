@@ -15,6 +15,8 @@ public interface IProductRepository {
 
    List<Product> getFavouriteProducts();
 
+   List<Product> getProductsByName(String name);
+
    void updateProductIsFavourite(Product product);
 
    void updateProductRating(Product product);

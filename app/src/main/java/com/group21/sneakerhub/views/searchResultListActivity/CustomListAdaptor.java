@@ -16,10 +16,13 @@ import androidx.annotation.Nullable;
 
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.usecases.searchProductByName.ISearchProductByName;
+import com.group21.sneakerhub.usecases.searchProductByName.SearchProductByName;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Map;
 
 public class CustomListAdaptor extends ArrayAdapter {
 
@@ -75,5 +78,6 @@ public class CustomListAdaptor extends ArrayAdapter {
 
         return currentListViewItem;
     }
+
 }
 

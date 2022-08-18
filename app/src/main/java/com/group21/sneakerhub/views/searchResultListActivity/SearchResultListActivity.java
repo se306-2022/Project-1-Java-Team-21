@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
@@ -27,6 +29,7 @@ import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SearchResultListActivity extends AppCompatActivity {
 
@@ -39,6 +42,7 @@ public class SearchResultListActivity extends AppCompatActivity {
         LinearLayout collapseItem1 = (LinearLayout) findViewById(R.id.collapse_item_1);
         TextView collapseItem2 = (TextView) findViewById(R.id.collapse_item_2);
         TextView collapseItem3 = (TextView) findViewById(R.id.collapse_item_3);
+        ImageButton backButton = (ImageButton) findViewById(R.id.back_button_search_result);
     }
 
 
@@ -63,6 +67,7 @@ public class SearchResultListActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list);
 
         searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults ->{
+
             CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results,searchResults);
 
             // getting a reference to the ListView and setting its adapter
@@ -72,15 +77,35 @@ public class SearchResultListActivity extends AppCompatActivity {
             vh.collapseItem2.setText("Showing " + searchResults.size() + " search results for");
             vh.collapseItem3.setText("'" + query + "'");
 
+            // listener navigates to the detail activity for the specific sneaker than gets clicked on
+            listView.setOnItemClickListener((parent, view, position, id) -> {
+                // create an intent that navigates to NumbersActivity class
+                Intent detailPage = new Intent(getBaseContext(), DetailsActivity.class);
+
+                // ensures that the state gets saved so if the user uses back button from details activity
+                // the search results will persist
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                // send the name of the sneaker so the detail activity can load it
+                detailPage.putExtra("sneakerName", searchResults.get(position).getName());
+
+                detailPage.putExtra("callingActivity", "SearchResultListActivity");
+
+                //start the activity
+                startActivity(detailPage);
+            });
+
+            /**
+             * back to the search filter screen button listener
+             */
+            vh.backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
+                }
+            });
+
         });
 
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-
-            System.out.println("hi");
-            if (position == 0){
-                System.out.println("Adidas Yeezy 450");
-            }
-        });
 
         listView.setOnScrollListener(new OnScrollListener() {
             @Override
@@ -142,6 +167,5 @@ public class SearchResultListActivity extends AppCompatActivity {
             navBarWrapper.setVisibility(View.VISIBLE);
         }
     }
-
 
 }

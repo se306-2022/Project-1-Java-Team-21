@@ -29,6 +29,7 @@
                 android:layout_height="60dp"
                 android:src="@drawable/ic_left_arrow"
                 android:scaleType="centerCrop"
+                android:id="@+id/back_button_favourites"
                 android:backgroundTint="@color/white"/>
         </LinearLayout>
 

@@ -16,6 +16,7 @@ public class firebaseDatabasePopulator implements IDatabasePopulator {
 
     @Override
     public void populate() {
+
         CollectionReference products = db.collection("Products");
         Map<Long,Product> productsMap = new HashMap<Long,Product>();
         // continue add onto existing data in the database
@@ -161,5 +162,6 @@ public class firebaseDatabasePopulator implements IDatabasePopulator {
         for(long i = initialId; i < id; i++){
             products.document(i+"").set(Objects.requireNonNull(productsMap.get(i)));
         }
+
     }
 }

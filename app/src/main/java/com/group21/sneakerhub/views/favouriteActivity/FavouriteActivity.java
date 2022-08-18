@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,6 +26,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import com.group21.sneakerhub.views.searchResultListActivity.CustomListAdaptor;
@@ -39,9 +41,9 @@ public class FavouriteActivity extends AppCompatActivity {
 
     class ViewHolder{
         ListView listView = (ListView) findViewById(R.id.list_favourites);
-        ToggleButton heartShoe = (ToggleButton) findViewById(R.id.heart_button);
         TextView header = (TextView) findViewById(R.id.favourite_header);
         LinearLayout collapseReturnArrow = (LinearLayout) findViewById(R.id.collapse_item_1);
+        ImageButton backButton = (ImageButton) findViewById(R.id.back_button_favourites);
     }
 
 
@@ -67,11 +69,29 @@ public class FavouriteActivity extends AppCompatActivity {
 
             vh.listView.setAdapter(itemsAdapter);
 
-            vh.listView.setOnItemClickListener((parent, view, position, id) -> {
 
+            // listener navigates to the detail activity for the specific sneaker than gets clicked on
+            vh.listView.setOnItemClickListener((parent, view, position, id) -> {
+                // create an intent that navigates to NumbersActivity class
+                Intent detailPage = new Intent(getBaseContext(), DetailsActivity.class);
+
+                // send the name of the sneaker so the detail activity can load it
+                detailPage.putExtra("sneakerName", productList.get(position).getName());
+
+                detailPage.putExtra("callingActivity", "FavouriteActivity");
+
+                //start the activity
+                startActivity(detailPage);
             });
         });
 
+        // back to home screen listener
+        vh.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
 
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -99,9 +119,6 @@ public class FavouriteActivity extends AppCompatActivity {
 
 
     }
-
-
-
 
     public void heartButtonToggle(View v){
 

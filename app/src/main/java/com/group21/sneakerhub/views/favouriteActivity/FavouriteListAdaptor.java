@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.usecases.searchProductByName.ISearchProductByName;
+import com.group21.sneakerhub.usecases.searchProductByName.SearchProductByName;
 
 import java.util.List;
 
@@ -56,7 +58,7 @@ public class FavouriteListAdaptor extends ArrayAdapter {
         //Setting the icon
         iconImageView.setImageResource(i);
 
-        // set the name of the shoe
+        // display the number of colors the shoe is available in
         TextView nameTextView = (TextView) currentListViewItem.findViewById(R.id.shoe_description);
         nameTextView.setText(currentProduct.getColor());
 
@@ -75,4 +77,5 @@ public class FavouriteListAdaptor extends ArrayAdapter {
 
         return currentListViewItem;
     }
+
 }
