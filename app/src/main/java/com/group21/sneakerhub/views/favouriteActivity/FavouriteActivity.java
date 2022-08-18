@@ -34,13 +34,14 @@ import java.util.List;
 public class FavouriteActivity extends AppCompatActivity {
 
     ViewHolder vh;
-    private String currentItemSelectedName;
     private static List<Product> products;
+    FavouriteViewModel favouriteViewModel;
 
     class ViewHolder{
         ListView listView = (ListView) findViewById(R.id.list_favourites);
         ToggleButton heartShoe = (ToggleButton) findViewById(R.id.heart_button);
-
+        TextView header = (TextView) findViewById(R.id.favourite_header);
+        LinearLayout collapseReturnArrow = (LinearLayout) findViewById(R.id.collapse_item_1);
     }
 
 
@@ -53,23 +54,24 @@ public class FavouriteActivity extends AppCompatActivity {
         vh = new ViewHolder();
 
 
-        FavouriteViewModel favouriteViewModel = new ViewModelProvider(this).get(FavouriteViewModel.class);
+        favouriteViewModel = new ViewModelProvider(this).get(FavouriteViewModel.class);
         favouriteViewModel.getFavouriteProducts().observe(this, productList -> {
-            //products = productList;
+            products = productList;
             // declaring the arrayadapter and setting the data
             // the second argument in the ArrayAdapter is the layout you want to use
             // we use the custom one we made in the layout folder
             // simple arrayadapter takes list of strings as its default input
-            CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_favourites,productList);
+            FavouriteListAdaptor itemsAdapter = new FavouriteListAdaptor(this, R.layout.list_view_favourites,productList);
 
             // getting a reference to the ListView and setting its adapter
 
             vh.listView.setAdapter(itemsAdapter);
 
             vh.listView.setOnItemClickListener((parent, view, position, id) -> {
-                currentItemSelectedName = productList.get(position).getName();
+
             });
         });
+
 
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -107,13 +109,14 @@ public class FavouriteActivity extends AppCompatActivity {
         ToggleButton toggleButton = (ToggleButton) v;
         if(toggleButton.isChecked()){
             toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
-           // int index = Integer.parseInt(toggleButton.getTag().toString());
-           // System.out.println(index);
-           // System.out.println(products.get(index).getName());
-
+            int index = Integer.parseInt(toggleButton.getTag().toString());
+            // remove product from favourite
+            favouriteViewModel.removeProductFromFavourite(products.get(index));
         } else{
             toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-
+            int index = Integer.parseInt(toggleButton.getTag().toString());
+            // add to favourite, incase the user has pressed heart button more than once
+            favouriteViewModel.addProductToFavourite(products.get(index));
         }
 
     }
@@ -128,9 +131,14 @@ public class FavouriteActivity extends AppCompatActivity {
             // reference has to be here, cant be in viewholder
             LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper_fav);
             navBarWrapper.setVisibility(View.GONE);
+            vh.collapseReturnArrow.setVisibility(View.GONE);
+            vh.header.setVisibility(View.GONE);
+
         } else {
             LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper_fav);
             navBarWrapper.setVisibility(View.VISIBLE);
+            vh.collapseReturnArrow.setVisibility(View.VISIBLE);
+            vh.header.setVisibility(View.VISIBLE);
         }
     }
 

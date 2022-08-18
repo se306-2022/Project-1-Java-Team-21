@@ -37,13 +37,15 @@
             android:exported="false" />
         <activity
             android:name=".views.favouriteActivity.FavouriteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".views.detailsActivity.DetailsActivity"
             android:exported="false" />
         <activity
             android:name=".views.mainActivity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

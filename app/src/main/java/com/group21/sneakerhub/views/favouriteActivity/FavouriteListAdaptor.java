@@ -1,11 +1,9 @@
-package com.group21.sneakerhub.views.searchResultListActivity;
+package com.group21.sneakerhub.views.favouriteActivity;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,17 +15,14 @@ import androidx.annotation.Nullable;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class CustomListAdaptor extends ArrayAdapter {
-
+public class FavouriteListAdaptor extends ArrayAdapter {
     int mLayoutId;
     List<Product> products;
     Context mContext;
 
-    public CustomListAdaptor(@NonNull Context context, int resource, @NonNull List<Product> objects) {
+    public FavouriteListAdaptor(@NonNull Context context, int resource, @NonNull List<Product> objects) {
         super(context, resource, objects);
         mLayoutId = resource; // layout xml file we made (custom)
         mContext = context; // the class it is in
@@ -55,7 +50,7 @@ public class CustomListAdaptor extends ArrayAdapter {
         //setting the image view for the icon inside the about to be displayed list view
         ImageView iconImageView = (ImageView) currentListViewItem.findViewById(R.id.sneaker_preview_img);
         int i = mContext.getResources().getIdentifier(
-                "s"+currentProduct.getImageUrls().get(0), "drawable",
+                "s" + currentProduct.getImageUrls().get(0), "drawable",
                 mContext.getPackageName());
 
         //Setting the icon
@@ -73,7 +68,11 @@ public class CustomListAdaptor extends ArrayAdapter {
         TextView priceTextView = (TextView) currentListViewItem.findViewById(R.id.price_text);
         priceTextView.setText(String.valueOf(currentProduct.getPrice()) + "+");
 
+        // set tag for favourite button
+        ToggleButton favButton = (ToggleButton) currentListViewItem.findViewById(R.id.heart_button);
+        favButton.setTag(position);
+
+
         return currentListViewItem;
     }
 }
-
