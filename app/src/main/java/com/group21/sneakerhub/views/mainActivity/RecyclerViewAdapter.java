@@ -17,7 +17,7 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<Integer> mViewColors;
+    private List<String> mViewColors;
     private List<String> mBrands;
     private List<Integer> mImages;
     private LayoutInflater mInflater;
@@ -29,7 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<Double> mProductPrices;
 
     // data is passed into the constructor
-    RecyclerViewAdapter(Context context, List<Integer> colors, List<String> brands, List<Integer> images) {
+    RecyclerViewAdapter(Context context, List<String> colors, List<String> brands, List<Integer> images) {
         this.mInflater = LayoutInflater.from(context);
         this.mViewColors = colors;
         this.mBrands = brands;
@@ -58,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // binds the data to the view and textview in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int color = mViewColors.get(position);
+        String color = mViewColors.get(position);
         String brand = mBrands.get(position);
         int image = mImages.get(position);
 
@@ -67,7 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 //        String color1 = mProductColors.get(position);
 //        double price1 = mProductPrices.get(position);
 
-        holder.myView.setCardBackgroundColor(color);
+        holder.colorText.setText(color);
         holder.myTextView.setText(brand);
         holder.myImageView.setImageResource(image);
 
@@ -85,7 +85,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        CardView myView;
+        //CardView myView;
+        TextView colorText;
         TextView myTextView;
         ImageView myImageView;
 
@@ -96,7 +97,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         ViewHolder(View itemView) {
             super(itemView);
-            myView = itemView.findViewById(R.id.brand_color);
+            colorText = itemView.findViewById(R.id.brand_color);
             myTextView = itemView.findViewById(R.id.brand_name);
             myImageView = itemView.findViewById(R.id.brand_image);
 
