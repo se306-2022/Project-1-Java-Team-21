@@ -22,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 
@@ -264,11 +265,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
+        overridePendingTransition(0, 0);
     }
 
     @Override
     public void onItemClick2(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter2.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+
     }
 
 }
