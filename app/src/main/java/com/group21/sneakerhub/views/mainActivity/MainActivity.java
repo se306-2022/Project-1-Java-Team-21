@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
 
 
-
         MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
 
@@ -85,6 +84,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 //        });
 
 /*
+=======
+//        IDatabasePopulator databasePopulator = new firebaseDatabasePopulator();
+//        Thread t1 = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                databasePopulator.populate();
+//            }
+//        });
+//        t1.start();
+
+>>>>>>> Stashed changes
         mainViewModel.getTrendingProducts().observe(this, products -> {
             for (Product product : products) {
                 System.out.println(product.getName());

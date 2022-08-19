@@ -45,8 +45,10 @@
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".views.mainActivity.MainActivity"
-            android:exported="true"
-            android:configChanges="orientation|screenSize">
+            android:exported="false" />
+        <activity
+            android:name=".views.splashActivity.SplashActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
