@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="bottom"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
     tools:context=".views.detailsActivity.DetailsActivity">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/collapse_item_1">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- things to scroll -->
+
             <ImageButton
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:id="@+id/back_button_details"
@@ -32,32 +33,67 @@
                 android:scaleType="centerCrop"
                 android:backgroundTint="@color/white"/>
 
-        </LinearLayout>
+
+
+            <ToggleButton
+                android:id="@+id/heart_button"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="44dp"
+                android:layout_marginRight="36dp"
+                android:background="@drawable/ic_baseline_favorite_24"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:textOff=""
+                android:textOn="" />
+        </RelativeLayout>
 
         <TextView
+            android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:paddingLeft="14dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:layout_marginLeft="35dp"
+            android:text="Yeezy Boost 350"
             android:textColor="@color/black"
-            android:id="@+id/productName"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
 
-    </LinearLayout>
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:clipToPadding="false"
+                app:sliderAutoCycleEnabled="false"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#797979"
+                app:sliderIndicatorUnselectedColor="#D9D9D9"
+                app:sliderScrollTimeInSec="2"
+                app:sliderStartAutoCycle="false" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
         app:itemBackground="@color/black"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
+
         app:menu="@menu/menu_navigation"
-        app:labelVisibilityMode="unlabeled"/>
+        app:labelVisibilityMode="unlabeled" />
 
-
-</LinearLayout>
+</RelativeLayout>

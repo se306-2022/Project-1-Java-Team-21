@@ -23,6 +23,9 @@ import com.group21.sneakerhub.views.mainActivity.MainActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListViewModel;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import org.w3c.dom.Text;
 
@@ -37,11 +40,28 @@ public class DetailsActivity extends AppCompatActivity {
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button_details);
     }
 
+
+    SliderView sliderView;
+    int[] images = {R.drawable.s61_1,
+            R.drawable.s61_2,
+            R.drawable.s61_3};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         getSupportActionBar().hide();
+
+        sliderView = findViewById(R.id.image_slider);
+
+        SliderAdapter sliderAdapter = new SliderAdapter(images);
+
+        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+        //sliderView.startAutoCycle();
+
+
 
         vh = new ViewHolder();
 

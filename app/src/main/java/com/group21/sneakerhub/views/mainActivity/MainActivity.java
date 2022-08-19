@@ -241,6 +241,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(getBaseContext(), ListActivity.class);
+//        intent.putExtra("brandName", adapter.getItem(position));
+//        startActivity(intent);
         startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
         overridePendingTransition(0, 0);
     }
@@ -251,9 +254,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
 //=======
 //
- //       Intent intent = new Intent(getBaseContext(), ListActivity.class);
- //       intent.putExtra("brandName", adapter.getItem(position));
- //       startActivity(intent);
+//        Intent intent = new Intent(getBaseContext(), ListActivity.class);
+//        intent.putExtra("brandName", adapter.getItem(position));
+//        startActivity(intent);
 //>>>>>>> development
     }
 
