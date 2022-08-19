@@ -62,7 +62,7 @@ public class CategoryRepository implements ICategoryRepository {
     public List<Category> getCategories(){
         try {
             List<Category> categories = Tasks.await(db.collection("Categories").get()).toObjects(Category.class);
-            categoryList = new ArrayList<Category>();
+            categoryList = new ArrayList<>();
             for (Category categoryItem : categories) {
                 switch (categoryItem.getName()) {
                     case "Nike":
@@ -74,7 +74,7 @@ public class CategoryRepository implements ICategoryRepository {
                     case "Vans":
                         categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
                         break;
-                    case "AirJordan":
+                    case "Air Jordan":
                         categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
                         break;
                 }

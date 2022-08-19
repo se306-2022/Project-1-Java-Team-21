@@ -27,10 +27,32 @@
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:id="@+id/back_button_search_result"
                 android:src="@drawable/ic_left_arrow"
                 android:scaleType="centerCrop"
                 android:backgroundTint="@color/white"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/loading_container">
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#a9a9a9"
+                android:gravity="center"
+                android:id="@+id/loading_text"
+                android:textSize="24sp"/>
         </LinearLayout>
 
         <TextView
@@ -42,7 +64,8 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:id="@+id/collapse_item_2"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +74,8 @@
             android:textSize="24sp"
             android:textColor="#a9a9a9"
             android:id="@+id/collapse_item_3"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"/>
 
         <ListView
             android:id="@+id/list"
@@ -59,6 +83,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:paddingHorizontal="16dp"
+            android:visibility="gone"
             tools:context=".views.searchResultListActivity.SearchResultListActivity"/>
     </LinearLayout>
 

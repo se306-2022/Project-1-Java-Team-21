@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import android.widget.LinearLayout;
+
 import android.widget.Toast;
 
 
@@ -24,7 +27,9 @@ import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
+import com.group21.sneakerhub.views.listActivity.ListActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
+import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 //                System.out.println(product.getName());
 //            }
 //        });
+
 
 
         ArrayList<Product> products = new ArrayList<>();
@@ -204,36 +210,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
 
 
-//        MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-//
-//        mainViewModel.isLoading.observe(this, isLoading -> {
-//            if (isLoading) {
-//                findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
-//            } else {
-//                findViewById(R.id.progress_bar).setVisibility(View.GONE);
-//            }
-//        });
-
-
-//        mainViewModel.getTrendingProducts().observe(this, products -> {
-//            for (Product product : products) {
-//                System.out.println(product.getName());
-//            }
-//        });
-//
-//        mainViewModel.getSearchedProducts("Air JORDan").observe(this, products -> {
-//            for (Product product : products) {
-//                System.out.println(product.getName());
-//            }
-//        });
-
-//        mainViewModel.getProductsByCategoryId(1).observe(this, products -> {
-//            for (Product product : products) {
-//                System.out.println(product.getName());
-//            }
-//        });
-
-
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -273,6 +249,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void onItemClick2(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter2.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
 
+//=======
+//
+ //       Intent intent = new Intent(getBaseContext(), ListActivity.class);
+ //       intent.putExtra("brandName", adapter.getItem(position));
+ //       startActivity(intent);
+//>>>>>>> development
     }
+
 
 }

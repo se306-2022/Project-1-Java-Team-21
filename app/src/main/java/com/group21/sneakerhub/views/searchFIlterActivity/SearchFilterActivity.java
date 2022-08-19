@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -81,6 +82,10 @@ public class SearchFilterActivity extends AppCompatActivity {
             }
         });
 
+        // setting the default values for the slider touch listener if the user does not touch it
+        searchFilterVM.setLowerPriceRange(200);
+        searchFilterVM.setUpperPriceRange(800);
+
         // implement listener for range slider
         vh.rangeSlider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
             @Override
@@ -88,8 +93,8 @@ public class SearchFilterActivity extends AppCompatActivity {
                 List<Float> rangeValues = slider.getValues();
                 searchFilterVM.setLowerPriceRange(Math.round(rangeValues.get(0)));
                 searchFilterVM.setUpperPriceRange(Math.round(rangeValues.get(1)));
-                vh.sliderMinText.setText(rangeValues.get(0).toString());
-                vh.sliderMaxText.setText(rangeValues.get(1).toString());
+                vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
+                vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
             }
 
             @Override
@@ -128,28 +133,38 @@ public class SearchFilterActivity extends AppCompatActivity {
          * If submit button is not pressed or the return key is not hit by the user and they navigate away
          * from page then the data collected by viewmodel is not processed and discarded.
          */
+
         vh.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // create an intent that navigates to NumbersActivity class
-                Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
-                //set data across to the other activity
-                // sent in a key, value format, with the key being the first argument
-                // many different types of data can be sent
-                searchResults.putExtra("isFilters", true);
+                // if the user selects no brand or colour then prompt the user to do so with a toast
+                if (searchFilterVM.getBrandNames().size() == 0){
+                    Toast.makeText(SearchFilterActivity.this,"Please select atleast one brand", Toast.LENGTH_LONG).show();
+                } else if (searchFilterVM.getColours().size() == 0){
+                    Toast.makeText(SearchFilterActivity.this,"Please select atleast one colour", Toast.LENGTH_LONG).show();
+                } else if (searchFilterVM.getLiveQueryString() == null){
+                    Toast.makeText(SearchFilterActivity.this,"Please fill out the search field", Toast.LENGTH_LONG).show();
+                } else {
+                    // create an intent that navigates to NumbersActivity class
+                    Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
+                    //set data across to the other activity
+                    // sent in a key, value format, with the key being the first argument
+                    // many different types of data can be sent
+                    searchResults.putExtra("isFilters", true);
 
-                searchResults.putExtra("query",searchFilterVM.getLiveQueryString());
-                searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
-                searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
+                    searchResults.putExtra("query",searchFilterVM.getLiveQueryString());
+                    searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
+                    searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
 
-                ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
-                searchResults.putExtra("colours",colours);
+                    ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
+                    searchResults.putExtra("colours",colours);
 
-                ArrayList<String> brands = (ArrayList<String>) searchFilterVM.getBrandNames();
-                searchResults.putExtra("brands",brands);
+                    ArrayList<String> brands = (ArrayList<String>) searchFilterVM.getBrandNames();
+                    searchResults.putExtra("brands",brands);
 
-                //start the activity
-                startActivity(searchResults);
+                    //start the activity
+                    startActivity(searchResults);
+                }
             }
         });
 
@@ -196,11 +211,6 @@ public class SearchFilterActivity extends AppCompatActivity {
         vh.searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
 
         return true;
-    }
-
-    public void doMySearch(String query){
-        // correctly retrieves query to screen
-        System.out.println(query);
     }
 
     /**

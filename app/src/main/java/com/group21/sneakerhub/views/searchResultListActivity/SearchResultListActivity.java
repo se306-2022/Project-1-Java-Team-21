@@ -13,13 +13,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
@@ -27,6 +30,7 @@ import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SearchResultListActivity extends AppCompatActivity {
 
@@ -39,6 +43,11 @@ public class SearchResultListActivity extends AppCompatActivity {
         LinearLayout collapseItem1 = (LinearLayout) findViewById(R.id.collapse_item_1);
         TextView collapseItem2 = (TextView) findViewById(R.id.collapse_item_2);
         TextView collapseItem3 = (TextView) findViewById(R.id.collapse_item_3);
+        ImageButton backButton = (ImageButton) findViewById(R.id.back_button_search_result);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        ListView listView = (ListView) findViewById(R.id.list);
+        TextView loadingText = (TextView)  findViewById(R.id.loading_text);
+        LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
     }
 
 
@@ -51,49 +60,80 @@ public class SearchResultListActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-
-
-
         SearchResultListViewModel searchResultVM = new ViewModelProvider(this).get(SearchResultListViewModel.class);
 
-
         Intent intent = getIntent();
+
         String query = intent.getStringExtra("query");
         ArrayList<String> colours = intent.getStringArrayListExtra("colours");
         ArrayList<String> brands = intent.getStringArrayListExtra("brands");
         int lowerPrice = intent.getIntExtra("lowerPrice",0);
         int upperPrice = intent.getIntExtra("upperPrice",0);
 
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String queryFinal = intent.getStringExtra(SearchManager.QUERY);
-            System.out.println("final query :" + queryFinal);
-        }
-
-        System.out.println("activity");
-        System.out.println(brands.get(0));
-        System.out.println(colours.get(0));
-        System.out.println(query);
-        System.out.println(lowerPrice);
-        System.out.println(upperPrice);
-        ListView listView = (ListView) findViewById(R.id.list);
 
         searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults ->{
+
             CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results,searchResults);
 
             // getting a reference to the ListView and setting its adapter
-            listView.setAdapter(itemsAdapter);
+            vh.listView.setAdapter(itemsAdapter);
+
+            // set the header text based on the query
+            vh.collapseItem2.setText("Showing " + searchResults.size() + " search results for");
+            vh.collapseItem3.setText("'" + query + "'");
+
+            // listener navigates to the detail activity for the specific sneaker than gets clicked on
+            vh.listView.setOnItemClickListener((parent, view, position, id) -> {
+                // create an intent that navigates to NumbersActivity class
+                Intent detailPage = new Intent(getBaseContext(), DetailsActivity.class);
+
+                // send the name of the sneaker so the detail activity can load it
+                detailPage.putExtra("sneakerName", searchResults.get(position).getName());
+
+                detailPage.putExtra("callingActivity", "SearchResultListActivity");
+
+                //start the activity
+                startActivity(detailPage);
+            });
 
         });
 
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-
-            System.out.println("hi");
-            if (position == 0){
-                System.out.println("Adidas Yeezy 450");
+        /**
+         * back to the search filter screen button listener
+         */
+        vh.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
             }
         });
 
-        listView.setOnScrollListener(new OnScrollListener() {
+        /**
+         * Implementing the loading screen while the data is being fetched from the database
+         */
+        searchResultVM.isLoading.observe(this, isLoading -> {
+            if (isLoading) {
+                // set screen to progress bar
+                vh.progressBar.setVisibility(View.VISIBLE);
+                vh.listView.setVisibility(View.GONE);
+                vh.collapseItem2.setVisibility(View.GONE);
+                vh.collapseItem3.setVisibility(View.GONE);
+                vh.loadingText.setVisibility(View.VISIBLE);
+                vh.loadingContainer.setVisibility(View.VISIBLE);
+
+            } else {
+                // change from progress bar back to the activity
+                vh.progressBar.setVisibility(View.GONE);
+                vh.loadingText.setVisibility(View.GONE);
+                vh.listView.setVisibility(View.VISIBLE);
+                vh.collapseItem2.setVisibility(View.VISIBLE);
+                vh.collapseItem3.setVisibility(View.VISIBLE);
+                vh.loadingContainer.setVisibility(View.GONE);
+            }
+        });
+
+
+        vh.listView.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -153,6 +193,5 @@ public class SearchResultListActivity extends AppCompatActivity {
             navBarWrapper.setVisibility(View.VISIBLE);
         }
     }
-
 
 }

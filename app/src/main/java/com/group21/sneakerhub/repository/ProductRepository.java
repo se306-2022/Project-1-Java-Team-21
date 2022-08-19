@@ -54,6 +54,16 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
+    public List<Product> getProductsByName(String name){
+        try {
+            return Tasks.await(db.collection(COLLECTION_NAME).whereEqualTo("name", name).get()).toObjects(Product.class);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public List<Product> getFavouriteProducts() {
         try {
             return Tasks.await(db.collection(COLLECTION_NAME).whereEqualTo("isFavourite", true).get()).toObjects(Product.class);
