@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SearchView;
@@ -35,6 +37,8 @@ public class SearchFilterActivity extends AppCompatActivity {
 
     ViewHolder vh;
     SearchFilterViewModel searchFilterVM;
+    Animation shakeAnimation;
+    float x1, x2, y1, y2;
 
     class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -57,8 +61,7 @@ public class SearchFilterActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        // instantiate the viewmodel class
-        SearchFilterViewModel viewModel = new ViewModelProvider(this).get(SearchFilterViewModel.class);
+        shakeAnimation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.shake);
 
         // Set Home selected
         vh.bottomNavigationView.setSelectedItemId(R.id.search);
@@ -72,11 +75,11 @@ public class SearchFilterActivity extends AppCompatActivity {
                         return true;
                     case R.id.favourite:
                         startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         return true;
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 }
                 return false;
             }
@@ -221,6 +224,7 @@ public class SearchFilterActivity extends AppCompatActivity {
 
         // use typecast to change v from a generic view to of type CheckBox
         ToggleButton toggleButton = (ToggleButton) v;
+        toggleButton.startAnimation(shakeAnimation);
         if(toggleButton.isChecked()){
             String text = toggleButton.getText().toString();
             // send text to viewmodel as the selected brand filter for searchfilterview
@@ -246,6 +250,7 @@ public class SearchFilterActivity extends AppCompatActivity {
 
         // use typecast to change v from a generic view to of type CheckBox
         ToggleButton toggleButton = (ToggleButton) v;
+        toggleButton.startAnimation(shakeAnimation);
         if(toggleButton.isChecked()){
             String text = toggleButton.getText().toString();
             // send text to viewmodel as the selected colour filter for searchfilterview
@@ -260,6 +265,32 @@ public class SearchFilterActivity extends AppCompatActivity {
             toggleButton.setBackgroundResource(R.drawable.button_border);
             toggleButton.setTextColor(getResources().getColor(R.color.black));
         }
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent touchEvent){
+        switch(touchEvent.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                if (x1 < x2) {
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+                if(x1 > x2){
+                    Intent intent = new Intent(getBaseContext(), FavouriteActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+                break;
+        }
+        return false;
 
     }
 
