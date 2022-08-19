@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// FOLLOW THIS FORMAT
+
 public class SearchResultListViewModel extends ViewModel {
     // fields
     MutableLiveData<List<Product>> searchResults;
