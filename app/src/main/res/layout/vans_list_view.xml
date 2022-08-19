@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="4dp"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="8dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Yeezy Boost 350"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:id="@+id/shoe_name"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Available in X colours"
+            android:textSize="18sp"
+            android:id="@+id/shoe_description"
+            android:textColor="#3a3b3c"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="100dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/yeezy_img_1"
+                android:id="@+id/sneaker_preview_img"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="$450.00 +"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="15dp"
+                android:id="@+id/price_text"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="right|bottom"
+                android:textColor="#3a3b3c"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

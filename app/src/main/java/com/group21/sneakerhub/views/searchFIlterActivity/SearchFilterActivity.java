@@ -142,6 +142,8 @@ public class SearchFilterActivity extends AppCompatActivity {
                     Toast.makeText(SearchFilterActivity.this,"Please select atleast one brand", Toast.LENGTH_LONG).show();
                 } else if (searchFilterVM.getColours().size() == 0){
                     Toast.makeText(SearchFilterActivity.this,"Please select atleast one colour", Toast.LENGTH_LONG).show();
+                } else if (searchFilterVM.getLiveQueryString() == null){
+                    Toast.makeText(SearchFilterActivity.this,"Please fill out the search field", Toast.LENGTH_LONG).show();
                 } else {
                     // create an intent that navigates to NumbersActivity class
                     Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);

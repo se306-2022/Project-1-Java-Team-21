@@ -33,12 +33,34 @@
                 android:backgroundTint="@color/white"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/loading_container">
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#a9a9a9"
+                android:gravity="center"
+                android:id="@+id/loading_text"
+                android:textSize="24sp"/>
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Favourites"
             android:id="@+id/favourite_header"
             android:paddingLeft="14dp"
+            android:visibility="gone"
             android:textSize="34sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -49,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:visibility="gone"
             android:paddingHorizontal="16dp"
             tools:context=".views.favouriteActivity.FavouriteActivity" />
     </LinearLayout>

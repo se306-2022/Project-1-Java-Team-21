@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -43,6 +44,10 @@ public class SearchResultListActivity extends AppCompatActivity {
         TextView collapseItem2 = (TextView) findViewById(R.id.collapse_item_2);
         TextView collapseItem3 = (TextView) findViewById(R.id.collapse_item_3);
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button_search_result);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        ListView listView = (ListView) findViewById(R.id.list);
+        TextView loadingText = (TextView)  findViewById(R.id.loading_text);
+        LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
     }
 
 
@@ -58,33 +63,30 @@ public class SearchResultListActivity extends AppCompatActivity {
         SearchResultListViewModel searchResultVM = new ViewModelProvider(this).get(SearchResultListViewModel.class);
 
         Intent intent = getIntent();
+
         String query = intent.getStringExtra("query");
         ArrayList<String> colours = intent.getStringArrayListExtra("colours");
         ArrayList<String> brands = intent.getStringArrayListExtra("brands");
         int lowerPrice = intent.getIntExtra("lowerPrice",0);
         int upperPrice = intent.getIntExtra("upperPrice",0);
 
-        ListView listView = (ListView) findViewById(R.id.list);
 
         searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults ->{
 
             CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results,searchResults);
 
             // getting a reference to the ListView and setting its adapter
-            listView.setAdapter(itemsAdapter);
+            vh.listView.setAdapter(itemsAdapter);
 
             // set the header text based on the query
             vh.collapseItem2.setText("Showing " + searchResults.size() + " search results for");
             vh.collapseItem3.setText("'" + query + "'");
 
             // listener navigates to the detail activity for the specific sneaker than gets clicked on
-            listView.setOnItemClickListener((parent, view, position, id) -> {
+            vh.listView.setOnItemClickListener((parent, view, position, id) -> {
                 // create an intent that navigates to NumbersActivity class
                 Intent detailPage = new Intent(getBaseContext(), DetailsActivity.class);
 
-                // ensures that the state gets saved so if the user uses back button from details activity
-                // the search results will persist
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 // send the name of the sneaker so the detail activity can load it
                 detailPage.putExtra("sneakerName", searchResults.get(position).getName());
 
@@ -94,20 +96,44 @@ public class SearchResultListActivity extends AppCompatActivity {
                 startActivity(detailPage);
             });
 
-            /**
-             * back to the search filter screen button listener
-             */
-            vh.backButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
-                }
-            });
+        });
 
+        /**
+         * back to the search filter screen button listener
+         */
+        vh.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
+            }
+        });
+
+        /**
+         * Implementing the loading screen while the data is being fetched from the database
+         */
+        searchResultVM.isLoading.observe(this, isLoading -> {
+            if (isLoading) {
+                // set screen to progress bar
+                vh.progressBar.setVisibility(View.VISIBLE);
+                vh.listView.setVisibility(View.GONE);
+                vh.collapseItem2.setVisibility(View.GONE);
+                vh.collapseItem3.setVisibility(View.GONE);
+                vh.loadingText.setVisibility(View.VISIBLE);
+                vh.loadingContainer.setVisibility(View.VISIBLE);
+
+            } else {
+                // change from progress bar back to the activity
+                vh.progressBar.setVisibility(View.GONE);
+                vh.loadingText.setVisibility(View.GONE);
+                vh.listView.setVisibility(View.VISIBLE);
+                vh.collapseItem2.setVisibility(View.VISIBLE);
+                vh.collapseItem3.setVisibility(View.VISIBLE);
+                vh.loadingContainer.setVisibility(View.GONE);
+            }
         });
 
 
-        listView.setOnScrollListener(new OnScrollListener() {
+        vh.listView.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 

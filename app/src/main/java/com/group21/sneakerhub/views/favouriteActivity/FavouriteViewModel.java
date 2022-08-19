@@ -16,6 +16,7 @@ import java.util.List;
 
 public class FavouriteViewModel extends ViewModel {
     MutableLiveData<List<Product>> favouriteProducts;
+    MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
     IGetFavouriteProducts getFavouriteProducts;
     IRemoveProductFromFavourite removeProductFromFavourite;
@@ -37,7 +38,9 @@ public class FavouriteViewModel extends ViewModel {
             Thread thread1 = new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    isLoading.postValue(true);
                     favouriteProducts.postValue(getFavouriteProducts.getFavouriteProducts());
+                    isLoading.postValue(false);
                 }
             });
 

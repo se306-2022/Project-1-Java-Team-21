@@ -20,6 +20,7 @@ public class SearchResultListViewModel extends ViewModel {
     // fields
     MutableLiveData<List<Product>> searchResults;
     Map<String,Integer> colorsMap;
+    MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
     // use case interfaces
     ISearchProductWithFIlter searchProductWithFIlter;
@@ -38,13 +39,16 @@ public class SearchResultListViewModel extends ViewModel {
      * Because Tasks class requires method not be called on main thread.
      */
     public LiveData<List<Product>> getProductsBySearchFilter(String search, List<String> brandNames, List<String> colors, int fromPrice, int toPrice){
+        isLoading.postValue(true);
         if (searchResults == null){
             searchResults = new MutableLiveData<>();
 
             Thread thread1 = new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    isLoading.postValue(true);
                     searchResults.postValue(searchProductWithFIlter.searchProductWithFIlter(search,brandNames,colors,fromPrice,toPrice));
+                    isLoading.postValue(false);
                 }
             });
 

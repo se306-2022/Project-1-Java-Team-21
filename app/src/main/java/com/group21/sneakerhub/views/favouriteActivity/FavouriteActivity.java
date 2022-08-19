@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -44,6 +45,9 @@ public class FavouriteActivity extends AppCompatActivity {
         TextView header = (TextView) findViewById(R.id.favourite_header);
         LinearLayout collapseReturnArrow = (LinearLayout) findViewById(R.id.collapse_item_1);
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button_favourites);
+        TextView loadingText = (TextView)  findViewById(R.id.loading_text);
+        LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
     }
 
 
@@ -90,6 +94,28 @@ public class FavouriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+
+        /**
+         * Implementing the loading screen while the data is being fetched from the database
+         */
+        favouriteViewModel.isLoading.observe(this, isLoading -> {
+            if (isLoading) {
+                // set screen to progress bar
+                vh.progressBar.setVisibility(View.VISIBLE);
+                vh.listView.setVisibility(View.GONE);
+                vh.header.setVisibility(View.GONE);
+                vh.loadingText.setVisibility(View.VISIBLE);
+                vh.loadingContainer.setVisibility(View.VISIBLE);
+
+            } else {
+                // change from progress bar back to the activity
+                vh.progressBar.setVisibility(View.GONE);
+                vh.loadingText.setVisibility(View.GONE);
+                vh.listView.setVisibility(View.VISIBLE);
+                vh.header.setVisibility(View.VISIBLE);
+                vh.loadingContainer.setVisibility(View.GONE);
             }
         });
 
