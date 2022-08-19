@@ -55,7 +55,7 @@
             android:fontFamily="@font/poppinsboldsemi"
             android:paddingStart="30dp"
             android:paddingTop="10dp"
-            android:text="Categories"
+            android:text="Featured"
             android:textColor="#000000"
             android:textSize="30sp" />
 
@@ -63,7 +63,7 @@
             android:id="@+id/rvBrands"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="30dp" />
+            android:paddingLeft="15dp" />
 
         <TextView
             android:id="@+id/textView6"
@@ -72,7 +72,7 @@
             android:fontFamily="@font/poppinsboldsemi"
             android:paddingStart="30dp"
             android:paddingTop="20dp"
-            android:text="Featured"
+            android:text="Categories"
             android:textColor="#000000"
             android:textSize="30sp" />
 

@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        adapter = new RecyclerViewAdapter(this, productColors, brandNames, brandImages);
+        adapter = new RecyclerViewAdapter(this, productColors, brandNames, brandImages, productPrices);
         //adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);

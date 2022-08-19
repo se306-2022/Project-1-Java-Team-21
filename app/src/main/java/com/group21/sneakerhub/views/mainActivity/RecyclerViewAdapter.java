@@ -29,11 +29,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<Double> mProductPrices;
 
     // data is passed into the constructor
-    RecyclerViewAdapter(Context context, List<String> colors, List<String> brands, List<Integer> images) {
+    RecyclerViewAdapter(Context context, List<String> colors, List<String> brands, List<Integer> images, List<Double> productPrices) {
         this.mInflater = LayoutInflater.from(context);
         this.mViewColors = colors;
         this.mBrands = brands;
         this.mImages = images;
+        this.mProductPrices = productPrices;
     }
 
 
@@ -65,11 +66,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 //        String name1 = mProductNames.get(position);
 //        //int image1 = mProductImages.get(position);
 //        String color1 = mProductColors.get(position);
-//        double price1 = mProductPrices.get(position);
+        double price1 = mProductPrices.get(position);
 
         holder.colorText.setText(color);
         holder.myTextView.setText(brand);
         holder.myImageView.setImageResource(image);
+        holder.priceText.setText("$" + String.format("%.2f",price1));
 
         //holder.imageTV.setImageResource(image1);
 //        holder.colorTV.setText(color1);
@@ -89,6 +91,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView colorText;
         TextView myTextView;
         ImageView myImageView;
+        TextView priceText;
 
 //        TextView priceTV;
 //        TextView colorTV;
@@ -100,7 +103,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             colorText = itemView.findViewById(R.id.brand_color);
             myTextView = itemView.findViewById(R.id.brand_name);
             myImageView = itemView.findViewById(R.id.brand_image);
-
+            priceText = itemView.findViewById(R.id.price);
 //            priceTV = itemView.findViewById(R.id.price);
 //            colorTV = itemView.findViewById(R.id.textView8);
 //            //imageTV = itemView.findViewById(R.id.shoe_image);
