@@ -23,6 +23,7 @@ tools:context=".views.listActivity.ListActivity">
         android:orientation="vertical"
         android:id="@+id/list_header_background"
         android:layout_marginBottom="20dp"
+        android:visibility="gone"
         android:paddingVertical="15dp"
         android:background="#ADD8E6">
         <LinearLayout
@@ -32,17 +33,17 @@ tools:context=".views.listActivity.ListActivity">
             android:id="@+id/collapse_item_1">
             <ImageButton
                 android:layout_width="60dp"
+                android:id="@+id/back_button_list"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_left_arrow"
-                android:scaleType="centerCrop"
-                android:backgroundTint="#ADD8E6"/>
+                android:scaleType="centerCrop"/>
 
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tiger Mafia"
-            android:paddingLeft="14dp"
+            android:text=""
+            android:paddingHorizontal="28dp"
             android:textSize="34sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -50,12 +51,34 @@ tools:context=".views.listActivity.ListActivity">
             android:layout_marginBottom="8dp"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/loading_container">
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading..."
+            android:textColor="#a9a9a9"
+            android:gravity="center"
+            android:id="@+id/loading_text"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
     <ListView
         android:id="@+id/list_activity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="16dp"
+        android:visibility="gone"
+        android:paddingHorizontal="28dp"
         tools:context=".views.listActivity.ListActivity"/>
 </LinearLayout>
 

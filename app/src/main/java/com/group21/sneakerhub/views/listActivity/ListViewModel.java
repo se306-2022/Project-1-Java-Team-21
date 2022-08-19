@@ -18,7 +18,6 @@ public class ListViewModel extends ViewModel {
     /**
      * fields
      */
-    private String currentBrandName;
     private List<Category> categoryList;
     private List<Product> productsPerCategory;
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
@@ -36,17 +35,6 @@ public class ListViewModel extends ViewModel {
     public ListViewModel(){
         getCategories = new GetCategories();
         getProductsByCategoryId = new GetProductsByCategoryId();
-    }
-
-    /**
-     * getters and setters
-     */
-    public String getCurrentBrandName() {
-        return currentBrandName;
-    }
-
-    public void setCurrentBrandName(String currentBrandName) {
-        this.currentBrandName = currentBrandName;
     }
 
     /**
@@ -68,6 +56,12 @@ public class ListViewModel extends ViewModel {
 
         thread1.start();
 
+        try {
+            thread1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return productsPerCategory;
     }
 
@@ -75,18 +69,17 @@ public class ListViewModel extends ViewModel {
      * Load and return a list containing all the categories or brands of sneakers from the database.
      * @return
      */
-    public Category getCategory() {
+    public Category getCategory(String brandName) {
 
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 isLoading.postValue(true);
-                categoryList = getCategories.getCategories();
-                for (Category category : categoryList){
-                    System.out.println(category.getName());
-                    System.out.println("-------------------------");
-                    if (category.getName().equals(currentBrandName)) {
-                        confirmedCategory = category;
+                System.out.println("-------------brand name -------------------");
+                System.out.println(brandName);
+                for (Category c : getCategories.getCategories()){
+                    if (c.getName().equals(brandName)){
+                        confirmedCategory = c;
                     }
                 }
                 isLoading.postValue(false);
@@ -95,6 +88,13 @@ public class ListViewModel extends ViewModel {
 
         thread1.start();
 
+        try {
+            thread1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(confirmedCategory.getName());
         return confirmedCategory;
     }
 

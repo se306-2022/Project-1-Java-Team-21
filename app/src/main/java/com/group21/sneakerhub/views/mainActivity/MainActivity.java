@@ -24,7 +24,10 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
+import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.repository.CategoryRepository;
+import com.group21.sneakerhub.repository.ProductRepository;
 import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.listActivity.ListActivity;
@@ -39,12 +42,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     private RecyclerViewAdapter adapter;
     private CategoriesAdapter adapter2;
-
-
-
-
-
-
 
 
     @Override
@@ -87,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 //           }
 //        });
 
-
+/*
         mainViewModel.getTrendingProducts().observe(this, products -> {
             for (Product product : products) {
                 System.out.println(product.getName());
@@ -101,6 +98,22 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 System.out.println(product.getName());
             }
         });
+*/
+        CategoryRepository cr = CategoryRepository.getInstance();
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Category c : cr.getCategories()){
+                    System.out.println(c.getName());
+                    System.out.println(c.getClass().getName());
+                    if (c.getName().equals("Air Jordan"));
+                    System.out.println("hoorray!");
+                }
+            }
+        });
+
+        thread1.start();
+
 
 
 //        mainViewModel.getProductsByCategoryId(1).observe(this, products -> {
@@ -249,12 +262,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void onItemClick2(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter2.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
 
-//=======
-//
- //       Intent intent = new Intent(getBaseContext(), ListActivity.class);
- //       intent.putExtra("brandName", adapter.getItem(position));
- //       startActivity(intent);
-//>>>>>>> development
+        Intent intent = new Intent(getBaseContext(), ListActivity.class);
+        intent.putExtra("brandName", adapter2.getItem(position));
+        startActivity(intent);
+
     }
 
 
