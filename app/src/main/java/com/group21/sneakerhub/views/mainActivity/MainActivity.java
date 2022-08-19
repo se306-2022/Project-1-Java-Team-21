@@ -12,7 +12,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 
@@ -27,15 +29,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener, CategoriesAdapter.ItemClickListener2 {
 
     private RecyclerViewAdapter adapter;
+    private CategoriesAdapter adapter2;
+
+
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+
+
+        ArrayList<String> countryList = new ArrayList<>();
+        countryList.add("Air Jordan");
+        countryList.add("Nike");
+        countryList.add("Adidas");
+        countryList.add("Vans");
+
+        ArrayList<Integer> colorsListView = new ArrayList<>();
+        colorsListView.add(Color.rgb(242,228,255));
+        colorsListView.add(Color.rgb(255,199,195));
+        colorsListView.add(Color.rgb(218,255,208));
+        colorsListView.add(Color.rgb(195,226,255));
+
+        ArrayList<Integer> imagesListView = new ArrayList<>();
+        imagesListView.add(R.drawable.airjordan_logo);
+        imagesListView.add(R.drawable.nike_logo);
+        imagesListView.add(R.drawable.adidas_logo);
+        imagesListView.add(R.drawable.vans_logo);
+
+
 
 
         MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -124,17 +155,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         brandImages.add(getResources().getIdentifier(p3.getImageUrls().get(0), "drawable", getPackageName()));
 
          //data to populate the RecyclerView with
-        ArrayList<Integer> viewColors = new ArrayList<>();
-        viewColors.add(Color.rgb(242,228,255));
-        viewColors.add(Color.rgb(255,199,195));
-        viewColors.add(Color.rgb(218,255,208));
-        //viewColors.add(Color.rgb(195,226,255));
 
-//        ArrayList<Integer> brandImages = new ArrayList<>();
-//        brandImages.add(R.drawable.airjordan_logo);
-//        brandImages.add(R.drawable.nike_logo);
-//        brandImages.add(R.drawable.adidas_logo);
-       // brandImages.add(R.drawable.vans_logo);
+
 
 
 //        ArrayList<String> brandNames = new ArrayList<>();
@@ -153,6 +175,22 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
+
+        RecyclerView recyclerView2 = findViewById(R.id.rvBrands2);
+        LinearLayoutManager verticalLayoutManager
+                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
+        recyclerView2.setLayoutManager(verticalLayoutManager);
+        adapter2 = new CategoriesAdapter(this, colorsListView, countryList, imagesListView);
+        adapter2.setClickListener2(this);
+        recyclerView2.setAdapter(adapter2);
+
+//        RecyclerView recyclerView2 = findViewById(R.id.rvBrands2);
+//        LinearLayoutManager horizontalLayoutManager2
+//                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+//        recyclerView2.setLayoutManager(horizontalLayoutManager2);
+//        adapter2 = new CategoriesAdapter(this, colorsListView, countryList, imagesListView);
+//        adapter2.setClickListener2(this);
+//        recyclerView2.setAdapter(adapter2);
 
 //        RecyclerView recyclerView = findViewById(R.id.rvFeatured);
 //        LinearLayoutManager verticalLayoutManager
@@ -226,6 +264,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemClick2(View view, int position) {
+        Toast.makeText(this, "You clicked " + adapter2.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
 }
