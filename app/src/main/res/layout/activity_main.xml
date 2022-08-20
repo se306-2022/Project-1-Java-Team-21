@@ -100,7 +100,6 @@
         app:itemBackground="@color/black"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-
         app:menu="@menu/menu_navigation"
         app:labelVisibilityMode="unlabeled" />
 

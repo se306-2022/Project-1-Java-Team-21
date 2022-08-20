@@ -101,8 +101,8 @@ public class SearchFilterActivity extends AppCompatActivity {
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
                 List<Float> rangeValues = slider.getValues();
 
-                vh.sliderMinText.setText(rangeValues.get(0).toString());
-                vh.sliderMaxText.setText(rangeValues.get(1).toString());
+                vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
+                vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
             }
         });
 

@@ -45,7 +45,8 @@
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".views.mainActivity.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".views.splashActivity.SplashActivity"
             android:exported="true" >
