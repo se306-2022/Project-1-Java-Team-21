@@ -19,8 +19,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
+import com.group21.sneakerhub.views.listActivity.ListActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
+import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -32,6 +34,13 @@ import java.util.concurrent.atomic.AtomicReference;
 public class DetailsActivity extends AppCompatActivity {
 
     ViewHolder vh;
+
+    private String query;
+    private ArrayList<String> colours;
+    private ArrayList<String> brands;
+    private int lowerPrice;
+    private int upperPrice;
+    private String brandName;
 
 
     class ViewHolder{
@@ -50,7 +59,7 @@ public class DetailsActivity extends AppCompatActivity {
     int indexOfThird;
 
     ArrayList<String> names = new ArrayList<>();
-    ArrayList<String> colours = new ArrayList<>();
+    ArrayList<String> colours2 = new ArrayList<>();
     ArrayList<ArrayList<String>> allImages = new ArrayList<>();
     ArrayList<ArrayList<String>> features = new ArrayList<>();
     ArrayList<String> description = new ArrayList<>();
@@ -90,6 +99,14 @@ public class DetailsActivity extends AppCompatActivity {
         String defaultColour = intent.getStringExtra("currentColour");
         System.out.println(callingActivity);
 
+        query = intent.getStringExtra("query");
+        colours = intent.getStringArrayListExtra("colours");
+        brands = intent.getStringArrayListExtra("brands");
+        lowerPrice = intent.getIntExtra("lowerPrice",0);
+        upperPrice = intent.getIntExtra("upperPrice",0);
+        brandName = intent.getStringExtra("brandName");
+
+
         DetailsViewModel detailsVM = new ViewModelProvider(this).get(DetailsViewModel.class);
 
         detailsVM.getDetailPageProduct(sneakerName).observe(this, productColors ->{
@@ -103,7 +120,7 @@ public class DetailsActivity extends AppCompatActivity {
                 // names
                 names.add(p.getName());
                 // colours
-                colours.add(p.getColor());
+                colours2.add(p.getColor());
                 // allImages
                 List<String> temp = p.getImageUrls();
                 ArrayList<String> temp2 = new ArrayList<>(temp);
@@ -139,10 +156,10 @@ public class DetailsActivity extends AppCompatActivity {
             for (int i = 0; i < isFirst.size(); i++) {
                 if (isFirst.get(i) == true) {
                     indexOfFirst = i;
-                    String temp = colours.get(i);
+                    String temp = colours2.get(i);
                     firstColor = returnColorValue(temp);
                 } else {
-                    otherColours.add(colours.get(i));
+                    otherColours.add(colours2.get(i));
                     otherIndexes.add(i);
                 }
             }
@@ -209,13 +226,13 @@ public class DetailsActivity extends AppCompatActivity {
 
             if (raPrivate.isChecked()) {
                 sliderView.setSliderAdapter(sliderAdapter1);
-                currentColor.setText(colours.get(indexOfFirst));
+                currentColor.setText(colours2.get(indexOfFirst));
             } else if (raPrivate2.isChecked()) {
                 sliderView.setSliderAdapter(sliderAdapter2);
-                currentColor.setText(colours.get(indexOfSecond));
+                currentColor.setText(colours2.get(indexOfSecond));
             } else {
                 sliderView.setSliderAdapter(sliderAdapter3);
-                currentColor.setText(colours.get(indexOfThird));
+                currentColor.setText(colours2.get(indexOfThird));
             }
         });
 
@@ -225,11 +242,21 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (callingActivity.equals("SearchResultListActivity")){
-                    startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
+                    intent.putExtra("query",query);
+                    intent.putExtra("lowerPrice", lowerPrice);
+                    intent.putExtra("upperPrice", upperPrice);
+                    intent.putExtra("colours",colours);
+                    intent.putExtra("brands",brands);
+                    
+                    startActivity(intent);
                 } else if(callingActivity.equals("FavouriteActivity")){
                     startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
                 } else {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                    intent.putExtra("brandName", brandName);
+
+                    startActivity(intent);
                 }
             }
         });
@@ -266,19 +293,19 @@ public class DetailsActivity extends AppCompatActivity {
                 if (checked)
                     sliderView.setSliderAdapter(sa1);
                     productName.setText(names.get(indexOfFirst));
-                    currentColor.setText(colours.get(indexOfFirst));
+                    currentColor.setText(colours2.get(indexOfFirst));
                     break;
             case R.id.colorButton2:
                 if (checked)
                     sliderView.setSliderAdapter(sa2);
                     productName.setText(names.get(indexOfSecond));
-                currentColor.setText(colours.get(indexOfSecond));
+                currentColor.setText(colours2.get(indexOfSecond));
                 break;
             case R.id.colorButton3:
                 if (checked)
                     sliderView.setSliderAdapter(sa3);
                     productName.setText(names.get(indexOfThird));
-                currentColor.setText(colours.get(indexOfThird));
+                currentColor.setText(colours2.get(indexOfThird));
                 break;
         }
     }

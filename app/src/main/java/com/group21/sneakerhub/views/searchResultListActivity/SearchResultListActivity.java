@@ -35,7 +35,12 @@ import java.util.Map;
 public class SearchResultListActivity extends AppCompatActivity {
 
     ViewHolder vh;
-
+    private String query;
+    private ArrayList<String> colours;
+    private ArrayList<String> brands;
+    private int lowerPrice;
+    private int upperPrice;
+    SearchResultListViewModel searchResultVM;
 
     class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -60,15 +65,15 @@ public class SearchResultListActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        SearchResultListViewModel searchResultVM = new ViewModelProvider(this).get(SearchResultListViewModel.class);
+        searchResultVM = new ViewModelProvider(this).get(SearchResultListViewModel.class);
 
         Intent intent = getIntent();
 
-        String query = intent.getStringExtra("query");
-        ArrayList<String> colours = intent.getStringArrayListExtra("colours");
-        ArrayList<String> brands = intent.getStringArrayListExtra("brands");
-        int lowerPrice = intent.getIntExtra("lowerPrice",0);
-        int upperPrice = intent.getIntExtra("upperPrice",0);
+        query = intent.getStringExtra("query");
+        colours = intent.getStringArrayListExtra("colours");
+        brands = intent.getStringArrayListExtra("brands");
+        lowerPrice = intent.getIntExtra("lowerPrice",0);
+        upperPrice = intent.getIntExtra("upperPrice",0);
 
 
         searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults ->{
@@ -92,6 +97,14 @@ public class SearchResultListActivity extends AppCompatActivity {
                 detailPage.putExtra("currentColour", searchResults.get(position).getColor());
 
                 detailPage.putExtra("callingActivity", "SearchResultListActivity");
+
+                // sending listview arguments to the details activity, so the details activity can
+                // send back if and when the back button is pressed
+                detailPage.putExtra("query",query);
+                detailPage.putExtra("colours",colours);
+                detailPage.putExtra("brands",brands);
+                detailPage.putExtra("lowerPrice",lowerPrice);
+                detailPage.putExtra("upperPrice",upperPrice);
 
                 //start the activity
                 startActivity(detailPage);
@@ -195,4 +208,37 @@ public class SearchResultListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Saving the items in the list view when navigating away from the activity
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArrayList("brands", brands);
+        outState.putStringArrayList("colours", colours);
+        outState.putString("query", query);
+        outState.putInt("lowerPrice",lowerPrice);
+        outState.putInt("upperPrice", upperPrice);
+    }
+
+    /**
+     * Restoring the search results when returning to the activity, from another activity, using t
+     * the back button.
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        String query = savedInstanceState.getString("query");
+        List<String> colours = savedInstanceState.getStringArrayList("colours");
+        List<String> brands = savedInstanceState.getStringArrayList("brands");
+        int lowerPrice = savedInstanceState.getInt("lowerPrice");
+        int upperPrice = savedInstanceState.getInt("upperPrice");
+
+        System.out.println("restore state ----------------------------------");
+        System.out.println(query);
+        System.out.println(upperPrice);
+    }
 }

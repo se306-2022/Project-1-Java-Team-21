@@ -89,6 +89,8 @@ public class ListActivity extends AppCompatActivity {
 
             detailPage.putExtra("callingActivity", "ListActivity");
 
+            detailPage.putExtra("brandName", brandName);
+
             //start the activity
             startActivity(detailPage);
         });
