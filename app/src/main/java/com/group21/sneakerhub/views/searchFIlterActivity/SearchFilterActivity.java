@@ -27,7 +27,6 @@ import com.google.android.material.slider.RangeSlider;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
-import com.group21.sneakerhub.views.mainActivity.MainViewModel;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
 
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class SearchFilterActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        shakeAnimation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.shake);
+        shakeAnimation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.button_blink);
 
         // Set Home selected
         vh.bottomNavigationView.setSelectedItemId(R.id.search);
