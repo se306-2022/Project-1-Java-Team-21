@@ -69,7 +69,7 @@ public class FavouriteListAdaptor extends ArrayAdapter {
 
         // set the price
         TextView priceTextView = (TextView) currentListViewItem.findViewById(R.id.price_text);
-        priceTextView.setText(String.valueOf(currentProduct.getPrice()) + "+");
+        priceTextView.setText("$" + String.format("%.2f", currentProduct.getPrice()));
 
         // set tag for favourite button
         ToggleButton favButton = (ToggleButton) currentListViewItem.findViewById(R.id.heart_button);

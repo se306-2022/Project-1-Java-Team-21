@@ -74,7 +74,7 @@ public class CustomListAdaptor extends ArrayAdapter {
 
         // set the price
         TextView priceTextView = (TextView) currentListViewItem.findViewById(R.id.price_text);
-        priceTextView.setText(String.valueOf(currentProduct.getPrice()) + "+");
+        priceTextView.setText("$" + String.format("%.2f", currentProduct.getPrice()));
 
         return currentListViewItem;
     }
