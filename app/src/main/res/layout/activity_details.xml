@@ -55,10 +55,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
+            android:fontFamily="@font/poppinsboldsemi"
             android:text="Yeezy Boost 350"
             android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="28sp" />
 
 
             <com.smarteist.autoimageslider.SliderView
@@ -76,6 +76,48 @@
                 app:sliderIndicatorUnselectedColor="#D9D9D9"
                 app:sliderScrollTimeInSec="2"
                 app:sliderStartAutoCycle="false" />
+
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_pirates"
+                    android:layout_width="27dp"
+                    android:layout_height="32dp"
+                    android:buttonTint="@color/purple_200"
+                    android:checked="true"
+                    android:onClick="onRadioButtonClicked"
+                    android:outlineAmbientShadowColor="@color/teal_200"
+                    android:outlineSpotShadowColor="@color/purple_200" />
+
+                <RadioButton
+                    android:id="@+id/radio_ninjas"
+                    android:layout_width="27dp"
+                    android:layout_height="32dp"
+                    android:buttonTint="@color/teal_200"
+                    android:onClick="onRadioButtonClicked" />
+
+                <RadioButton
+                    android:id="@+id/radio_ninjass"
+                    android:layout_width="27dp"
+                    android:layout_height="32dp"
+                    android:buttonTint="#616161"
+                    android:onClick="onRadioButtonClicked" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/currentColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="42dp"
+                android:fontFamily="@font/poppins"
+                android:text="Purple"
+                android:textColor="#616161"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
