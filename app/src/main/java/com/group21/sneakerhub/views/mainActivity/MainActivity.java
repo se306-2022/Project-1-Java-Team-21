@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,7 +25,10 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
+import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.repository.CategoryRepository;
+import com.group21.sneakerhub.repository.ProductRepository;
 import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.listActivity.ListActivity;
@@ -40,12 +44,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     private RecyclerViewAdapter adapter;
     private CategoriesAdapter adapter2;
 
-
-
-
-
-
-
+    float x1, x2, y1, y2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
 
 
-
         MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
 
@@ -87,6 +85,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 //           }
 //        });
 
+/*
+
+//        IDatabasePopulator databasePopulator = new firebaseDatabasePopulator();
+//        Thread t1 = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                databasePopulator.populate();
+//            }
+//        });
+//        t1.start();
 
         mainViewModel.getTrendingProducts().observe(this, products -> {
             for (Product product : products) {
@@ -101,6 +109,22 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 System.out.println(product.getName());
             }
         });
+*/
+        CategoryRepository cr = CategoryRepository.getInstance();
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Category c : cr.getCategories()){
+                    System.out.println(c.getName());
+                    System.out.println(c.getClass().getName());
+                    if (c.getName().equals("Air Jordan"));
+                    System.out.println("hoorray!");
+                }
+            }
+        });
+
+        thread1.start();
+
 
 
 //        mainViewModel.getProductsByCategoryId(1).observe(this, products -> {
@@ -223,11 +247,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 switch (item.getItemId()) {
                     case R.id.search:
                         startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
-                        overridePendingTransition(0, 0);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         return true;
                     case R.id.favourite:
                         startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
-                        overridePendingTransition(0, 0);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         return true;
                     case R.id.home:
                         return true;
@@ -252,13 +276,32 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void onItemClick2(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter2.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
 
-//=======
-//
-//        Intent intent = new Intent(getBaseContext(), ListActivity.class);
-//        intent.putExtra("brandName", adapter.getItem(position));
-//        startActivity(intent);
-//>>>>>>> development
+
+        Intent intent = new Intent(getBaseContext(), ListActivity.class);
+        intent.putExtra("brandName", adapter2.getItem(position));
+        startActivity(intent);
+
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent touchEvent){
+        switch(touchEvent.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+                if(x1 > x2){
+                    Intent intent = new Intent(getBaseContext(), SearchFilterActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+                break;
+        }
+        return false;
+
+    }
 
 }

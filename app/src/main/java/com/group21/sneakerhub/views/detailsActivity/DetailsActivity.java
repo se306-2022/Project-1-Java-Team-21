@@ -23,6 +23,7 @@ import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.usecases.searchProductByName.SearchProductByName;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
+import com.group21.sneakerhub.views.listActivity.ListActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
@@ -109,11 +110,11 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (callingActivity.equals("SearchResultListActivity")){
-                    startActivity(new Intent(getApplicationContext(), SearchResultListActivity.class));
+                    startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
                 } else if(callingActivity.equals("FavouriteActivity")){
                     startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
                 } else {
-                    startActivity(new Intent(getApplicationContext(), ListView.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
             }
         });
