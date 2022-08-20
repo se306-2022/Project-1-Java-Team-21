@@ -236,7 +236,7 @@ public class SearchFilterActivity extends AppCompatActivity {
             // retract text from viewmodel as it has been deselected
             searchFilterVM.removeBrand(text);
             toggleButton.setBackgroundResource(R.drawable.button_border);
-            toggleButton.setTextColor(getResources().getColor(R.color.black));
+            toggleButton.setTextColor(getResources().getColor(R.color.blackd));
         }
 
     }
@@ -262,7 +262,7 @@ public class SearchFilterActivity extends AppCompatActivity {
             // retract text from viewmodel as it has been deselected
             searchFilterVM.removeColour(text);
             toggleButton.setBackgroundResource(R.drawable.button_border);
-            toggleButton.setTextColor(getResources().getColor(R.color.black));
+            toggleButton.setTextColor(getResources().getColor(R.color.blackd));
         }
 
     }

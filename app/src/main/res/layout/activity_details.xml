@@ -57,7 +57,7 @@
             android:layout_marginLeft="35dp"
             android:fontFamily="@font/poppinsboldsemi"
             android:text="Yeezy Boost 350"
-            android:textColor="@color/black"
+            android:textColor="@color/blackd"
             android:textSize="28sp" />
 
 
@@ -90,24 +90,23 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radio_pirates"
+                    android:id="@+id/colorButton1"
                     android:layout_width="27dp"
                     android:layout_height="32dp"
                     android:buttonTint="@color/purple_200"
                     android:checked="true"
-                    android:onClick="onRadioButtonClicked"
-                    android:outlineAmbientShadowColor="@color/teal_200"
-                    android:outlineSpotShadowColor="@color/purple_200" />
-
-                <RadioButton
-                    android:id="@+id/radio_ninjas"
-                    android:layout_width="27dp"
-                    android:layout_height="32dp"
-                    android:buttonTint="@color/teal_200"
                     android:onClick="onRadioButtonClicked" />
 
                 <RadioButton
-                    android:id="@+id/radio_ninjass"
+                    android:id="@+id/colorButton2"
+                    android:layout_width="27dp"
+                    android:layout_height="32dp"
+                    android:buttonTint="@color/teal_200"
+
+                    android:onClick="onRadioButtonClicked" />
+
+                <RadioButton
+                    android:id="@+id/colorButton3"
                     android:layout_width="27dp"
                     android:layout_height="32dp"
                     android:buttonTint="#616161"
@@ -121,7 +120,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="42dp"
                 android:fontFamily="@font/poppins"
-                android:text="Purple"
                 android:textColor="#616161"
                 android:textSize="16sp" />
 
@@ -458,7 +456,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:visibility="visible"
-        app:itemBackground="@color/black"
+        app:itemBackground="@color/blackd"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
 
