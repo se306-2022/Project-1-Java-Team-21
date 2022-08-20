@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="bottom"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
     tools:context=".views.detailsActivity.DetailsActivity">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/collapse_item_1">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- things to scroll -->
+
             <ImageButton
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:id="@+id/back_button_details"
@@ -32,32 +33,436 @@
                 android:scaleType="centerCrop"
                 android:backgroundTint="@color/white"/>
 
-        </LinearLayout>
+
+
+            <ToggleButton
+                android:id="@+id/heart_button"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="44dp"
+                android:layout_marginRight="36dp"
+                android:background="@drawable/ic_baseline_favorite_24"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:textOff=""
+                android:textOn="" />
+        </RelativeLayout>
 
         <TextView
+            android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:paddingLeft="14dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:layout_marginLeft="35dp"
+            android:fontFamily="@font/poppinsboldsemi"
+            android:text="Yeezy Boost 350"
             android:textColor="@color/black"
-            android:id="@+id/productName"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="28sp" />
 
 
-    </LinearLayout>
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:clipToPadding="false"
+                app:sliderAutoCycleEnabled="false"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#797979"
+                app:sliderIndicatorUnselectedColor="#D9D9D9"
+                app:sliderScrollTimeInSec="2"
+                app:sliderStartAutoCycle="false" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:id="@+id/radio_group"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_pirates"
+                    android:layout_width="27dp"
+                    android:layout_height="32dp"
+                    android:buttonTint="@color/purple_200"
+                    android:checked="true"
+                    android:onClick="onRadioButtonClicked"
+                    android:outlineAmbientShadowColor="@color/teal_200"
+                    android:outlineSpotShadowColor="@color/purple_200" />
+
+                <RadioButton
+                    android:id="@+id/radio_ninjas"
+                    android:layout_width="27dp"
+                    android:layout_height="32dp"
+                    android:buttonTint="@color/teal_200"
+                    android:onClick="onRadioButtonClicked" />
+
+                <RadioButton
+                    android:id="@+id/radio_ninjass"
+                    android:layout_width="27dp"
+                    android:layout_height="32dp"
+                    android:buttonTint="#616161"
+                    android:onClick="onRadioButtonClicked" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/currentColor"
+                android:layout_below="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="42dp"
+                android:fontFamily="@font/poppins"
+                android:text="Purple"
+                android:textColor="#616161"
+                android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/currentPrice"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="45dp"
+                    android:fontFamily="@font/poppinsboldsemi"
+                    android:text="$475.00"
+                    android:textColor="#000000"
+                    android:textSize="32sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/sizing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="42dp"
+                    android:fontFamily="@font/poppinsboldsemi"
+                    android:text="Sizing"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ToggleButton
+                    android:id="@+id/expand"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:onClick="sizingClicked"
+                    android:background="@drawable/back_arrow"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:textOff=""
+                    android:textOn="" />
+
+
+                <ToggleButton
+                    android:id="@+id/expanded"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="34dp"
+                    android:onClick="sizingClosed"
+                    android:background="@drawable/arrow_down"
+                    android:focusable="false"
+                    android:visibility="invisible"
+                    android:focusableInTouchMode="false"
+                    android:textOff=""
+                    android:textOn="" />
+
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/sizing"
+                    android:background="#EAEAEA" />
+
+                <TextView
+                    android:id="@+id/SizingText"
+                    android:layout_below="@+id/line"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginLeft="42dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="Available sizes: US 9, US 10, US 1 test test asdfjkn faksjdnbf lkadfbh ka;sdjfnb k;asjdf  k;ajsdfhak;jsdh fadkjfhasdk fa;kjsdfh akj;dhf;aj f;ajdf; ;jksadf a; j;afdfajsdf fasd fa dfasd fasdfasd fasd fasd f adf asdfas dfasdfasdfasdfasdfaerfasd fadfas df asdf asdf asdf a dsfas dfa dfas dfa df asdf asdf adfasdfasd fasdfs"
+                    android:textColor="#616161"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="42dp"
+                    android:fontFamily="@font/poppinsboldsemi"
+                    android:text="Description"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ToggleButton
+                    android:id="@+id/expandDescription"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:onClick="descriptionClicked"
+                    android:background="@drawable/back_arrow"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:textOff=""
+                    android:textOn="" />
+
+
+                <ToggleButton
+                    android:id="@+id/expandedDescription"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="34dp"
+                    android:onClick="descriptionClosed"
+                    android:background="@drawable/arrow_down"
+                    android:focusable="false"
+                    android:visibility="invisible"
+                    android:focusableInTouchMode="false"
+                    android:textOff=""
+                    android:textOn="" />
+
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/description"
+                    android:background="#EAEAEA" />
+
+                <TextView
+                    android:id="@+id/DescriptionText"
+                    android:layout_below="@+id/line2"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginLeft="42dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="The Yeezy Boost 350 features an upper composed of re-engineered Primeknit. The post-dyed monofilament side stripe is woven into the upper. Reflective threads are woven into the laces."
+                    android:textColor="#616161"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="42dp"
+                    android:fontFamily="@font/poppinsboldsemi"
+                    android:text="Features"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ToggleButton
+                    android:id="@+id/expandDetails"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:onClick="detailsClicked"
+                    android:background="@drawable/back_arrow"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:textOff=""
+                    android:textOn="" />
+
+
+                <ToggleButton
+                    android:id="@+id/expandedDetails"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="34dp"
+                    android:onClick="detailsClosed"
+                    android:background="@drawable/arrow_down"
+                    android:focusable="false"
+                    android:visibility="invisible"
+                    android:focusableInTouchMode="false"
+                    android:textOff=""
+                    android:textOn="" />
+
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/details"
+                    android:background="#EAEAEA" />
+
+                <TextView
+                    android:id="@+id/DetailsText"
+                    android:layout_below="@+id/line3"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginLeft="42dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="Available sizes: US 9, US 10, US 11"
+                    android:textColor="#616161"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="60dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="42dp"
+                    android:fontFamily="@font/poppinsboldsemi"
+                    android:text="Rating"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ToggleButton
+                    android:id="@+id/expandRating"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:onClick="ratingClicked"
+                    android:background="@drawable/back_arrow"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:textOff=""
+                    android:textOn="" />
+
+
+                <ToggleButton
+                    android:id="@+id/expandedRating"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="34dp"
+                    android:onClick="ratingClosed"
+                    android:background="@drawable/arrow_down"
+                    android:focusable="false"
+                    android:visibility="invisible"
+                    android:focusableInTouchMode="false"
+                    android:textOff=""
+                    android:textOn="" />
+
+
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/rating"
+                    android:background="#EAEAEA" />
+
+                <TextView
+                    android:id="@+id/RatingText"
+                    android:layout_below="@+id/line4"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginLeft="42dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="Available sizes: US 9, US 10, US 11"
+                    android:textColor="#616161"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
         app:itemBackground="@color/black"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
+
         app:menu="@menu/menu_navigation"
-        app:labelVisibilityMode="unlabeled"/>
+        app:labelVisibilityMode="unlabeled" />
 
-
-</LinearLayout>
+</RelativeLayout>

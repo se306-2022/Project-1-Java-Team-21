@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 //        });
 
 /*
-=======
+
 //        IDatabasePopulator databasePopulator = new firebaseDatabasePopulator();
 //        Thread t1 = new Thread(new Runnable() {
 //            @Override
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 //        });
 //        t1.start();
 
->>>>>>> Stashed changes
         mainViewModel.getTrendingProducts().observe(this, products -> {
             for (Product product : products) {
                 System.out.println(product.getName());
@@ -266,6 +265,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(getBaseContext(), ListActivity.class);
+//        intent.putExtra("brandName", adapter.getItem(position));
+//        startActivity(intent);
         startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
         overridePendingTransition(0, 0);
     }
@@ -273,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void onItemClick2(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter2.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+
 
         Intent intent = new Intent(getBaseContext(), ListActivity.class);
         intent.putExtra("brandName", adapter2.getItem(position));
