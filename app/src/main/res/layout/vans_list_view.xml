@@ -18,7 +18,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:id="@+id/shoe_name"
-            android:textColor="@color/black"/>
+            android:textColor="@color/blackd"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

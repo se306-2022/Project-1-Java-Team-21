@@ -46,7 +46,7 @@ tools:context=".views.listActivity.ListActivity">
             android:paddingHorizontal="28dp"
             android:textSize="34sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/blackd"
             android:id="@+id/brand_name_header"
             android:layout_marginBottom="8dp"/>
     </LinearLayout>
@@ -92,7 +92,7 @@ tools:context=".views.listActivity.ListActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:itemBackground="@color/black"
+        app:itemBackground="@color/blackd"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation"

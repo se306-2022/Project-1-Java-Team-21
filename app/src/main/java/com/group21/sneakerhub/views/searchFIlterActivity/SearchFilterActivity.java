@@ -27,7 +27,6 @@ import com.google.android.material.slider.RangeSlider;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
-import com.group21.sneakerhub.views.mainActivity.MainViewModel;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
 
 import java.util.ArrayList;
@@ -237,7 +236,7 @@ public class SearchFilterActivity extends AppCompatActivity {
             // retract text from viewmodel as it has been deselected
             searchFilterVM.removeBrand(text);
             toggleButton.setBackgroundResource(R.drawable.button_border);
-            toggleButton.setTextColor(getResources().getColor(R.color.black));
+            toggleButton.setTextColor(getResources().getColor(R.color.blackd));
         }
 
     }
@@ -263,7 +262,7 @@ public class SearchFilterActivity extends AppCompatActivity {
             // retract text from viewmodel as it has been deselected
             searchFilterVM.removeColour(text);
             toggleButton.setBackgroundResource(R.drawable.button_border);
-            toggleButton.setTextColor(getResources().getColor(R.color.black));
+            toggleButton.setTextColor(getResources().getColor(R.color.blackd));
         }
 
     }
