@@ -6,6 +6,14 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="blackd">#FF000000</color>
+    <color name="blue">#0026a9</color>
+    <color name="green">#49a026</color>
+    <color name="grey">#a9a6a6</color>
+    <color name="orange">#ea9f2b</color>
+    <color name="purple">#b92bea</color>
+    <color name="red">#a90000</color>
+    <color name="yellow">#eadc2b</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Nike">#ff0000</color>
 </resources>

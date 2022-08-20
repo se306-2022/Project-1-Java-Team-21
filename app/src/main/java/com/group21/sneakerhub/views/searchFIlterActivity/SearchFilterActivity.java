@@ -27,7 +27,6 @@ import com.google.android.material.slider.RangeSlider;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
-import com.group21.sneakerhub.views.mainActivity.MainViewModel;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
 
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class SearchFilterActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        shakeAnimation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.shake);
+        shakeAnimation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.button_blink);
 
         // Set Home selected
         vh.bottomNavigationView.setSelectedItemId(R.id.search);
@@ -75,11 +74,11 @@ public class SearchFilterActivity extends AppCompatActivity {
                         return true;
                     case R.id.favourite:
                         startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                        overridePendingTransition(0,0);
                 }
                 return false;
             }
@@ -237,7 +236,7 @@ public class SearchFilterActivity extends AppCompatActivity {
             // retract text from viewmodel as it has been deselected
             searchFilterVM.removeBrand(text);
             toggleButton.setBackgroundResource(R.drawable.button_border);
-            toggleButton.setTextColor(getResources().getColor(R.color.black));
+            toggleButton.setTextColor(getResources().getColor(R.color.blackd));
         }
 
     }
@@ -263,7 +262,7 @@ public class SearchFilterActivity extends AppCompatActivity {
             // retract text from viewmodel as it has been deselected
             searchFilterVM.removeColour(text);
             toggleButton.setBackgroundResource(R.drawable.button_border);
-            toggleButton.setTextColor(getResources().getColor(R.color.black));
+            toggleButton.setTextColor(getResources().getColor(R.color.blackd));
         }
 
     }

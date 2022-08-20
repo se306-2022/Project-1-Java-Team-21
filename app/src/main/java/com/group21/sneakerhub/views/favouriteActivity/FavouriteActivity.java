@@ -133,12 +133,12 @@ public class FavouriteActivity extends AppCompatActivity {
                 switch(item.getItemId()){
                     case R.id.search:
                         startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
-                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                        overridePendingTransition(0,0);
                     case R.id.favourite:
                         return true;
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                        overridePendingTransition(0,0);
                 }
                 return false;
             }
