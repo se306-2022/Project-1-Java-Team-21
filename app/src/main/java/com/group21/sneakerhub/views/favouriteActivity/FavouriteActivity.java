@@ -39,6 +39,7 @@ public class FavouriteActivity extends AppCompatActivity {
     ViewHolder vh;
     private static List<Product> products;
     FavouriteViewModel favouriteViewModel;
+    float x1, x2, y1, y2;
 
     class ViewHolder{
         ListView listView = (ListView) findViewById(R.id.list_favourites);
@@ -132,12 +133,12 @@ public class FavouriteActivity extends AppCompatActivity {
                 switch(item.getItemId()){
                     case R.id.search:
                         startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                     case R.id.favourite:
                         return true;
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 }
                 return false;
             }
@@ -183,6 +184,27 @@ public class FavouriteActivity extends AppCompatActivity {
             vh.collapseReturnArrow.setVisibility(View.VISIBLE);
             vh.header.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent touchEvent){
+        switch(touchEvent.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                if (x1 < x2) {
+                    Intent intent = new Intent(getBaseContext(), SearchFilterActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+                break;
+        }
+        return false;
+
     }
 
 }
