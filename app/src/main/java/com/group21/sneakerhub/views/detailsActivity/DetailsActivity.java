@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -152,6 +153,24 @@ public class DetailsActivity extends AppCompatActivity {
                     // Ninjas rule
                     break;
         }
+    }
+
+    public void sizingClicked(View view) {
+        TextView sizing = (TextView)findViewById(R.id.SizingText);
+        sizing.setVisibility(View.VISIBLE);
+        Button expand = (Button)findViewById(R.id.expand);
+        expand.setVisibility(View.GONE);
+        Button expanded = (Button)findViewById(R.id.expanded);
+        expanded.setVisibility(View.VISIBLE);
+    }
+
+    public void sizingClosed(View view) {
+        TextView sizing = (TextView)findViewById(R.id.SizingText);
+        sizing.setVisibility(View.GONE);
+        Button expanded = (Button)findViewById(R.id.expanded);
+        expanded.setVisibility(View.GONE);
+        Button expand = (Button)findViewById(R.id.expand);
+        expand.setVisibility(View.VISIBLE);
     }
 
 }
