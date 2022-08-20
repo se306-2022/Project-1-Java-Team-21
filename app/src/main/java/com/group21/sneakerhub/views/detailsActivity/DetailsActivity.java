@@ -87,6 +87,7 @@ public class DetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String sneakerName = intent.getStringExtra("sneakerName");
         String callingActivity = intent.getStringExtra("callingActivity");
+        String defaultColour = intent.getStringExtra("currentColour");
         System.out.println(callingActivity);
 
         DetailsViewModel detailsVM = new ViewModelProvider(this).get(DetailsViewModel.class);

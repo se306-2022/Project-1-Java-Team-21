@@ -89,6 +89,7 @@ public class SearchResultListActivity extends AppCompatActivity {
 
                 // send the name of the sneaker so the detail activity can load it
                 detailPage.putExtra("sneakerName", searchResults.get(position).getName());
+                detailPage.putExtra("currentColour", searchResults.get(position).getColor());
 
                 detailPage.putExtra("callingActivity", "SearchResultListActivity");
 

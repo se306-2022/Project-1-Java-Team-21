@@ -82,6 +82,7 @@ public class FavouriteActivity extends AppCompatActivity {
 
                 // send the name of the sneaker so the detail activity can load it
                 detailPage.putExtra("sneakerName", productList.get(position).getName());
+                detailPage.putExtra("currentColour", productList.get(position).getColor());
 
                 detailPage.putExtra("callingActivity", "FavouriteActivity");
 
