@@ -75,11 +75,11 @@ public class SearchFilterActivity extends AppCompatActivity {
                         return true;
                     case R.id.favourite:
                         startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                        overridePendingTransition(0,0);
                 }
                 return false;
             }

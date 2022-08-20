@@ -247,11 +247,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 switch (item.getItemId()) {
                     case R.id.search:
                         startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.favourite:
                         startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
                         return true;

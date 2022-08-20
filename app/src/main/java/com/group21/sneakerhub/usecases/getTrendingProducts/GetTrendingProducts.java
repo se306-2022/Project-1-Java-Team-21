@@ -11,6 +11,8 @@ public class GetTrendingProducts implements IGetTrendingProducts{
 
     @Override
     public List<Product> getTrendingProducts() {
-        return productRepository.getTrendingProducts();
+        List<Product> products =  productRepository.getTrendingProducts();
+        // only return the top 10 products
+        return products.subList(0, 10);
     }
 }
