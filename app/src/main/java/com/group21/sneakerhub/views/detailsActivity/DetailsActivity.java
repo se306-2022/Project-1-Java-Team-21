@@ -173,4 +173,59 @@ public class DetailsActivity extends AppCompatActivity {
         expand.setVisibility(View.VISIBLE);
     }
 
+    public void descriptionClicked(View view) {
+        TextView description = (TextView)findViewById(R.id.DescriptionText);
+        description.setVisibility(View.VISIBLE);
+        Button expandDescription = (Button)findViewById(R.id.expandDescription);
+        expandDescription.setVisibility(View.GONE);
+        Button expanded = (Button)findViewById(R.id.expandedDescription);
+        expanded.setVisibility(View.VISIBLE);
+    }
+
+    public void descriptionClosed(View view) {
+        TextView sizing = (TextView)findViewById(R.id.DescriptionText);
+        sizing.setVisibility(View.GONE);
+        Button expanded = (Button)findViewById(R.id.expandedDescription);
+        expanded.setVisibility(View.GONE);
+        Button expand = (Button)findViewById(R.id.expandDescription);
+        expand.setVisibility(View.VISIBLE);
+    }
+
+
+    public void detailsClicked(View view) {
+        TextView sizing = (TextView)findViewById(R.id.DetailsText);
+        sizing.setVisibility(View.VISIBLE);
+        Button expand = (Button)findViewById(R.id.expandDetails);
+        expand.setVisibility(View.GONE);
+        Button expanded = (Button)findViewById(R.id.expandedDetails);
+        expanded.setVisibility(View.VISIBLE);
+    }
+
+    public void detailsClosed(View view) {
+        TextView sizing = (TextView)findViewById(R.id.DetailsText);
+        sizing.setVisibility(View.GONE);
+        Button expanded = (Button)findViewById(R.id.expandedDetails);
+        expanded.setVisibility(View.GONE);
+        Button expand = (Button)findViewById(R.id.expandDetails);
+        expand.setVisibility(View.VISIBLE);
+    }
+
+    public void ratingClicked(View view) {
+        TextView sizing = (TextView)findViewById(R.id.RatingText);
+        sizing.setVisibility(View.VISIBLE);
+        Button expand = (Button)findViewById(R.id.expandRating);
+        expand.setVisibility(View.GONE);
+        Button expanded = (Button)findViewById(R.id.expandedRating);
+        expanded.setVisibility(View.VISIBLE);
+    }
+
+    public void ratingClosed(View view) {
+        TextView sizing = (TextView)findViewById(R.id.RatingText);
+        sizing.setVisibility(View.GONE);
+        Button expanded = (Button)findViewById(R.id.expandedRating);
+        expanded.setVisibility(View.GONE);
+        Button expand = (Button)findViewById(R.id.expandRating);
+        expand.setVisibility(View.VISIBLE);
+    }
+
 }
