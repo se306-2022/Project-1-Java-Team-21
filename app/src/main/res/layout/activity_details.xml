@@ -43,8 +43,6 @@
                 android:layout_marginTop="44dp"
                 android:layout_marginRight="36dp"
                 android:background="@drawable/ic_baseline_favorite_border_24"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
                 android:textOff=""
                 android:textOn="" />
         </RelativeLayout>
@@ -55,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
             android:fontFamily="@font/poppinsboldsemi"
-            android:text="Yeezy Boost 350"
+            android:text=""
             android:textColor="@color/blackd"
             android:textSize="28sp" />
 

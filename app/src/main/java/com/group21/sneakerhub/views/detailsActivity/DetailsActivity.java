@@ -3,6 +3,7 @@ package com.group21.sneakerhub.views.detailsActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -43,6 +44,9 @@ public class DetailsActivity extends AppCompatActivity {
     private int lowerPrice;
     private int upperPrice;
     private String brandName;
+    private List<Product> favProducts;
+    private String favCurrentColor;
+    private String favCurrentName;
 
 
     class ViewHolder{
@@ -102,7 +106,6 @@ public class DetailsActivity extends AppCompatActivity {
         String sneakerName = intent.getStringExtra("sneakerName");
         String callingActivity = intent.getStringExtra("callingActivity");
         String defaultColour = intent.getStringExtra("currentColour");
-        System.out.println(callingActivity);
 
         query = intent.getStringExtra("query");
         colours = intent.getStringArrayListExtra("colours");
@@ -117,9 +120,9 @@ public class DetailsActivity extends AppCompatActivity {
         detailsVM.getDetailPageProduct(sneakerName).observe(this, productColors ->{
             // returns the product variations, so the sneaker with the same name but
             // in different colours
-
             vh.productName.setText(productColors.get(0).getName());
-            System.out.println("==============================================");
+            favProducts = productColors;
+
             for(Product p : productColors){
                 // names
                 names.add(p.getName());
@@ -148,9 +151,6 @@ public class DetailsActivity extends AppCompatActivity {
                 //isFirst
                 isFirst.add(p.getIsFirst());
             }
-            System.out.println("==============================================");
-            System.out.println(availableSizes);
-
 
             String firstColor = null;
             ArrayList<String> otherColours = new ArrayList<>();
@@ -158,7 +158,7 @@ public class DetailsActivity extends AppCompatActivity {
             // Finding first color
             indexOfFirst = 0;
             for (int i = 0; i < isFirst.size(); i++) {
-                if (isFirst.get(i) == true) {
+                if (isFirst.get(i)) {
                     indexOfFirst = i;
                     String temp = colours2.get(i);
                     firstColor = returnColorValue(temp);
@@ -234,11 +234,27 @@ public class DetailsActivity extends AppCompatActivity {
             if (defaultColour.equals(colours2.get(indexOfSecond))) {
                 raPrivate2.setChecked(true);
                 raPrivate.setChecked(false);
+                raPrivate3.setChecked(false);
+
+                if (favProducts.get(indexOfSecond).getIsFavourite()){
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }
             } else if (defaultColour.equals(colours2.get(indexOfThird))) {
                 raPrivate3.setChecked(true);
                 raPrivate.setChecked(false);
+                raPrivate2.setChecked(false);
+
+                if (favProducts.get(indexOfThird).getIsFavourite()){
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }
             } else {
                 raPrivate.setChecked(true);
+                raPrivate2.setChecked(false);
+                raPrivate3.setChecked(false);
+
+                if (favProducts.get(indexOfFirst).getIsFavourite()){
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }
             }
 
             if (raPrivate.isChecked()) {
@@ -257,6 +273,8 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfSecond)));
                 descriptionText.setText(description.get(indexOfSecond));
                 featuresText.setText(parseFeature(features.get(indexOfSecond)));
+                favCurrentColor = colours2.get(indexOfSecond);
+                favCurrentName = names.get(indexOfSecond);
 
             } else {
                 sliderView.setSliderAdapter(sliderAdapter3);
@@ -265,6 +283,8 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfThird)));
                 descriptionText.setText(description.get(indexOfThird));
                 featuresText.setText(parseFeature(features.get(indexOfThird)));
+                favCurrentColor = colours2.get(indexOfThird);
+                favCurrentName = names.get(indexOfThird);
             }
         });
 
@@ -280,17 +300,14 @@ public class DetailsActivity extends AppCompatActivity {
                     intent.putExtra("upperPrice", upperPrice);
                     intent.putExtra("colours",colours);
                     intent.putExtra("brands",brands);
-                    
+
                     startActivity(intent);
                 } else if(callingActivity.equals("FavouriteActivity")){
                     startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
-                } else if (callingActivity.equals("ListActivity")){
+                } else {
                     Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                     intent.putExtra("brandName", brandName);
 
-                    startActivity(intent);
-                } else{
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }
             }
@@ -298,15 +315,27 @@ public class DetailsActivity extends AppCompatActivity {
 
         //heart toggle button
 
-
         vh.heartButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-
-                } else {
-
-
+                Product currentProduct = favProducts.get(0);
+                for (Product p : favProducts) {
+                    if(p.getColor().equals(favCurrentColor)) {
+                        currentProduct = p;
+                        break;
+                    }
                 }
+
+                detailsVM.toggleProductIsFavourite(currentProduct).observe(DetailsActivity.this, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean currentIsFavourite) {
+                        if (currentIsFavourite) {
+                            vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                        } else {
+                            vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                        }
+                    }
+                });
             }
         });
 
@@ -331,6 +360,7 @@ public class DetailsActivity extends AppCompatActivity {
             return false;
         });
     }
+
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
@@ -359,6 +389,8 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfFirst)));
                 descriptionText.setText(description.get(indexOfFirst));
                 featuresText.setText(parseFeature(features.get(indexOfFirst)));
+                favCurrentColor = colours2.get(indexOfFirst);
+                favCurrentName = names.get(indexOfFirst);
                 break;
             case R.id.colorButton2:
                 if (checked)
@@ -370,6 +402,8 @@ public class DetailsActivity extends AppCompatActivity {
                 currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfSecond)));
                 sizingText.setText(parseSize(availableSizes.get(indexOfSecond)));
                 featuresText.setText(parseFeature(features.get(indexOfSecond)));
+                favCurrentColor = colours2.get(indexOfSecond);
+                favCurrentName = names.get(indexOfSecond);
                 break;
             case R.id.colorButton3:
                 if (checked)
@@ -382,7 +416,21 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfThird)));
                 descriptionText.setText(description.get(indexOfThird));
                 featuresText.setText(parseFeature(features.get(indexOfThird)));
+                favCurrentColor = colours2.get(indexOfThird);
+                favCurrentName = names.get(indexOfThird);
                 break;
+        }
+        Product currentProduct = favProducts.get(0);
+        for (Product p : favProducts) {
+            if(p.getColor().equals(favCurrentColor)) {
+                currentProduct = p;
+                break;
+            }
+        }
+        if (currentProduct.getIsFavourite()) {
+            vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+        } else {
+            vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
         }
     }
 

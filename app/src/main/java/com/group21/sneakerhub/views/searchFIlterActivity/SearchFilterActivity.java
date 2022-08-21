@@ -92,17 +92,23 @@ public class SearchFilterActivity extends AppCompatActivity {
         vh.rangeSlider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
             @Override
             public void onStartTrackingTouch(@NonNull RangeSlider slider) {
-                List<Float> rangeValues = slider.getValues();
-                searchFilterVM.setLowerPriceRange(Math.round(rangeValues.get(0)));
-                searchFilterVM.setUpperPriceRange(Math.round(rangeValues.get(1)));
-                vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
-                vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
             }
 
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
                 List<Float> rangeValues = slider.getValues();
+                System.out.println(rangeValues.get(0) + " " + rangeValues.get(1));
+                searchFilterVM.setLowerPriceRange(Math.round(rangeValues.get(0)));
+                searchFilterVM.setUpperPriceRange(Math.round(rangeValues.get(1)));
+                vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
+                vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
+            }
+        });
 
+        vh.rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+                List<Float> rangeValues = slider.getValues();
                 vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
                 vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
             }
