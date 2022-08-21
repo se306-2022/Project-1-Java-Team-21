@@ -319,11 +319,14 @@ public class DetailsActivity extends AppCompatActivity {
         TextView descriptionText = (TextView)findViewById(R.id.DescriptionText);
         TextView featuresText = (TextView)findViewById(R.id.DetailsText);
 
+        int page = 0;
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.colorButton1:
                 if (checked)
+                    page = sliderView.getCurrentPagePosition();
                     sliderView.setSliderAdapter(sa1);
+                    sliderView.setCurrentPagePosition(page);
                     productName.setText(names.get(indexOfFirst));
                     currentColor.setText(colours2.get(indexOfFirst));
                 //currentPrice.setText("$" + String.format("%.2f",prices.get(indexOfFirst).toString()));
@@ -334,8 +337,10 @@ public class DetailsActivity extends AppCompatActivity {
                 break;
             case R.id.colorButton2:
                 if (checked)
-                    sliderView.setSliderAdapter(sa2);
-                    productName.setText(names.get(indexOfSecond));
+                    page = sliderView.getCurrentPagePosition();
+                sliderView.setSliderAdapter(sa2);
+                sliderView.setCurrentPagePosition(page);
+                productName.setText(names.get(indexOfSecond));
                 currentColor.setText(colours2.get(indexOfSecond));
                 currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfSecond)));
                 sizingText.setText(parseSize(availableSizes.get(indexOfSecond)));
@@ -343,8 +348,10 @@ public class DetailsActivity extends AppCompatActivity {
                 break;
             case R.id.colorButton3:
                 if (checked)
-                    sliderView.setSliderAdapter(sa3);
-                    productName.setText(names.get(indexOfThird));
+                    page = sliderView.getCurrentPagePosition();
+                sliderView.setSliderAdapter(sa3);
+                sliderView.setCurrentPagePosition(page);
+                productName.setText(names.get(indexOfThird));
                 currentColor.setText(colours2.get(indexOfThird));
                 currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfThird)));
                 sizingText.setText(parseSize(availableSizes.get(indexOfThird)));

@@ -67,7 +67,7 @@
                 android:layout_height="200dp"
                 android:clipToPadding="false"
                 app:sliderAutoCycleEnabled="false"
-                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorAnimationDuration="10"
                 app:sliderIndicatorGravity="center_horizontal|bottom"
                 app:sliderIndicatorOrientation="horizontal"
                 app:sliderIndicatorPadding="3dp"
