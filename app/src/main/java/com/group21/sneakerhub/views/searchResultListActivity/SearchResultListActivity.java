@@ -73,7 +73,7 @@ public class SearchResultListActivity extends AppCompatActivity {
         colours = intent.getStringArrayListExtra("colours");
         brands = intent.getStringArrayListExtra("brands");
         lowerPrice = intent.getIntExtra("lowerPrice",0);
-        upperPrice = intent.getIntExtra("upperPrice",0);
+        upperPrice = intent.getIntExtra("upperPrice",1000);
 
 
         searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults ->{
@@ -85,7 +85,8 @@ public class SearchResultListActivity extends AppCompatActivity {
 
             // set the header text based on the query
             vh.collapseItem2.setText("Showing " + searchResults.size() + " search results for");
-            vh.collapseItem3.setText("'" + query + "'");
+            String searchText = query == null? "Empty Search Input": "\"" + query + "\"";
+            vh.collapseItem3.setText(searchText);
 
             // listener navigates to the detail activity for the specific sneaker than gets clicked on
             vh.listView.setOnItemClickListener((parent, view, position, id) -> {

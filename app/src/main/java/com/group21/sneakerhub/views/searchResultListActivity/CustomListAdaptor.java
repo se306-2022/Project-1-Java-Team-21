@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -75,6 +76,8 @@ public class CustomListAdaptor extends ArrayAdapter {
         // set the price
         TextView priceTextView = (TextView) currentListViewItem.findViewById(R.id.price_text);
         priceTextView.setText("$" + String.format("%.2f", currentProduct.getPrice()));
+
+        currentListViewItem.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.list));
 
         return currentListViewItem;
     }

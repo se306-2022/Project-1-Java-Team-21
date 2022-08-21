@@ -122,7 +122,6 @@ public class SearchFilterActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    System.out.println("hi");
                     Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
                     searchResults.putExtra("isFilters", false);
                     searchResults.putExtra("finalQueryString", searchFilterVM.getFinalQueryString());
@@ -145,34 +144,27 @@ public class SearchFilterActivity extends AppCompatActivity {
         vh.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // if the user selects no brand or colour then prompt the user to do so with a toast
-                if (searchFilterVM.getBrandNames().size() == 0){
-                    Toast.makeText(SearchFilterActivity.this,"Please select atleast one brand", Toast.LENGTH_LONG).show();
-                } else if (searchFilterVM.getColours().size() == 0){
-                    Toast.makeText(SearchFilterActivity.this,"Please select atleast one colour", Toast.LENGTH_LONG).show();
-                } else if (searchFilterVM.getLiveQueryString() == null){
-                    Toast.makeText(SearchFilterActivity.this,"Please fill out the search field", Toast.LENGTH_LONG).show();
-                } else {
-                    // create an intent that navigates to NumbersActivity class
-                    Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
-                    //set data across to the other activity
-                    // sent in a key, value format, with the key being the first argument
-                    // many different types of data can be sent
-                    searchResults.putExtra("isFilters", true);
 
-                    searchResults.putExtra("query",searchFilterVM.getLiveQueryString());
-                    searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
-                    searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
+                // create an intent that navigates to NumbersActivity class
+                Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
+                //set data across to the other activity
+                // sent in a key, value format, with the key being the first argument
+                // many different types of data can be sent
+                searchResults.putExtra("isFilters", true);
 
-                    ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
-                    searchResults.putExtra("colours",colours);
+                searchResults.putExtra("query",searchFilterVM.getLiveQueryString());
+                searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
+                searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
 
-                    ArrayList<String> brands = (ArrayList<String>) searchFilterVM.getBrandNames();
-                    searchResults.putExtra("brands",brands);
+                ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
+                searchResults.putExtra("colours",colours);
 
-                    //start the activity
-                    startActivity(searchResults);
-                }
+                ArrayList<String> brands = (ArrayList<String>) searchFilterVM.getBrandNames();
+                searchResults.putExtra("brands",brands);
+
+                //start the activity
+                startActivity(searchResults);
+
             }
         });
 

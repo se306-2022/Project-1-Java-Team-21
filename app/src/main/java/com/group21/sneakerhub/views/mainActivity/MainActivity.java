@@ -409,8 +409,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         //String currentColorInput = currentColor.getText().toString();
         String currentColorInput = adapter.getColourMethod(position);
 
-        System.out.println("fasdfasd=f====================== " + currentColorInput);
-
         Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
         intent.putExtra("sneakerName", adapter.getItem(position));
         intent.putExtra("callingActivity", "MainActivity");
@@ -427,9 +425,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     @Override
     public void onItemClick2(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter2.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-
-
         Intent intent = new Intent(getBaseContext(), ListActivity.class);
         intent.putExtra("brandName", adapter2.getItem(position));
         startActivity(intent);

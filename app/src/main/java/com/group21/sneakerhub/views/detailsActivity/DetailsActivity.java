@@ -10,14 +10,18 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.airbnb.lottie.Lottie;
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
@@ -53,9 +57,13 @@ public class DetailsActivity extends AppCompatActivity {
         TextView productName = (TextView) findViewById(R.id.productName);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button_details);
+        ImageButton shareButton = (ImageButton) findViewById(R.id.share_button);
         ToggleButton heartButton = (ToggleButton) findViewById(R.id.heart_button);
         TextView currentColor = (TextView)findViewById(R.id.currentColor);
         TextView currentPrice = (TextView)findViewById(R.id.currentPrice);
+        LottieAnimationView likeAnimation = findViewById(R.id.like_animation);
+        LottieAnimationView unlikeAnimation = findViewById(R.id.unlike_animation);
+
     }
 
 
@@ -316,6 +324,26 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 ;
+        // share button
+        vh.shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Product currentProduct = favProducts.get(0);
+                for (Product p : favProducts) {
+                    if(p.getColor().equals(favCurrentColor)) {
+                        currentProduct = p;
+                        break;
+                    }
+                }
+
+                Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
+                txtIntent.setType("text/plain");
+                txtIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Check out the " + currentProduct.getColor()+" "+currentProduct.getName()+" on Sneaker Hub!");
+                txtIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<h1>Current Price:</h1>"+"<p>"+currentProduct.getPrice()+"</p>"+"<h1>Product Description:</h1>"+"<p>"+currentProduct.getDescription()+"</p>"+"<h1>Product Rating:</h1>"+"<p>"+currentProduct.getRating()+"</p>"));
+                startActivity(Intent.createChooser(txtIntent ,"Share"));
+            }
+      });
+
         //heart toggle button
         vh.heartButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -332,8 +360,13 @@ public class DetailsActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(Boolean currentIsFavourite) {
                         if (currentIsFavourite) {
-                            vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                            vh.unlikeAnimation.setVisibility(View.INVISIBLE);
+                            vh.likeAnimation.setVisibility(View.VISIBLE);
+                            vh.likeAnimation.playAnimation();
                         } else {
+                            vh.likeAnimation.setVisibility(View.INVISIBLE);
+                            vh.unlikeAnimation.setVisibility(View.VISIBLE);
+                            vh.unlikeAnimation.playAnimation();
                             vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
                         }
                     }
