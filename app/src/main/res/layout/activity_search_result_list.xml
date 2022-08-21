@@ -62,7 +62,7 @@
             android:paddingLeft="14dp"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/blackd"
+            android:textColor="@color/black"
             android:id="@+id/collapse_item_2"
             android:layout_marginBottom="8dp"
             android:visibility="gone"/>

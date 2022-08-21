@@ -139,7 +139,7 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        vh.bottomNavigationView.setSelectedItemId(R.id.search);
+        vh.bottomNavigationView.setSelectedItemId(R.id.home);
 
         // implement event listener for nav bar
         vh.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -147,6 +147,8 @@ public class ListActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.search:
+                        startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.favourite:
                         startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));

@@ -11,9 +11,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group21.sneakerhub.R;
@@ -41,12 +43,18 @@ public class DetailsActivity extends AppCompatActivity {
     private int lowerPrice;
     private int upperPrice;
     private String brandName;
+    private List<Product> favProducts;
+    private String favCurrentColor;
+    private String favCurrentName;
 
 
     class ViewHolder{
         TextView productName = (TextView) findViewById(R.id.productName);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button_details);
+        ToggleButton heartButton = (ToggleButton) findViewById(R.id.heart_button);
+        TextView currentColor = (TextView)findViewById(R.id.currentColor);
+        TextView currentPrice = (TextView)findViewById(R.id.currentPrice);
     }
 
 
@@ -114,7 +122,7 @@ public class DetailsActivity extends AppCompatActivity {
             // in different colours
 
             vh.productName.setText(productColors.get(0).getName());
-
+            favProducts = productColors;
             System.out.println("==============================================");
             for(Product p : productColors){
                 // names
@@ -240,6 +248,7 @@ public class DetailsActivity extends AppCompatActivity {
             if (raPrivate.isChecked()) {
                 sliderView.setSliderAdapter(sliderAdapter1);
                 currentColor.setText(colours2.get(indexOfFirst));
+
                 currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfFirst)));
                 sizingText.setText(parseSize(availableSizes.get(indexOfFirst)));
                 descriptionText.setText(description.get(indexOfFirst));
@@ -252,6 +261,8 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfSecond)));
                 descriptionText.setText(description.get(indexOfSecond));
                 featuresText.setText(parseFeature(features.get(indexOfSecond)));
+                favCurrentColor = colours2.get(indexOfSecond);
+                favCurrentName = names.get(indexOfSecond);
 
             } else {
                 sliderView.setSliderAdapter(sliderAdapter3);
@@ -260,7 +271,8 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfThird)));
                 descriptionText.setText(description.get(indexOfThird));
                 featuresText.setText(parseFeature(features.get(indexOfThird)));
-
+                favCurrentColor = colours2.get(indexOfThird);
+                favCurrentName = names.get(indexOfThird);
             }
         });
 
@@ -289,6 +301,35 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
+        //heart toggle button
+
+        vh.heartButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+
+                    Product currentProduct = null;
+                    for (Product p : favProducts){
+                        if (p.getColor().equals(favCurrentColor)){
+                            currentProduct = p;
+                        }
+                    }
+
+                    detailsVM.addProductToFavourite(currentProduct);
+                } else {
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+
+                    Product currentProduct = null;
+                    for (Product p : favProducts){
+                        if (p.getColor().equals(favCurrentColor)){
+                            currentProduct = p;
+                        }
+                    }
+                    detailsVM.removeProductFromFavourite(currentProduct);
+                }
+            }
+        });
+
 
         vh.bottomNavigationView.setSelectedItemId(R.id.search);
 
@@ -296,6 +337,8 @@ public class DetailsActivity extends AppCompatActivity {
         vh.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch(item.getItemId()){
                 case R.id.search:
+                    startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
+                    overridePendingTransition(0,0);
                     return true;
                 case R.id.favourite:
                     startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
@@ -320,12 +363,14 @@ public class DetailsActivity extends AppCompatActivity {
         TextView featuresText = (TextView)findViewById(R.id.DetailsText);
 
         int page = 0;
+
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.colorButton1:
                 if (checked)
                     page = sliderView.getCurrentPagePosition();
                     sliderView.setSliderAdapter(sa1);
+
                     sliderView.setCurrentPagePosition(page);
                     productName.setText(names.get(indexOfFirst));
                     currentColor.setText(colours2.get(indexOfFirst));
@@ -334,6 +379,8 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfFirst)));
                 descriptionText.setText(description.get(indexOfFirst));
                 featuresText.setText(parseFeature(features.get(indexOfFirst)));
+                favCurrentColor = colours2.get(indexOfFirst);
+                favCurrentName = names.get(indexOfFirst);
                 break;
             case R.id.colorButton2:
                 if (checked)
@@ -345,6 +392,8 @@ public class DetailsActivity extends AppCompatActivity {
                 currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfSecond)));
                 sizingText.setText(parseSize(availableSizes.get(indexOfSecond)));
                 featuresText.setText(parseFeature(features.get(indexOfSecond)));
+                favCurrentColor = colours2.get(indexOfSecond);
+                favCurrentName = names.get(indexOfSecond);
                 break;
             case R.id.colorButton3:
                 if (checked)
@@ -357,6 +406,8 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfThird)));
                 descriptionText.setText(description.get(indexOfThird));
                 featuresText.setText(parseFeature(features.get(indexOfThird)));
+                favCurrentColor = colours2.get(indexOfThird);
+                favCurrentName = names.get(indexOfThird);
                 break;
         }
     }

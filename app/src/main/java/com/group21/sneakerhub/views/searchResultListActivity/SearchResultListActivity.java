@@ -208,37 +208,4 @@ public class SearchResultListActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Saving the items in the list view when navigating away from the activity
-     * @param outState
-     */
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putStringArrayList("brands", brands);
-        outState.putStringArrayList("colours", colours);
-        outState.putString("query", query);
-        outState.putInt("lowerPrice",lowerPrice);
-        outState.putInt("upperPrice", upperPrice);
-    }
-
-    /**
-     * Restoring the search results when returning to the activity, from another activity, using t
-     * the back button.
-     * @param savedInstanceState
-     */
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        String query = savedInstanceState.getString("query");
-        List<String> colours = savedInstanceState.getStringArrayList("colours");
-        List<String> brands = savedInstanceState.getStringArrayList("brands");
-        int lowerPrice = savedInstanceState.getInt("lowerPrice");
-        int upperPrice = savedInstanceState.getInt("upperPrice");
-
-        System.out.println("restore state ----------------------------------");
-        System.out.println(query);
-        System.out.println(upperPrice);
-    }
 }
