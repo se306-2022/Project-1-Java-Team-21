@@ -31,6 +31,7 @@ import com.group21.sneakerhub.repository.CategoryRepository;
 import com.group21.sneakerhub.repository.ProductRepository;
 import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
+import com.group21.sneakerhub.views.favouriteActivity.FavouriteViewModel;
 import com.group21.sneakerhub.views.listActivity.ListActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     private RecyclerViewAdapter adapter;
     private CategoriesAdapter adapter2;
+    private static List<Product> featured;
 
     float x1, x2, y1, y2;
 
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+        MainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        MainViewModel.getTrendingProducts.observe(this, productList -> {
+            products = productList;});
 
         ArrayList<String> countryList = new ArrayList<>();
         countryList.add("Air Jordan");
