@@ -39,7 +39,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/brand_color"
+            android:id="@+id/brand_color_featured"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/brand_name"

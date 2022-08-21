@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import android.widget.LinearLayout;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -358,17 +359,29 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(getBaseContext(), ListActivity.class);
-//        intent.putExtra("brandName", adapter.getItem(position));
-//        startActivity(intent);
+
+        System.out.println("Position: " + position + " Name: " + adapter.getItem(position));
+
+
+        //TextView currentColor = (TextView)findViewById(R.id.brand_color_featured);
+        //String currentColorInput = currentColor.getText().toString();
+        String currentColorInput = adapter.getColourMethod(position);
+
+        System.out.println("fasdfasd=f====================== " + currentColorInput);
+
+        Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
+        intent.putExtra("sneakerName", adapter.getItem(position));
+        intent.putExtra("callingActivity", "MainActivity");
+        intent.putExtra("currentColour", currentColorInput);
+
+        startActivity(intent);
+
+
 
 //        startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
 //        overridePendingTransition(0, 0);
     }
 
-    public void test(View view) {
-        System.out.println("=============================asdfasdfasdfasdf==asdf=asdfasdf");
-    }
 
     @Override
     public void onItemClick2(View view, int position) {

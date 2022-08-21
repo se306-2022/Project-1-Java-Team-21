@@ -307,26 +307,10 @@ public class DetailsActivity extends AppCompatActivity {
         vh.heartButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
 
-                    Product currentProduct = null;
-                    for (Product p : favProducts){
-                        if (p.getColor().equals(favCurrentColor)){
-                            currentProduct = p;
-                        }
-                    }
 
-                    detailsVM.addProductToFavourite(currentProduct);
                 } else {
-                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
 
-                    Product currentProduct = null;
-                    for (Product p : favProducts){
-                        if (p.getColor().equals(favCurrentColor)){
-                            currentProduct = p;
-                        }
-                    }
-                    detailsVM.removeProductFromFavourite(currentProduct);
                 }
             }
         });
