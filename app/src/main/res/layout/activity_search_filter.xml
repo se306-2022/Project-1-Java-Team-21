@@ -19,24 +19,12 @@
         android:paddingVertical="10dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_left_arrow"
-                android:id="@+id/back_arrow"
-                android:scaleType="centerCrop"
-                android:backgroundTint="@color/white"/>
-        </LinearLayout>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search"
             android:paddingLeft="14dp"
+            android:paddingTop="15dp"
             android:textSize="34sp"
             android:textStyle="bold"
             android:textColor="@color/blackd"
@@ -121,7 +109,7 @@
             android:paddingLeft="14dp"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/blackd" />
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -245,7 +233,7 @@
             android:paddingLeft="14dp"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/blackd"
+            android:textColor="@color/black"
             android:layout_marginBottom="8dp"/>
 
         <LinearLayout
@@ -259,7 +247,7 @@
                 android:text="$200"
                 android:paddingRight="120dp"
                 android:textSize="14sp"
-                android:textColor="@color/blackd"
+                android:textColor="@color/black"
                 android:id="@+id/slider_text_min"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -277,6 +265,10 @@
             android:layout_height="wrap_content"
             android:stepSize="50.0"
             android:valueFrom="0.0"
+            app:tickColor="#3a3b3c"
+            app:thumbColor="@color/black"
+            app:haloColor="@color/black"
+            app:thumbRadius="8dp"
             android:valueTo="1000.0"
             app:values="@array/initial_slider_values" />
 
@@ -289,10 +281,12 @@
                 android:id="@+id/button_id"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Submit"
-                android:textSize="14dp"
+                android:text="SEARCH"
+                android:textSize="18dp"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="10dp"
                 android:textStyle="bold"
-                android:backgroundTint="#ff0000"/>
+                android:backgroundTint="#3A3B3C"/>
         </LinearLayout>
 
     </LinearLayout>

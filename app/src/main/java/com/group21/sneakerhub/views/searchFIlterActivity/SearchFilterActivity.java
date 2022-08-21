@@ -47,7 +47,7 @@ public class SearchFilterActivity extends AppCompatActivity {
         TextView sliderMinText = (TextView)  findViewById(R.id.slider_text_min);
         TextView sliderMaxText = (TextView)  findViewById(R.id.slider_text_max);
         Button submitButton = (Button) findViewById(R.id.button_id);
-        ImageButton backButton = (ImageButton) findViewById(R.id.back_arrow);
+
     }
 
     @Override
@@ -167,16 +167,6 @@ public class SearchFilterActivity extends AppCompatActivity {
                     //start the activity
                     startActivity(searchResults);
                 }
-            }
-        });
-
-        /**
-         * back to the home screen button listener
-         */
-        vh.backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
 

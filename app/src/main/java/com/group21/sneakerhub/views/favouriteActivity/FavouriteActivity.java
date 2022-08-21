@@ -44,8 +44,6 @@ public class FavouriteActivity extends AppCompatActivity {
     class ViewHolder{
         ListView listView = (ListView) findViewById(R.id.list_favourites);
         TextView header = (TextView) findViewById(R.id.favourite_header);
-        LinearLayout collapseReturnArrow = (LinearLayout) findViewById(R.id.collapse_item_1);
-        ImageButton backButton = (ImageButton) findViewById(R.id.back_button_favourites);
         TextView loadingText = (TextView)  findViewById(R.id.loading_text);
         LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
@@ -91,13 +89,6 @@ public class FavouriteActivity extends AppCompatActivity {
             });
         });
 
-        // back to home screen listener
-        vh.backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            }
-        });
 
         /**
          * Implementing the loading screen while the data is being fetched from the database
@@ -176,13 +167,11 @@ public class FavouriteActivity extends AppCompatActivity {
             // reference has to be here, cant be in viewholder
             LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper_fav);
             navBarWrapper.setVisibility(View.GONE);
-            vh.collapseReturnArrow.setVisibility(View.GONE);
             vh.header.setVisibility(View.GONE);
 
         } else {
             LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper_fav);
             navBarWrapper.setVisibility(View.VISIBLE);
-            vh.collapseReturnArrow.setVisibility(View.VISIBLE);
             vh.header.setVisibility(View.VISIBLE);
         }
     }
