@@ -60,9 +60,9 @@ public class MainViewModel extends ViewModel {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    isLoading.postValue(true);
+                    //isLoading.postValue(true);
                     trendingProducts.postValue(getTrendingProducts.getTrendingProducts());
-                    isLoading.postValue(false);
+                    //isLoading.postValue(false);
                 }
             }).start();
         }

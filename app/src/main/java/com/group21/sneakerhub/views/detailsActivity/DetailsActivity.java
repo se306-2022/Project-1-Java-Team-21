@@ -238,6 +238,7 @@ public class DetailsActivity extends AppCompatActivity {
             if (defaultColour.equals(colours2.get(indexOfSecond))) {
                 raPrivate2.setChecked(true);
                 raPrivate.setChecked(false);
+
             } else if (defaultColour.equals(colours2.get(indexOfThird))) {
                 raPrivate3.setChecked(true);
                 raPrivate.setChecked(false);
