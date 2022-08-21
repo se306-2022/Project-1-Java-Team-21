@@ -304,17 +304,19 @@ public class DetailsActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if(callingActivity.equals("FavouriteActivity")){
                     startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
-                } else {
+                } else if (callingActivity.equals("ListActivity")){
                     Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                     intent.putExtra("brandName", brandName);
 
                     startActivity(intent);
+                } else{
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
             }
         });
-
+;
         //heart toggle button
-
         vh.heartButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
