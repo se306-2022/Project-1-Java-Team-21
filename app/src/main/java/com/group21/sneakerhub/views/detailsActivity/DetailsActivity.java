@@ -239,11 +239,20 @@ public class DetailsActivity extends AppCompatActivity {
                 raPrivate2.setChecked(true);
                 raPrivate.setChecked(false);
 
+                if (favProducts.get(indexOfSecond).getIsFavourite()){
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }
             } else if (defaultColour.equals(colours2.get(indexOfThird))) {
                 raPrivate3.setChecked(true);
                 raPrivate.setChecked(false);
+                if (favProducts.get(indexOfThird).getIsFavourite()){
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }
             } else {
                 raPrivate.setChecked(true);
+                if (favProducts.get(indexOfFirst).getIsFavourite()){
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }
             }
 
             if (raPrivate.isChecked()) {
@@ -310,6 +319,7 @@ public class DetailsActivity extends AppCompatActivity {
 
 
                 } else {
+
 
                 }
             }

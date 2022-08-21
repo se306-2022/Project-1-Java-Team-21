@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         getSupportActionBar().hide();
 
 
+        //MainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        //MainViewModel.getTrendingProducts.observe(this, productList -> {
+        //    products = productList;});
 
         ArrayList<String> countryList = new ArrayList<>();
         countryList.add("Air Jordan");
