@@ -63,7 +63,7 @@ public class DetailsActivity extends AppCompatActivity {
     ArrayList<ArrayList<String>> allImages = new ArrayList<>();
     ArrayList<ArrayList<String>> features = new ArrayList<>();
     ArrayList<String> description = new ArrayList<>();
-    ArrayList<List<Integer>> availableSizes = new ArrayList<>();
+    ArrayList<ArrayList<Integer>> availableSizes = new ArrayList<>();
     ArrayList<Double> rating = new ArrayList<>();
     ArrayList<Integer> numberOfUsersRated = new ArrayList<>();
     ArrayList<Double> prices = new ArrayList<>();
@@ -222,17 +222,45 @@ public class DetailsActivity extends AppCompatActivity {
             raPrivate3.setButtonTintList(ColorStateList.valueOf(textColor3));
 
             TextView currentColor = (TextView)findViewById(R.id.currentColor);
+            TextView currentPrice = (TextView)findViewById(R.id.currentPrice);
+            TextView sizingText = (TextView)findViewById(R.id.SizingText);
+            TextView descriptionText = (TextView)findViewById(R.id.DescriptionText);
+            TextView featuresText = (TextView)findViewById(R.id.DetailsText);
 
+            if (defaultColour.equals(colours2.get(indexOfSecond))) {
+                raPrivate2.setChecked(true);
+                raPrivate.setChecked(false);
+            } else if (defaultColour.equals(colours2.get(indexOfThird))) {
+                raPrivate3.setChecked(true);
+                raPrivate.setChecked(false);
+            } else {
+                raPrivate.setChecked(true);
+            }
 
             if (raPrivate.isChecked()) {
                 sliderView.setSliderAdapter(sliderAdapter1);
                 currentColor.setText(colours2.get(indexOfFirst));
+                currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfFirst)));
+                sizingText.setText(parseSize(availableSizes.get(indexOfFirst)));
+                descriptionText.setText(description.get(indexOfFirst));
+                featuresText.setText(parseFeature(features.get(indexOfFirst)));
+
             } else if (raPrivate2.isChecked()) {
                 sliderView.setSliderAdapter(sliderAdapter2);
                 currentColor.setText(colours2.get(indexOfSecond));
+                currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfSecond)));
+                sizingText.setText(parseSize(availableSizes.get(indexOfSecond)));
+                descriptionText.setText(description.get(indexOfSecond));
+                featuresText.setText(parseFeature(features.get(indexOfSecond)));
+
             } else {
                 sliderView.setSliderAdapter(sliderAdapter3);
                 currentColor.setText(colours2.get(indexOfThird));
+                currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfThird)));
+                sizingText.setText(parseSize(availableSizes.get(indexOfThird)));
+                descriptionText.setText(description.get(indexOfThird));
+                featuresText.setText(parseFeature(features.get(indexOfThird)));
+
             }
         });
 
@@ -287,6 +315,10 @@ public class DetailsActivity extends AppCompatActivity {
         TextView productName = (TextView)findViewById(R.id.productName);
         TextView currentColor = (TextView)findViewById(R.id.currentColor);
         TextView currentPrice = (TextView)findViewById(R.id.currentPrice);
+        TextView sizingText = (TextView)findViewById(R.id.SizingText);
+        TextView descriptionText = (TextView)findViewById(R.id.DescriptionText);
+        TextView featuresText = (TextView)findViewById(R.id.DetailsText);
+
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.colorButton1:
@@ -294,18 +326,30 @@ public class DetailsActivity extends AppCompatActivity {
                     sliderView.setSliderAdapter(sa1);
                     productName.setText(names.get(indexOfFirst));
                     currentColor.setText(colours2.get(indexOfFirst));
-                    break;
+                //currentPrice.setText("$" + String.format("%.2f",prices.get(indexOfFirst).toString()));
+                currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfFirst)));
+                sizingText.setText(parseSize(availableSizes.get(indexOfFirst)));
+                descriptionText.setText(description.get(indexOfFirst));
+                featuresText.setText(parseFeature(features.get(indexOfFirst)));
+                break;
             case R.id.colorButton2:
                 if (checked)
                     sliderView.setSliderAdapter(sa2);
                     productName.setText(names.get(indexOfSecond));
                 currentColor.setText(colours2.get(indexOfSecond));
+                currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfSecond)));
+                sizingText.setText(parseSize(availableSizes.get(indexOfSecond)));
+                featuresText.setText(parseFeature(features.get(indexOfSecond)));
                 break;
             case R.id.colorButton3:
                 if (checked)
                     sliderView.setSliderAdapter(sa3);
                     productName.setText(names.get(indexOfThird));
                 currentColor.setText(colours2.get(indexOfThird));
+                currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfThird)));
+                sizingText.setText(parseSize(availableSizes.get(indexOfThird)));
+                descriptionText.setText(description.get(indexOfThird));
+                featuresText.setText(parseFeature(features.get(indexOfThird)));
                 break;
         }
     }
@@ -391,6 +435,24 @@ public class DetailsActivity extends AppCompatActivity {
             ret[i] = integers.get(i).intValue();
         }
         return ret;
+    }
+
+    public String parseSize(ArrayList<Integer> sizeList) {
+        String sizeString = "Available sizes:";
+        for (Integer size : sizeList) {
+            sizeString = sizeString.concat(" US " + String.valueOf(size) + ",");
+        }
+        sizeString = sizeString.substring(0, sizeString.length() - 1);
+        return sizeString;
+    }
+
+    public String parseFeature(ArrayList<String> features) {
+        String featureString = "";
+        for (String feature : features) {
+            featureString = featureString.concat(" " + feature + ",");
+        }
+        featureString = featureString.substring(0, featureString.length() - 1);
+        return featureString;
     }
 
     public String returnColorValue(String colorString) {
