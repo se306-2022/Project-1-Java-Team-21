@@ -147,25 +147,6 @@ public class SearchResultListActivity extends AppCompatActivity {
         });
 
 
-        vh.listView.setOnScrollListener(new OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (firstVisibleItem != 0){
-                    vh.collapseItem1.setVisibility(View.GONE);
-                    vh.collapseItem2.setVisibility(View.GONE);
-                    vh.collapseItem3.setVisibility(View.GONE);
-                } else {
-                    vh.collapseItem1.setVisibility(View.VISIBLE);
-                    vh.collapseItem2.setVisibility(View.VISIBLE);
-                    vh.collapseItem3.setVisibility(View.VISIBLE);
-                }
-            }
-        });
 
         vh.bottomNavigationView.setSelectedItemId(R.id.search);
 
