@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import android.widget.LinearLayout;
 
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,9 +49,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     private RecyclerViewAdapter adapter;
     private CategoriesAdapter adapter2;
     private List<Product> featured;
-
+    ViewHolder vh;
 
     float x1, x2, y1, y2;
+
+    class ViewHolder {
+        TextView textView1 = (TextView) findViewById(R.id.textView);
+        TextView textView2 = (TextView) findViewById(R.id.textView4);
+        TextView textView3 = (TextView) findViewById(R.id.textView5);
+        TextView textView4 = (TextView) findViewById(R.id.textView6);
+        SearchView searchView = (SearchView) findViewById(R.id.menu_search);
+        LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
+        RecyclerView rv1 = (RecyclerView) findViewById(R.id.rvBrands);
+        RecyclerView rv2 = (RecyclerView) findViewById(R.id.rvBrands2);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +70,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+        vh = new ViewHolder();
 
         //MainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         //MainViewModel.getTrendingProducts.observe(this, productList -> {
         //    products = productList;});
+
+
 
         ArrayList<String> countryList = new ArrayList<>();
         countryList.add("Air Jordan");
@@ -291,7 +306,31 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
         // set up the RecyclerView
 
+        // set up the loading screen
+        mainViewModel.isLoading.observe(this, isLoading -> {
+            if (isLoading) {
+                // set screen to progress bar
+                vh.textView1.setVisibility(View.GONE);
+                vh.textView2.setVisibility(View.GONE);
+                vh.textView3.setVisibility(View.GONE);
+                vh.textView4.setVisibility(View.GONE);
+                vh.searchView.setVisibility(View.GONE);
+                vh.loadingContainer.setVisibility(View.VISIBLE);
+                vh.rv1.setVisibility(View.GONE);
+                vh.rv2.setVisibility(View.GONE);
 
+            } else {
+                // change from progress bar back to the activity
+                vh.textView1.setVisibility(View.VISIBLE);
+                vh.textView2.setVisibility(View.VISIBLE);
+                vh.textView3.setVisibility(View.VISIBLE);
+                vh.textView4.setVisibility(View.VISIBLE);
+                vh.searchView.setVisibility(View.VISIBLE);
+                vh.loadingContainer.setVisibility(View.GONE);
+                vh.rv1.setVisibility(View.VISIBLE);
+                vh.rv2.setVisibility(View.VISIBLE);
+            }
+        });
 
 
 //        RecyclerView recyclerView = findViewById(R.id.rvBrands);
