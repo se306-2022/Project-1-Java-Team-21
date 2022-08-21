@@ -3,6 +3,7 @@ package com.group21.sneakerhub.repository;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.group21.sneakerhub.model.Product;
 
 import java.util.List;
@@ -95,7 +96,7 @@ public class ProductRepository implements IProductRepository{
     @Override
     public List<Product> getTrendingProducts() {
         try {
-            return Tasks.await(db.collection(COLLECTION_NAME).orderBy("rating").get()).toObjects(Product.class);
+            return Tasks.await(db.collection(COLLECTION_NAME).orderBy("rating", Query.Direction.DESCENDING).get()).toObjects(Product.class);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;

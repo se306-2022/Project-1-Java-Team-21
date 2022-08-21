@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -65,6 +68,9 @@ public class DetailsActivity extends AppCompatActivity {
     int indexOfFirst;
     int indexOfSecond;
     int indexOfThird;
+    double ratingGiven;
+    double ratingGiven2;
+    double ratingGiven3;
 
     ArrayList<String> names = new ArrayList<>();
     ArrayList<String> colours2 = new ArrayList<>();
@@ -82,6 +88,8 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         getSupportActionBar().hide();
+
+
 
 
         //sliderView.startAutoCycle();
@@ -234,6 +242,10 @@ public class DetailsActivity extends AppCompatActivity {
             TextView sizingText = (TextView)findViewById(R.id.SizingText);
             TextView descriptionText = (TextView)findViewById(R.id.DescriptionText);
             TextView featuresText = (TextView)findViewById(R.id.DetailsText);
+            TextView ratingText = (TextView)findViewById(R.id.RatingText);
+            RelativeLayout r1 = (RelativeLayout)findViewById(R.id.rating_holder);
+            RelativeLayout r2 = (RelativeLayout)findViewById(R.id.rating_holder2);
+            RelativeLayout r3 = (RelativeLayout)findViewById(R.id.rating_holder3);
 
             if (defaultColour.equals(colours2.get(indexOfSecond))) {
                 raPrivate2.setChecked(true);
@@ -254,6 +266,10 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfFirst)));
                 descriptionText.setText(description.get(indexOfFirst));
                 featuresText.setText(parseFeature(features.get(indexOfFirst)));
+                ratingText.setText(parseRating(rating.get(indexOfFirst)));
+                r1.setVisibility(View.VISIBLE);
+                r1.setVisibility(View.GONE);
+                r1.setVisibility(View.GONE);
 
             } else if (raPrivate2.isChecked()) {
                 sliderView.setSliderAdapter(sliderAdapter2);
@@ -264,6 +280,10 @@ public class DetailsActivity extends AppCompatActivity {
                 featuresText.setText(parseFeature(features.get(indexOfSecond)));
                 favCurrentColor = colours2.get(indexOfSecond);
                 favCurrentName = names.get(indexOfSecond);
+                ratingText.setText(parseRating(rating.get(indexOfSecond)));
+                r1.setVisibility(View.GONE);
+                r1.setVisibility(View.VISIBLE);
+                r1.setVisibility(View.GONE);
 
             } else {
                 sliderView.setSliderAdapter(sliderAdapter3);
@@ -274,6 +294,10 @@ public class DetailsActivity extends AppCompatActivity {
                 featuresText.setText(parseFeature(features.get(indexOfThird)));
                 favCurrentColor = colours2.get(indexOfThird);
                 favCurrentName = names.get(indexOfThird);
+                ratingText.setText(parseRating(rating.get(indexOfThird)));
+                r1.setVisibility(View.GONE);
+                r1.setVisibility(View.GONE);
+                r1.setVisibility(View.VISIBLE);
             }
         });
 
@@ -335,6 +359,57 @@ public class DetailsActivity extends AppCompatActivity {
             }
             return false;
         });
+
+
+        final RatingBar ratingRatingBar = (RatingBar) findViewById(R.id.rating_bar);
+        Button submitButton = (Button) findViewById(R.id.submit_button);
+        final TextView ratingDisplayTextView = (TextView) findViewById(R.id.rating_display_text_View);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                ratingDisplayTextView.setText("Your rating is: " + ratingRatingBar.getRating());
+                ratingGiven = ratingRatingBar.getRating();
+                submitButton.setVisibility(View.GONE);
+                ratingRatingBar.setVisibility(View.GONE);
+                ratingDisplayTextView.setText("Thank you for your rating.");
+            }
+        });
+
+
+        final RatingBar ratingRatingBar2 = (RatingBar) findViewById(R.id.rating_bar2);
+        Button submitButton2 = (Button) findViewById(R.id.submit_button2);
+        final TextView ratingDisplayTextView2 = (TextView) findViewById(R.id.rating_display_text_View2);
+
+        submitButton2.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                ratingDisplayTextView2.setText("Your rating is: " + ratingRatingBar2.getRating());
+                ratingGiven2 = ratingRatingBar2.getRating();
+                submitButton2.setVisibility(View.GONE);
+                ratingRatingBar2.setVisibility(View.GONE);
+                ratingDisplayTextView2.setText("Thank you for your rating.");
+            }
+        });
+
+
+        final RatingBar ratingRatingBar3 = (RatingBar) findViewById(R.id.rating_bar3);
+        Button submitButton3 = (Button) findViewById(R.id.submit_button3);
+        final TextView ratingDisplayTextView3 = (TextView) findViewById(R.id.rating_display_text_View3);
+
+        submitButton3.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                ratingDisplayTextView3.setText("Your rating is: " + ratingRatingBar3.getRating());
+                ratingGiven3 = ratingRatingBar3.getRating();
+                submitButton3.setVisibility(View.GONE);
+                ratingRatingBar3.setVisibility(View.GONE);
+                ratingDisplayTextView3.setText("Thank you for your rating.");
+            }
+        });
     }
 
     public void onRadioButtonClicked(View view) {
@@ -346,6 +421,11 @@ public class DetailsActivity extends AppCompatActivity {
         TextView sizingText = (TextView)findViewById(R.id.SizingText);
         TextView descriptionText = (TextView)findViewById(R.id.DescriptionText);
         TextView featuresText = (TextView)findViewById(R.id.DetailsText);
+        TextView ratingText = (TextView)findViewById(R.id.RatingText);
+        RelativeLayout r1 = (RelativeLayout)findViewById(R.id.rating_holder);
+        RelativeLayout r2 = (RelativeLayout)findViewById(R.id.rating_holder2);
+        RelativeLayout r3 = (RelativeLayout)findViewById(R.id.rating_holder3);
+
 
         int page = 0;
 
@@ -364,8 +444,12 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfFirst)));
                 descriptionText.setText(description.get(indexOfFirst));
                 featuresText.setText(parseFeature(features.get(indexOfFirst)));
+                ratingText.setText(parseRating(rating.get(indexOfFirst)));
                 favCurrentColor = colours2.get(indexOfFirst);
                 favCurrentName = names.get(indexOfFirst);
+                r1.setVisibility(View.VISIBLE);
+                r2.setVisibility(View.GONE);
+                r3.setVisibility(View.GONE);
                 break;
             case R.id.colorButton2:
                 if (checked)
@@ -377,8 +461,12 @@ public class DetailsActivity extends AppCompatActivity {
                 currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfSecond)));
                 sizingText.setText(parseSize(availableSizes.get(indexOfSecond)));
                 featuresText.setText(parseFeature(features.get(indexOfSecond)));
+                ratingText.setText(parseRating(rating.get(indexOfSecond)));
                 favCurrentColor = colours2.get(indexOfSecond);
                 favCurrentName = names.get(indexOfSecond);
+                r1.setVisibility(View.GONE);
+                r2.setVisibility(View.VISIBLE);
+                r3.setVisibility(View.GONE);
                 break;
             case R.id.colorButton3:
                 if (checked)
@@ -391,8 +479,12 @@ public class DetailsActivity extends AppCompatActivity {
                 sizingText.setText(parseSize(availableSizes.get(indexOfThird)));
                 descriptionText.setText(description.get(indexOfThird));
                 featuresText.setText(parseFeature(features.get(indexOfThird)));
+                ratingText.setText(parseRating(rating.get(indexOfThird)));
                 favCurrentColor = colours2.get(indexOfThird);
                 favCurrentName = names.get(indexOfThird);
+                r1.setVisibility(View.GONE);
+                r2.setVisibility(View.GONE);
+                r3.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -459,6 +551,8 @@ public class DetailsActivity extends AppCompatActivity {
         expand.setVisibility(View.GONE);
         Button expanded = (Button)findViewById(R.id.expandedRating);
         expanded.setVisibility(View.VISIBLE);
+        RelativeLayout ratingHolder = (RelativeLayout)findViewById(R.id.rating_holder);
+        ratingHolder.setVisibility(View.VISIBLE);
     }
 
     public void ratingClosed(View view) {
@@ -468,7 +562,11 @@ public class DetailsActivity extends AppCompatActivity {
         expanded.setVisibility(View.GONE);
         Button expand = (Button)findViewById(R.id.expandRating);
         expand.setVisibility(View.VISIBLE);
+        RelativeLayout ratingHolder = (RelativeLayout)findViewById(R.id.rating_holder);
+        ratingHolder.setVisibility(View.GONE);
     }
+
+
 
     public static int[] convertIntegers(ArrayList<Integer> integers)
     {
@@ -497,6 +595,15 @@ public class DetailsActivity extends AppCompatActivity {
         featureString = featureString.substring(0, featureString.length() - 1);
         return featureString;
     }
+
+    public String parseRating(double rating) {
+        String ratingString = "";
+        ratingString = ratingString.concat("Average rating: " + String.format("%.2f", rating) + "/5");
+
+        return ratingString;
+    }
+
+
 
     public String returnColorValue(String colorString) {
         switch (colorString.toLowerCase()) {

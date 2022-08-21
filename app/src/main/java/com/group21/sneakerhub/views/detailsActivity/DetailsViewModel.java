@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.usecases.addProductToFavourite.AddProductToFavourite;
 import com.group21.sneakerhub.usecases.addProductToFavourite.IAddProductToFavourite;
+import com.group21.sneakerhub.usecases.addRating.IAddRating;
 import com.group21.sneakerhub.usecases.removeProductFromFavourite.IRemoveProductFromFavourite;
 import com.group21.sneakerhub.usecases.removeProductFromFavourite.RemoveProductFromFavourite;
 import com.group21.sneakerhub.usecases.searchProductByName.ISearchProductByName;
@@ -21,6 +22,7 @@ public class DetailsViewModel extends ViewModel {
     ISearchProductByName searchProductByName;
     IRemoveProductFromFavourite removeProductFromFavourite;
     IAddProductToFavourite addProductToFavourite;
+    IAddRating addRating;
 
     public DetailsViewModel(){
         searchProductByName = new SearchProductByName();
@@ -60,6 +62,17 @@ public class DetailsViewModel extends ViewModel {
             @Override
             public void run() {
                 addProductToFavourite.addProductToFavourite(product);
+            }
+        });
+
+        thread1.start();
+    }
+
+    public void addRating(Product product, double rating){
+        Thread thread1 = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                addRating.addRating(product, rating);
             }
         });
 
