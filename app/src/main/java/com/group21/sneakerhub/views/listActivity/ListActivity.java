@@ -86,7 +86,7 @@ public class ListActivity extends AppCompatActivity {
 
             // send the name of the sneaker so the detail activity can load it
             detailPage.putExtra("sneakerName", productFromCategory.get(position).getName());
-
+            detailPage.putExtra("currentColour", productFromCategory.get(position).getColor());
             detailPage.putExtra("callingActivity", "ListActivity");
 
             detailPage.putExtra("brandName", brandName);
