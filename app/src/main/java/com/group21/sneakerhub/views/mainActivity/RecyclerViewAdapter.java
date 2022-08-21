@@ -100,7 +100,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         ViewHolder(View itemView) {
             super(itemView);
-            colorText = itemView.findViewById(R.id.brand_color);
+            colorText = itemView.findViewById(R.id.brand_color_featured);
             myTextView = itemView.findViewById(R.id.brand_name);
             myImageView = itemView.findViewById(R.id.brand_image);
             priceText = itemView.findViewById(R.id.price);
@@ -121,6 +121,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // convenience method for getting data at click position
     public String getItem(int id) {
         return mBrands.get(id);
+    }
+
+
+    public String getColourMethod(int id) {
+        return mViewColors.get(id);
     }
 
     // allows clicks events to be caught

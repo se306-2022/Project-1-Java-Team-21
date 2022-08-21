@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import android.widget.LinearLayout;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -40,11 +41,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener, CategoriesAdapter.ItemClickListener2 {
+
 
     private RecyclerViewAdapter adapter;
     private CategoriesAdapter adapter2;
-    private static List<Product> featured;
+    private List<Product> featured;
+
 
     float x1, x2, y1, y2;
 
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+
 
         //MainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         //MainViewModel.getTrendingProducts.observe(this, productList -> {
@@ -79,8 +84,88 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
 
         MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel.getTrendingProducts().observe(this, productList -> {
+
+//            Product p1 = productList.get(0);
+//            Product p2 = productList.get(1);
+//            Product p3 = productList.get(2);
+//            Product p4 = productList.get(3);
+//            Product p5 = productList.get(4);
+//            Product p6 = productList.get(5);
+//            Product p7 = productList.get(6);
+//            Product p8 = productList.get(7);
+//            Product p9 = productList.get(8);
+//            Product p10 = productList.get(9);
 
 
+            ArrayList<String> brandNames = new ArrayList<>();
+
+
+//
+//            brandNames.add(p1.getName());
+//            brandNames.add(p2.getName());
+//            brandNames.add(p3.getName());
+
+
+            ArrayList<String> productColors = new ArrayList<>();
+//            productColors.add(p1.getColor());
+//            productColors.add(p2.getColor());
+//            productColors.add(p3.getColor());
+
+            ArrayList<Double> productPrices = new ArrayList<>();
+//            productPrices.add(p1.getPrice());
+//            productPrices.add(p2.getPrice());
+//            productPrices.add(p3.getPrice());
+
+
+            ArrayList<Integer> brandImages = new ArrayList<>();
+
+
+
+            for (Product p : productList) {
+                brandNames.add(p.getName());
+                productColors.add(p.getColor());
+                productPrices.add(p.getPrice());
+                brandImages.add(getResources().getIdentifier("s" + p.getImageUrls().get(0), "drawable", getPackageName()));
+            }
+
+
+
+
+
+            RecyclerView recyclerView = findViewById(R.id.rvBrands);
+            LinearLayoutManager horizontalLayoutManager
+                    = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+            recyclerView.setLayoutManager(horizontalLayoutManager);
+            adapter = new RecyclerViewAdapter(this, productColors, brandNames, brandImages, productPrices);
+            //adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
+            adapter.setClickListener(this);
+            recyclerView.setAdapter(adapter);
+//
+//
+//            rv.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+//                @Override
+//                public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+//                    return false;
+//                }
+//
+//                @Override
+//                public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+//
+//                }
+//
+//                @Override
+//                public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//
+//                }
+//            });
+
+
+        System.out.println("================================================================");
+        System.out.println(productList);
+
+
+        });
 //
 //        mainViewModel.isLoading.observe(this, isLoading -> {
 //            if (isLoading) {
@@ -166,29 +251,32 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             add("test_11");
         } };
 //
-        Product p1 = new Product("Air Jordan 4", 100, 1, 450.00, "White", sizes, 4.5, 7, false, images, "good",  featuress, true);
-        Product p2 = new Product("Yeezy 350", 100, 1, 520.00, "Black", sizes, 4.5, 7, false, images2, "good",  featuress, false);
-        Product p3 = new Product("Air Jordan 1", 100, 1, 550.00, "Red", sizes, 4.5, 7, false, images3, "good",  featuress, true);
+//        Product p1 = new Product("Air Jordan 4", 100, 1, 450.00, "White", sizes, 4.5, 7, false, images, "good",  featuress, true);
+//        Product p2 = new Product("Yeezy 350", 100, 1, 520.00, "Black", sizes, 4.5, 7, false, images2, "good",  featuress, false);
+//        Product p3 = new Product("Air Jordan 1", 100, 1, 550.00, "Red", sizes, 4.5, 7, false, images3, "good",  featuress, true);
 
-        ArrayList<String> brandNames = new ArrayList<>();
-        brandNames.add(p1.getName());
-        brandNames.add(p2.getName());
-        brandNames.add(p3.getName());
-
-        ArrayList<String> productColors = new ArrayList<>();
-        productColors.add(p1.getColor());
-        productColors.add(p2.getColor());
-        productColors.add(p3.getColor());
-
-        ArrayList<Double> productPrices = new ArrayList<>();
-        productPrices.add(p1.getPrice());
-        productPrices.add(p2.getPrice());
-        productPrices.add(p3.getPrice());
-
-        ArrayList<Integer> brandImages = new ArrayList<>();
-        brandImages.add(getResources().getIdentifier(p1.getImageUrls().get(0), "drawable", getPackageName()));
-        brandImages.add(getResources().getIdentifier(p2.getImageUrls().get(0), "drawable", getPackageName()));
-        brandImages.add(getResources().getIdentifier(p3.getImageUrls().get(0), "drawable", getPackageName()));
+//        Product p1 = featured.get(0);
+//
+//
+//        ArrayList<String> brandNames = new ArrayList<>();
+//        brandNames.add(p1.getName());
+//        brandNames.add(p2.getName());
+//        brandNames.add(p3.getName());
+//
+//        ArrayList<String> productColors = new ArrayList<>();
+//        productColors.add(p1.getColor());
+//        productColors.add(p2.getColor());
+//        productColors.add(p3.getColor());
+//
+//        ArrayList<Double> productPrices = new ArrayList<>();
+//        productPrices.add(p1.getPrice());
+//        productPrices.add(p2.getPrice());
+//        productPrices.add(p3.getPrice());
+//
+//        ArrayList<Integer> brandImages = new ArrayList<>();
+//        brandImages.add(getResources().getIdentifier(p1.getImageUrls().get(0), "drawable", getPackageName()));
+//        brandImages.add(getResources().getIdentifier(p2.getImageUrls().get(0), "drawable", getPackageName()));
+//        brandImages.add(getResources().getIdentifier(p3.getImageUrls().get(0), "drawable", getPackageName()));
 
          //data to populate the RecyclerView with
 
@@ -202,14 +290,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
        // brandNames.add("Vans");
 
         // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvBrands);
-        LinearLayoutManager horizontalLayoutManager
-                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        adapter = new RecyclerViewAdapter(this, productColors, brandNames, brandImages, productPrices);
-        //adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
+
+
+
+
+//        RecyclerView recyclerView = findViewById(R.id.rvBrands);
+//        LinearLayoutManager horizontalLayoutManager
+//                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+//        recyclerView.setLayoutManager(horizontalLayoutManager);
+//        adapter = new RecyclerViewAdapter(this, productColors, brandNames, brandImages, productPrices);
+//        //adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
+//        adapter.setClickListener(this);
+//        recyclerView.setAdapter(adapter);
 
 
         RecyclerView recyclerView2 = findViewById(R.id.rvBrands2);
@@ -270,12 +362,29 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(getBaseContext(), ListActivity.class);
-//        intent.putExtra("brandName", adapter.getItem(position));
-//        startActivity(intent);
-        startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
-        overridePendingTransition(0, 0);
+
+        System.out.println("Position: " + position + " Name: " + adapter.getItem(position));
+
+
+        //TextView currentColor = (TextView)findViewById(R.id.brand_color_featured);
+        //String currentColorInput = currentColor.getText().toString();
+        String currentColorInput = adapter.getColourMethod(position);
+
+        System.out.println("fasdfasd=f====================== " + currentColorInput);
+
+        Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
+        intent.putExtra("sneakerName", adapter.getItem(position));
+        intent.putExtra("callingActivity", "MainActivity");
+        intent.putExtra("currentColour", currentColorInput);
+
+        startActivity(intent);
+
+
+
+//        startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
+//        overridePendingTransition(0, 0);
     }
+
 
     @Override
     public void onItemClick2(View view, int position) {

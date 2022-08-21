@@ -238,6 +238,7 @@ public class DetailsActivity extends AppCompatActivity {
             if (defaultColour.equals(colours2.get(indexOfSecond))) {
                 raPrivate2.setChecked(true);
                 raPrivate.setChecked(false);
+
                 if (favProducts.get(indexOfSecond).getIsFavourite()){
                     vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
                 }
@@ -316,26 +317,10 @@ public class DetailsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
-                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
-                    Product currentProduct = null;
-                    for (Product p : favProducts){
-                        if (p.getColor().equals(favCurrentColor)){
-                            currentProduct = p;
-                        }
-                    }
 
-                    detailsVM.removeProductFromFavourite(currentProduct);
                 } else {
-                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
 
-                    Product currentProduct = null;
-                    for (Product p : favProducts){
-                        if (p.getColor().equals(favCurrentColor)){
-                            currentProduct = p;
-                        }
-                    }
 
-                    detailsVM.addProductToFavourite(currentProduct);
                 }
             }
         });
