@@ -185,7 +185,25 @@ public class SearchFilterActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchFilterVM.setFinalQueryString(query);
-                return false;
+
+                // create an intent that navigates to NumbersActivity class
+                Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
+
+                searchResults.putExtra("query",searchFilterVM.getFinalQueryString());
+                searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
+                searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
+
+                searchResults.putExtra("callingActivity","SearchFilterActivity");
+                ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
+                searchResults.putExtra("colours",colours);
+
+                ArrayList<String> brands = (ArrayList<String>) searchFilterVM.getBrandNames();
+                searchResults.putExtra("brands",brands);
+
+                //start the activity
+                startActivity(searchResults);
+
+                return true;
             }
 
             // updates everytime a character changes in the searchbox
