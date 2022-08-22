@@ -16,5 +16,24 @@
     <color name="yellow">#eadc2b</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Nike">#ff0000</color>
-    <color name="rating_bar_blue">#0026a9</color>
+
+    <color name="rb_white">#D8D8D8</color>
+    <color name="rb_whiteD">#939393</color>
+    <color name="rb_black">#666666</color>
+    <color name="rb_blackD">#000000</color>
+    <color name="rb_red">#EDA1A1</color>
+    <color name="rb_redD">#923C3C</color>
+    <color name="rb_blue">#A6BDEB</color>
+    <color name="rb_blueD">#2C5097</color>
+    <color name="rb_yellow">#F4F1B1</color>
+    <color name="rb_yellowD">#DDD40F</color>
+    <color name="rb_orange">#F3D383</color>
+    <color name="rb_orangeD">#DCA214</color>
+    <color name="rb_purple">#D9ABEB</color>
+    <color name="rb_purpleD">#8613B4</color>
+    <color name="rb_green">#A8F2AC</color>
+    <color name="rb_greenD">#118618</color>
+    <color name="rb_grey">#A0A0A0</color>
+    <color name="rb_greyD">#676767</color>
+
 </resources>

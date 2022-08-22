@@ -14,11 +14,49 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="RatingBarTest" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/rating_bar_blue</item>
-        <item name="colorControlActivated">@color/red</item>
+    <style name="RbWhite" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rb_white</item>
+        <item name="colorControlActivated">@color/rb_whiteD</item>
     </style>
 
+    <style name="RbBlack" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rb_black</item>
+        <item name="colorControlActivated">@color/rb_blackD</item>
+    </style>
 
+    <style name="RbRed" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rb_red</item>
+        <item name="colorControlActivated">@color/rb_redD</item>
+    </style>
+
+    <style name="RbBlue" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rb_blue</item>
+        <item name="colorControlActivated">@color/rb_blueD</item>
+    </style>
+
+    <style name="RbYellow" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rb_yellow</item>
+        <item name="colorControlActivated">@color/rb_yellowD</item>
+    </style>
+
+    <style name="RbOrange" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rb_orange</item>
+        <item name="colorControlActivated">@color/rb_orangeD</item>
+    </style>
+
+    <style name="RbPurple" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rb_purple</item>
+        <item name="colorControlActivated">@color/rb_purpleD</item>
+    </style>
+
+    <style name="RbGreen" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rb_green</item>
+        <item name="colorControlActivated">@color/rb_greenD</item>
+    </style>
+
+    <style name="RbGrey" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rb_grey</item>
+        <item name="colorControlActivated">@color/rb_greyD</item>
+    </style>
 
 </resources>

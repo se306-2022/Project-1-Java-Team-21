@@ -189,6 +189,8 @@ public class DetailsActivity extends AppCompatActivity {
             indexOfSecond = otherIndexes.get(0);
             indexOfThird = otherIndexes.get(1);
 
+
+
             ArrayList<Integer> firstColorInt = new ArrayList<>();
             ArrayList<Integer> secondColorInt = new ArrayList<>();
             ArrayList<Integer> thirdColorInt = new ArrayList<>();
@@ -459,7 +461,7 @@ public class DetailsActivity extends AppCompatActivity {
                 //double newRating = favProducts.get(indexOfThird).getRating();
                 TextView rText = (TextView) findViewById(R.id.RatingText);
                 System.out.println("=======================NEW RATING: " + newRating);
-                rText.setText("Average rating: " + String.format("%.2f", newRating) + "/5 (supposed to be new)");
+                rText.setText("Average rating: " + String.format("%.2f", newRating) + "/5");
             }
         });
     }
