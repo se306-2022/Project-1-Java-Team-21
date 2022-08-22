@@ -26,13 +26,13 @@ public class SearchProductWithFilter implements ISearchProductWithFIlter{
         Product product;
         for (int i = 0; i < products.size(); i++) {
             product = products.get(i);
-            if(search != null){
-                if(!product.getName().toLowerCase().contains(search.toLowerCase())&&!product.getDescription().toLowerCase().contains(search.toLowerCase())){
+            if(search != null && !search.isEmpty()){
+                if(!product.getName().toLowerCase().contains(search.toLowerCase())){
                     unwantedProductIndex.add(i);
                     continue;
                 }
             }
-            if(brandNames != null){
+            if(brandNames != null && !brandNames.isEmpty()){
                 List<Category> categories = categoryRepository.getCategories();
 
                 Map<Long,String> brandIdtoNameMap = new HashMap<>();
@@ -46,7 +46,7 @@ public class SearchProductWithFilter implements ISearchProductWithFIlter{
                 }
             }
 
-            if(colors != null){
+            if(colors != null && !colors.isEmpty()){
                 if(!colors.contains(product.getColor())){
                     unwantedProductIndex.add(i);
                     continue;

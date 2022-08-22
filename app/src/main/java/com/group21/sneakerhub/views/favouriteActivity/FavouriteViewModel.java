@@ -11,21 +11,26 @@ import com.group21.sneakerhub.usecases.getFavouriteProducts.GetFavouriteProducts
 import com.group21.sneakerhub.usecases.getFavouriteProducts.IGetFavouriteProducts;
 import com.group21.sneakerhub.usecases.removeProductFromFavourite.IRemoveProductFromFavourite;
 import com.group21.sneakerhub.usecases.removeProductFromFavourite.RemoveProductFromFavourite;
+import com.group21.sneakerhub.usecases.toggleProductIsFavourite.IToggleProductIsFavourite;
+import com.group21.sneakerhub.usecases.toggleProductIsFavourite.ToggleProductIsFavourite;
 
 import java.util.List;
 
 public class FavouriteViewModel extends ViewModel {
     MutableLiveData<List<Product>> favouriteProducts;
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    MutableLiveData<Boolean> productIsFavourite = new MutableLiveData<>();
 
     IGetFavouriteProducts getFavouriteProducts;
     IRemoveProductFromFavourite removeProductFromFavourite;
     IAddProductToFavourite addProductToFavourite;
+    IToggleProductIsFavourite toggleProductIsFavourite;
 
     public FavouriteViewModel(){
         getFavouriteProducts = new GetFavouriteProducts();
         removeProductFromFavourite = new RemoveProductFromFavourite();
         addProductToFavourite = new AddProductToFavourite();
+        toggleProductIsFavourite = new ToggleProductIsFavourite();
     }
 
     /**
@@ -81,5 +86,19 @@ public class FavouriteViewModel extends ViewModel {
         });
 
         thread1.start();
+    }
+
+    public LiveData<Boolean> toggleProductIsFavourite(Product product) {
+
+        Thread thread1 = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                productIsFavourite.postValue(!product.getIsFavourite());
+                toggleProductIsFavourite.toggleProductIsFavourite(product);
+            }
+        });
+
+        thread1.start();
+        return productIsFavourite;
     }
 }

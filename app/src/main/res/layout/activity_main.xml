@@ -22,8 +22,7 @@
             android:text="Sneaker Hub"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="41sp"
-            android:visibility="visible"
-            tools:visibility="visible" />
+            android:visibility="gone"/>
 
 
         <TextView
@@ -32,22 +31,40 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:gravity="center"
+            android:visibility="gone"
             android:text="Easily purchase your favourite sneakers."
             android:textColor="#616161" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/loading_container">
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#a9a9a9"
+                android:gravity="center"
+                android:id="@+id/loading_text"
+                android:textSize="24sp"/>
+        </LinearLayout>
 
         <android.widget.SearchView
-            android:id="@+id/menu_search"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="5dp"
+            android:layout_height="48dp"
+            android:id="@+id/menu_search_main"
+            android:visibility="gone"
             android:background="@drawable/search_style"
-            android:backgroundTint="#EAEAEA"
-            android:clickable="true"
-            android:paddingVertical="10dp" />
+            android:paddingVertical="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"/>
 
         <TextView
             android:id="@+id/textView5"
@@ -58,13 +75,15 @@
             android:paddingTop="10dp"
             android:text="Featured"
             android:textColor="#000000"
+            android:visibility="gone"
             android:textSize="30sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBrands"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp" />
+            android:visibility="gone"
+           />
 
         <TextView
             android:id="@+id/textView6"
@@ -75,6 +94,7 @@
             android:paddingTop="20dp"
             android:text="Categories"
             android:textColor="#000000"
+            android:visibility="gone"
             android:textSize="30sp" />
 
 
@@ -84,9 +104,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:layout_marginStart="30dp"
+            android:visibility="gone"
             android:layout_marginBottom="60dp"/>
-
-
 
     </LinearLayout>
 

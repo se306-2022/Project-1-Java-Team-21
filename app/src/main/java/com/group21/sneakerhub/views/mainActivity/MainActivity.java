@@ -6,19 +6,25 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import android.widget.LinearLayout;
 
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,9 +54,21 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     private RecyclerViewAdapter adapter;
     private CategoriesAdapter adapter2;
     private List<Product> featured;
-
+    ViewHolder vh;
 
     float x1, x2, y1, y2;
+
+    class ViewHolder {
+        TextView textView1 = (TextView) findViewById(R.id.textView);
+        TextView textView2 = (TextView) findViewById(R.id.textView4);
+        TextView textView3 = (TextView) findViewById(R.id.textView5);
+        TextView textView4 = (TextView) findViewById(R.id.textView6);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
+        RecyclerView rv1 = (RecyclerView) findViewById(R.id.rvBrands);
+        RecyclerView rv2 = (RecyclerView) findViewById(R.id.rvBrands2);
+        SearchView searchbar = (SearchView) findViewById(R.id.menu_search_main);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+        vh = new ViewHolder();
 
 
         ArrayList<String> countryList = new ArrayList<>();
@@ -83,41 +102,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mainViewModel.getTrendingProducts().observe(this, productList -> {
 
-//            Product p1 = productList.get(0);
-//            Product p2 = productList.get(1);
-//            Product p3 = productList.get(2);
-//            Product p4 = productList.get(3);
-//            Product p5 = productList.get(4);
-//            Product p6 = productList.get(5);
-//            Product p7 = productList.get(6);
-//            Product p8 = productList.get(7);
-//            Product p9 = productList.get(8);
-//            Product p10 = productList.get(9);
-
 
             ArrayList<String> brandNames = new ArrayList<>();
-
-
-//
-//            brandNames.add(p1.getName());
-//            brandNames.add(p2.getName());
-//            brandNames.add(p3.getName());
-
-
             ArrayList<String> productColors = new ArrayList<>();
-//            productColors.add(p1.getColor());
-//            productColors.add(p2.getColor());
-//            productColors.add(p3.getColor());
-
             ArrayList<Double> productPrices = new ArrayList<>();
-//            productPrices.add(p1.getPrice());
-//            productPrices.add(p2.getPrice());
-//            productPrices.add(p3.getPrice());
-
-
             ArrayList<Integer> brandImages = new ArrayList<>();
-
-
 
             for (Product p : productList) {
                 brandNames.add(p.getName());
@@ -125,9 +114,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 productPrices.add(p.getPrice());
                 brandImages.add(getResources().getIdentifier("s" + p.getImageUrls().get(0), "drawable", getPackageName()));
             }
-
-
-
 
 
             RecyclerView recyclerView = findViewById(R.id.rvBrands);
@@ -138,88 +124,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             //adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
             adapter.setClickListener(this);
             recyclerView.setAdapter(adapter);
-//
-//
-//            rv.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-//                @Override
-//                public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-//                    return false;
-//                }
-//
-//                @Override
-//                public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-//
-//                }
-//
-//                @Override
-//                public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-//
-//                }
-//            });
-
-
-        System.out.println("================================================================");
-        System.out.println(productList);
-
-
         });
-//
-//        mainViewModel.isLoading.observe(this, isLoading -> {
-//            if (isLoading) {
-//                findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
-//            } else {
-//                findViewById(R.id.progress_bar).setVisibility(View.GONE);
-//           }
-//        });
-
-/*
-
-//        IDatabasePopulator databasePopulator = new firebaseDatabasePopulator();
-//        Thread t1 = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                databasePopulator.populate();
-//            }
-//        });
-//        t1.start();
-
-        mainViewModel.getTrendingProducts().observe(this, products -> {
-            for (Product product : products) {
-                System.out.println(product.getName());
-           }
-        });
-
-
-
-        mainViewModel.getSearchedProducts("Air JORDan").observe(this, products -> {
-            for (Product product : products) {
-                System.out.println(product.getName());
-            }
-        });
-*/
-        CategoryRepository cr = CategoryRepository.getInstance();
-        Thread thread1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (Category c : cr.getCategories()){
-                    System.out.println(c.getName());
-                    System.out.println(c.getClass().getName());
-                    if (c.getName().equals("Air Jordan"));
-                    System.out.println("hoorray!");
-                }
-            }
-        });
-
-        thread1.start();
-
-
-
-//        mainViewModel.getProductsByCategoryId(1).observe(this, products -> {
-//            for (Product product : products) {
-//                System.out.println(product.getName());
-//            }
-//        });
-
 
 
         ArrayList<Product> products = new ArrayList<>();
@@ -247,58 +152,32 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             add("test_3");
             add("test_11");
         } };
-//
-//        Product p1 = new Product("Air Jordan 4", 100, 1, 450.00, "White", sizes, 4.5, 7, false, images, "good",  featuress, true);
-//        Product p2 = new Product("Yeezy 350", 100, 1, 520.00, "Black", sizes, 4.5, 7, false, images2, "good",  featuress, false);
-//        Product p3 = new Product("Air Jordan 1", 100, 1, 550.00, "Red", sizes, 4.5, 7, false, images3, "good",  featuress, true);
 
-//        Product p1 = featured.get(0);
-//
-//
-//        ArrayList<String> brandNames = new ArrayList<>();
-//        brandNames.add(p1.getName());
-//        brandNames.add(p2.getName());
-//        brandNames.add(p3.getName());
-//
-//        ArrayList<String> productColors = new ArrayList<>();
-//        productColors.add(p1.getColor());
-//        productColors.add(p2.getColor());
-//        productColors.add(p3.getColor());
-//
-//        ArrayList<Double> productPrices = new ArrayList<>();
-//        productPrices.add(p1.getPrice());
-//        productPrices.add(p2.getPrice());
-//        productPrices.add(p3.getPrice());
-//
-//        ArrayList<Integer> brandImages = new ArrayList<>();
-//        brandImages.add(getResources().getIdentifier(p1.getImageUrls().get(0), "drawable", getPackageName()));
-//        brandImages.add(getResources().getIdentifier(p2.getImageUrls().get(0), "drawable", getPackageName()));
-//        brandImages.add(getResources().getIdentifier(p3.getImageUrls().get(0), "drawable", getPackageName()));
+        // set up the loading screen
+        mainViewModel.isLoading.observe(this, isLoading -> {
+            if (isLoading) {
+                // set screen to progress bar
+                vh.textView1.setVisibility(View.GONE);
+                vh.textView2.setVisibility(View.GONE);
+                vh.textView3.setVisibility(View.GONE);
+                vh.textView4.setVisibility(View.GONE);
+                vh.searchbar.setVisibility(View.GONE);
+                vh.loadingContainer.setVisibility(View.VISIBLE);
+                vh.rv1.setVisibility(View.GONE);
+                vh.rv2.setVisibility(View.GONE);
 
-         //data to populate the RecyclerView with
-
-
-
-
-//        ArrayList<String> brandNames = new ArrayList<>();
-//        brandNames.add("Air Jordan");
-//        brandNames.add("Nike");
-//        brandNames.add("Adidas");
-       // brandNames.add("Vans");
-
-        // set up the RecyclerView
-
-
-
-
-//        RecyclerView recyclerView = findViewById(R.id.rvBrands);
-//        LinearLayoutManager horizontalLayoutManager
-//                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView.setLayoutManager(horizontalLayoutManager);
-//        adapter = new RecyclerViewAdapter(this, productColors, brandNames, brandImages, productPrices);
-//        //adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
-//        adapter.setClickListener(this);
-//        recyclerView.setAdapter(adapter);
+            } else {
+                // change from progress bar back to the activity
+                vh.textView1.setVisibility(View.VISIBLE);
+                vh.textView2.setVisibility(View.VISIBLE);
+                vh.textView3.setVisibility(View.VISIBLE);
+                vh.textView4.setVisibility(View.VISIBLE);
+                vh.loadingContainer.setVisibility(View.GONE);
+                vh.searchbar.setVisibility(View.VISIBLE);
+                vh.rv1.setVisibility(View.VISIBLE);
+                vh.rv2.setVisibility(View.VISIBLE);
+            }
+        });
 
 
         RecyclerView recyclerView2 = findViewById(R.id.rvBrands2);
@@ -309,24 +188,31 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         adapter2.setClickListener2(this);
         recyclerView2.setAdapter(adapter2);
 
-//        RecyclerView recyclerView2 = findViewById(R.id.rvBrands2);
-//        LinearLayoutManager horizontalLayoutManager2
-//                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView2.setLayoutManager(horizontalLayoutManager2);
-//        adapter2 = new CategoriesAdapter(this, colorsListView, countryList, imagesListView);
-//        adapter2.setClickListener2(this);
-//        recyclerView2.setAdapter(adapter2);
+        // searchbar edit text listener
+        /*
+        vh.searchbar.setOnKeyListener(new View.OnKeyListener() {
 
-//        RecyclerView recyclerView = findViewById(R.id.rvFeatured);
-//        LinearLayoutManager verticalLayoutManager
-//                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView.setLayoutManager(horizontalLayoutManager);
-//        adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
-//        //adapter = new RecyclerViewAdapter(this, viewColors, brandNames, brandImages);
-//        adapter.setClickListener(this);
-//        recyclerView.setAdapter(adapter);
-
-
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // keyevent on return key pressed by user
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // checks whether the search is empty
+                    if (vh.searchbar.getText().toString() != null && !(vh.searchbar.getText().toString().trim().isEmpty())) {
+                        Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
+                        // remove white spaces on either end on query string
+                        intent.putExtra("query", vh.searchbar.getText().toString().trim());
+                        intent.putExtra("callingActivity", "MainActivity");
+                        startActivity(intent);
+                    } else {
+                        // informs user that search is empty
+                        Toast.makeText(getApplicationContext(), "Search query is empty", Toast.LENGTH_LONG).show();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+        */
 
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -362,12 +248,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
         System.out.println("Position: " + position + " Name: " + adapter.getItem(position));
 
-
-        //TextView currentColor = (TextView)findViewById(R.id.brand_color_featured);
-        //String currentColorInput = currentColor.getText().toString();
         String currentColorInput = adapter.getColourMethod(position);
-
-        System.out.println("fasdfasd=f====================== " + currentColorInput);
 
         Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
         intent.putExtra("sneakerName", adapter.getItem(position));
@@ -375,19 +256,50 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         intent.putExtra("currentColour", currentColorInput);
 
         startActivity(intent);
-
-
-
-//        startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
-//        overridePendingTransition(0, 0);
     }
 
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        vh.searchbar.setQueryHint("Search for sneaker...");
+        vh.searchbar.setSubmitButtonEnabled(false);
+
+        vh.searchbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // when user hits return the final search string is returned
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                if (query != null && !(query.trim().isEmpty())) {
+                    Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
+                    // remove white spaces on either end on query string
+                    intent.putExtra("query", query);
+                    intent.putExtra("callingActivity", "MainActivity");
+                    startActivity(intent);
+                } else {
+                    // informs user that search is empty
+                    Toast.makeText(getApplicationContext(), "Search query is empty", Toast.LENGTH_LONG).show();
+                }
+                return true;
+            }
+
+            // updates everytime a character changes in the searchbox
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
+
+
+        // Assumes current activity is the searchable activity
+        vh.searchbar.setSearchableInfo(vh.searchManager.getSearchableInfo(getComponentName()));
+        vh.searchbar.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+
+        return true;
+    }
+
+    @Override
     public void onItemClick2(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter2.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-
-
         Intent intent = new Intent(getBaseContext(), ListActivity.class);
         intent.putExtra("brandName", adapter2.getItem(position));
         startActivity(intent);

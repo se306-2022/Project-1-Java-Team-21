@@ -92,17 +92,23 @@ public class SearchFilterActivity extends AppCompatActivity {
         vh.rangeSlider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
             @Override
             public void onStartTrackingTouch(@NonNull RangeSlider slider) {
-                List<Float> rangeValues = slider.getValues();
-                searchFilterVM.setLowerPriceRange(Math.round(rangeValues.get(0)));
-                searchFilterVM.setUpperPriceRange(Math.round(rangeValues.get(1)));
-                vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
-                vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
             }
 
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
                 List<Float> rangeValues = slider.getValues();
+                System.out.println(rangeValues.get(0) + " " + rangeValues.get(1));
+                searchFilterVM.setLowerPriceRange(Math.round(rangeValues.get(0)));
+                searchFilterVM.setUpperPriceRange(Math.round(rangeValues.get(1)));
+                vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
+                vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
+            }
+        });
 
+        vh.rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+                List<Float> rangeValues = slider.getValues();
                 vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
                 vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
             }
@@ -116,7 +122,6 @@ public class SearchFilterActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    System.out.println("hi");
                     Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
                     searchResults.putExtra("isFilters", false);
                     searchResults.putExtra("finalQueryString", searchFilterVM.getFinalQueryString());
@@ -139,34 +144,28 @@ public class SearchFilterActivity extends AppCompatActivity {
         vh.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // if the user selects no brand or colour then prompt the user to do so with a toast
-                if (searchFilterVM.getBrandNames().size() == 0){
-                    Toast.makeText(SearchFilterActivity.this,"Please select atleast one brand", Toast.LENGTH_LONG).show();
-                } else if (searchFilterVM.getColours().size() == 0){
-                    Toast.makeText(SearchFilterActivity.this,"Please select atleast one colour", Toast.LENGTH_LONG).show();
-                } else if (searchFilterVM.getLiveQueryString() == null){
-                    Toast.makeText(SearchFilterActivity.this,"Please fill out the search field", Toast.LENGTH_LONG).show();
-                } else {
-                    // create an intent that navigates to NumbersActivity class
-                    Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
-                    //set data across to the other activity
-                    // sent in a key, value format, with the key being the first argument
-                    // many different types of data can be sent
-                    searchResults.putExtra("isFilters", true);
 
-                    searchResults.putExtra("query",searchFilterVM.getLiveQueryString());
-                    searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
-                    searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
+                // create an intent that navigates to NumbersActivity class
+                Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
+                //set data across to the other activity
+                // sent in a key, value format, with the key being the first argument
+                // many different types of data can be sent
+                searchResults.putExtra("isFilters", true);
 
-                    ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
-                    searchResults.putExtra("colours",colours);
+                searchResults.putExtra("query",searchFilterVM.getLiveQueryString());
+                searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
+                searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
 
-                    ArrayList<String> brands = (ArrayList<String>) searchFilterVM.getBrandNames();
-                    searchResults.putExtra("brands",brands);
+                searchResults.putExtra("callingActivity","SearchFilterActivity");
+                ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
+                searchResults.putExtra("colours",colours);
 
-                    //start the activity
-                    startActivity(searchResults);
-                }
+                ArrayList<String> brands = (ArrayList<String>) searchFilterVM.getBrandNames();
+                searchResults.putExtra("brands",brands);
+
+                //start the activity
+                startActivity(searchResults);
+
             }
         });
 
@@ -186,7 +185,25 @@ public class SearchFilterActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchFilterVM.setFinalQueryString(query);
-                return false;
+
+                // create an intent that navigates to NumbersActivity class
+                Intent searchResults = new Intent(getBaseContext(), SearchResultListActivity.class);
+
+                searchResults.putExtra("query",searchFilterVM.getFinalQueryString());
+                searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
+                searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
+
+                searchResults.putExtra("callingActivity","SearchFilterActivity");
+                ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
+                searchResults.putExtra("colours",colours);
+
+                ArrayList<String> brands = (ArrayList<String>) searchFilterVM.getBrandNames();
+                searchResults.putExtra("brands",brands);
+
+                //start the activity
+                startActivity(searchResults);
+
+                return true;
             }
 
             // updates everytime a character changes in the searchbox
@@ -254,32 +271,6 @@ public class SearchFilterActivity extends AppCompatActivity {
             toggleButton.setBackgroundResource(R.drawable.button_border);
             toggleButton.setTextColor(getResources().getColor(R.color.blackd));
         }
-
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent touchEvent){
-        switch(touchEvent.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                x1 = touchEvent.getX();
-                y1 = touchEvent.getY();
-                if (x1 < x2) {
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                x2 = touchEvent.getX();
-                y2 = touchEvent.getY();
-                if(x1 > x2){
-                    Intent intent = new Intent(getBaseContext(), FavouriteActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }
-                break;
-        }
-        return false;
 
     }
 

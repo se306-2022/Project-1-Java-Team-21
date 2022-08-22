@@ -16,13 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// FOLLOW THIS FORMAT
-
 public class SearchResultListViewModel extends ViewModel {
     // fields
     MutableLiveData<List<Product>> searchResults;
     Map<String,Integer> colorsMap;
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    MutableLiveData<List<Product>> nameSearchResult;
 
     // use case interfaces
     ISearchProductWithFIlter searchProductWithFIlter;
@@ -41,7 +40,7 @@ public class SearchResultListViewModel extends ViewModel {
      * Because Tasks class requires method not be called on main thread.
      */
     public LiveData<List<Product>> getProductsBySearchFilter(String search, List<String> brandNames, List<String> colors, int fromPrice, int toPrice){
-        isLoading.postValue(true);
+
         if (searchResults == null){
             searchResults = new MutableLiveData<>();
 
@@ -59,6 +58,31 @@ public class SearchResultListViewModel extends ViewModel {
         }
         return searchResults;
     }
+
+    /**
+     * Alternate path to search results activity from the search bar on the main activity.
+     * @param search
+     * @return
+     */
+    public LiveData<List<Product>> getProductsbySearchString(String search){
+        if (nameSearchResult == null){
+            nameSearchResult = new MutableLiveData<>();
+
+            Thread thread1 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    isLoading.postValue(true);
+                    nameSearchResult.postValue(searchProducts.searchProducts(search));
+                    isLoading.postValue(false);
+                }
+            });
+
+            thread1.start();
+
+        }
+        return nameSearchResult;
+    }
+
 
     public Map<String,Integer> colorAvailability(List<Product> products){
 

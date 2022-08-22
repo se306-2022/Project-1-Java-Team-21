@@ -81,13 +81,16 @@ public class Product extends Entity {
         this.numberOfUsersRated++;
     }
 
-    public void changeIsFavourite () {
-        // toggle isFavourite and return the new value
-        this.isFavourite = !this.isFavourite;
-    }
-
     public boolean getIsFirst() {
         return isFirst;
+    }
+
+    public void setIsFavourite(boolean isFavourite) {
+        this.isFavourite = isFavourite;
+    }
+
+    public void toggleIsFavourite(){
+        this.isFavourite = !this.isFavourite;
     }
 
 }

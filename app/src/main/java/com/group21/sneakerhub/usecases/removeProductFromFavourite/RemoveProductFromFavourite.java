@@ -9,7 +9,7 @@ public class RemoveProductFromFavourite implements IRemoveProductFromFavourite{
 
     @Override
     public void removeProductFromFavourite(Product product) {
-        product.changeIsFavourite();
+        product.setIsFavourite(true);
         productRepository.updateProductIsFavourite(product);
     }
 }

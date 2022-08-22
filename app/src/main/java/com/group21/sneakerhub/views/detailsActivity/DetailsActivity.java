@@ -3,6 +3,7 @@ package com.group21.sneakerhub.views.detailsActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -18,8 +20,11 @@ import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.airbnb.lottie.Lottie;
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Product;
@@ -56,9 +61,13 @@ public class DetailsActivity extends AppCompatActivity {
         TextView productName = (TextView) findViewById(R.id.productName);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button_details);
+        ImageButton shareButton = (ImageButton) findViewById(R.id.share_button);
         ToggleButton heartButton = (ToggleButton) findViewById(R.id.heart_button);
         TextView currentColor = (TextView)findViewById(R.id.currentColor);
         TextView currentPrice = (TextView)findViewById(R.id.currentPrice);
+        LottieAnimationView likeAnimation = findViewById(R.id.like_animation);
+        LottieAnimationView unlikeAnimation = findViewById(R.id.unlike_animation);
+
     }
 
 
@@ -120,7 +129,6 @@ public class DetailsActivity extends AppCompatActivity {
         String sneakerName = intent.getStringExtra("sneakerName");
         String callingActivity = intent.getStringExtra("callingActivity");
         String defaultColour = intent.getStringExtra("currentColour");
-        System.out.println(callingActivity);
 
         query = intent.getStringExtra("query");
         colours = intent.getStringArrayListExtra("colours");
@@ -135,10 +143,9 @@ public class DetailsActivity extends AppCompatActivity {
         detailsVM.getDetailPageProduct(sneakerName).observe(this, productColors ->{
             // returns the product variations, so the sneaker with the same name but
             // in different colours
-
             vh.productName.setText(productColors.get(0).getName());
             favProducts = productColors;
-            System.out.println("==============================================");
+
             for(Product p : productColors){
                 // names
                 names.add(p.getName());
@@ -167,9 +174,6 @@ public class DetailsActivity extends AppCompatActivity {
                 //isFirst
                 isFirst.add(p.getIsFirst());
             }
-            System.out.println("==============================================");
-            System.out.println(availableSizes);
-
 
             String firstColor = null;
             ArrayList<String> otherColours = new ArrayList<>();
@@ -177,7 +181,7 @@ public class DetailsActivity extends AppCompatActivity {
             // Finding first color
             indexOfFirst = 0;
             for (int i = 0; i < isFirst.size(); i++) {
-                if (isFirst.get(i) == true) {
+                if (isFirst.get(i)) {
                     indexOfFirst = i;
                     String temp = colours2.get(i);
                     firstColor = returnColorValue(temp);
@@ -259,12 +263,27 @@ public class DetailsActivity extends AppCompatActivity {
             if (defaultColour.equals(colours2.get(indexOfSecond))) {
                 raPrivate2.setChecked(true);
                 raPrivate.setChecked(false);
+                raPrivate3.setChecked(false);
 
+                if (favProducts.get(indexOfSecond).getIsFavourite()){
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }
             } else if (defaultColour.equals(colours2.get(indexOfThird))) {
                 raPrivate3.setChecked(true);
                 raPrivate.setChecked(false);
+                raPrivate2.setChecked(false);
+
+                if (favProducts.get(indexOfThird).getIsFavourite()){
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }
             } else {
                 raPrivate.setChecked(true);
+                raPrivate2.setChecked(false);
+                raPrivate3.setChecked(false);
+
+                if (favProducts.get(indexOfFirst).getIsFavourite()){
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }
             }
 
             if (raPrivate.isChecked()) {
@@ -334,29 +353,69 @@ public class DetailsActivity extends AppCompatActivity {
                     intent.putExtra("upperPrice", upperPrice);
                     intent.putExtra("colours",colours);
                     intent.putExtra("brands",brands);
-                    
+
                     startActivity(intent);
                 } else if(callingActivity.equals("FavouriteActivity")){
                     startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
-                } else {
+                } else if (callingActivity.equals("ListActivity")){
                     Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                     intent.putExtra("brandName", brandName);
 
                     startActivity(intent);
+                } else{
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
             }
         });
+;
+        // share button
+        vh.shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Product currentProduct = favProducts.get(0);
+                for (Product p : favProducts) {
+                    if(p.getColor().equals(favCurrentColor)) {
+                        currentProduct = p;
+                        break;
+                    }
+                }
+
+                Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
+                txtIntent.setType("text/plain");
+                txtIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Check out the " + currentProduct.getColor()+" "+currentProduct.getName()+" on Sneaker Hub!");
+                txtIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<h1>Current Price:</h1>"+"<p>"+currentProduct.getPrice()+"</p>"+"<h1>Product Description:</h1>"+"<p>"+currentProduct.getDescription()+"</p>"+"<h1>Product Rating:</h1>"+"<p>"+currentProduct.getRating()+"</p>"));
+                startActivity(Intent.createChooser(txtIntent ,"Share"));
+            }
+      });
 
         //heart toggle button
-
         vh.heartButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-
-
-                } else {
-
+                Product currentProduct = favProducts.get(0);
+                for (Product p : favProducts) {
+                    if(p.getColor().equals(favCurrentColor)) {
+                        currentProduct = p;
+                        break;
+                    }
                 }
+
+                detailsVM.toggleProductIsFavourite(currentProduct).observe(DetailsActivity.this, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean currentIsFavourite) {
+                        if (currentIsFavourite) {
+                            vh.unlikeAnimation.setVisibility(View.INVISIBLE);
+                            vh.likeAnimation.setVisibility(View.VISIBLE);
+                            vh.likeAnimation.playAnimation();
+                        } else {
+                            vh.likeAnimation.setVisibility(View.INVISIBLE);
+                            vh.unlikeAnimation.setVisibility(View.VISIBLE);
+                            vh.unlikeAnimation.playAnimation();
+                            vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                        }
+                    }
+                });
             }
         });
 
@@ -466,6 +525,7 @@ public class DetailsActivity extends AppCompatActivity {
         });
     }
 
+
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -574,6 +634,18 @@ public class DetailsActivity extends AppCompatActivity {
                 //System.out.println("third colour given a rating of " + ratingGiven3);
                 //detailsVM.addRating(favProducts.get(indexOfThird), ratingGiven3);
                 break;
+        }
+        Product currentProduct = favProducts.get(0);
+        for (Product p : favProducts) {
+            if(p.getColor().equals(favCurrentColor)) {
+                currentProduct = p;
+                break;
+            }
+        }
+        if (currentProduct.getIsFavourite()) {
+            vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+        } else {
+            vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
         }
     }
 

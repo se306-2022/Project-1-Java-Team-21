@@ -13,23 +13,28 @@ import com.group21.sneakerhub.usecases.removeProductFromFavourite.IRemoveProduct
 import com.group21.sneakerhub.usecases.removeProductFromFavourite.RemoveProductFromFavourite;
 import com.group21.sneakerhub.usecases.searchProductByName.ISearchProductByName;
 import com.group21.sneakerhub.usecases.searchProductByName.SearchProductByName;
+import com.group21.sneakerhub.usecases.toggleProductIsFavourite.IToggleProductIsFavourite;
+import com.group21.sneakerhub.usecases.toggleProductIsFavourite.ToggleProductIsFavourite;
 
 import java.util.List;
 
 public class DetailsViewModel extends ViewModel {
     MutableLiveData<List<Product>> detailProduct;
-    Product currentlySelectedProduct;
+    MutableLiveData<Product> currentlySelectedProduct;
+    MutableLiveData<Boolean> productIsFavourite = new MutableLiveData<>();
 
     ISearchProductByName searchProductByName;
     IRemoveProductFromFavourite removeProductFromFavourite;
     IAddProductToFavourite addProductToFavourite;
     IAddRating addRating;
+    IToggleProductIsFavourite toggleProductIsFavourite;
 
     public DetailsViewModel(){
         searchProductByName = new SearchProductByName();
         removeProductFromFavourite = new RemoveProductFromFavourite();
         addProductToFavourite = new AddProductToFavourite();
         addRating = new AddRating();
+        toggleProductIsFavourite = new ToggleProductIsFavourite();
     }
 
     public LiveData<List<Product>> getDetailPageProduct(String name){
@@ -70,6 +75,7 @@ public class DetailsViewModel extends ViewModel {
         thread1.start();
     }
 
+
     public void addRating(Product product, double rating){
         Thread thread1 = new Thread(new Runnable(){
             @Override
@@ -81,21 +87,17 @@ public class DetailsViewModel extends ViewModel {
         thread1.start();
     }
 
-    public Product getCurrentlySelectedProduct(String name, String colour){
+
+    public LiveData<Boolean> toggleProductIsFavourite(Product product) {
         Thread thread1 = new Thread(new Runnable(){
             @Override
             public void run() {
-                for (Product p : searchProductByName.searchByName(name)){
-                    System.out.println(p.getName() + "   " + p.getColor() + "    inside view model");
-                    if (p.getColor().equals(colour)){
-                        currentlySelectedProduct = p;
-                    }
-                }
+                productIsFavourite.postValue(!product.getIsFavourite());
+                toggleProductIsFavourite.toggleProductIsFavourite(product);
             }
         });
 
         thread1.start();
-
-        return currentlySelectedProduct;
+        return productIsFavourite;
     }
 }
