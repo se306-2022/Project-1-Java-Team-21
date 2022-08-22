@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -60,10 +63,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         TextView textView2 = (TextView) findViewById(R.id.textView4);
         TextView textView3 = (TextView) findViewById(R.id.textView5);
         TextView textView4 = (TextView) findViewById(R.id.textView6);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
         RecyclerView rv1 = (RecyclerView) findViewById(R.id.rvBrands);
         RecyclerView rv2 = (RecyclerView) findViewById(R.id.rvBrands2);
-        EditText searchbar = (EditText) findViewById(R.id.search_bar_main);
+        SearchView searchbar = (SearchView) findViewById(R.id.menu_search_main);
     }
 
     @Override
@@ -185,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         recyclerView2.setAdapter(adapter2);
 
         // searchbar edit text listener
+        /*
         vh.searchbar.setOnKeyListener(new View.OnKeyListener() {
 
             @Override
@@ -207,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 return false;
             }
         });
-
+        */
 
         // Initialize and assign object for nav bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -253,6 +258,45 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         startActivity(intent);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        vh.searchbar.setQueryHint("Search for sneaker...");
+        vh.searchbar.setSubmitButtonEnabled(false);
+
+        vh.searchbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // when user hits return the final search string is returned
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                if (query != null && !(query.trim().isEmpty())) {
+                    Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
+                    // remove white spaces on either end on query string
+                    intent.putExtra("query", query);
+                    intent.putExtra("callingActivity", "MainActivity");
+                    startActivity(intent);
+                } else {
+                    // informs user that search is empty
+                    Toast.makeText(getApplicationContext(), "Search query is empty", Toast.LENGTH_LONG).show();
+                }
+                return true;
+            }
+
+            // updates everytime a character changes in the searchbox
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
+
+
+        // Assumes current activity is the searchable activity
+        vh.searchbar.setSearchableInfo(vh.searchManager.getSearchableInfo(getComponentName()));
+        vh.searchbar.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+
+        return true;
+    }
 
     @Override
     public void onItemClick2(View view, int position) {
