@@ -156,6 +156,7 @@ public class SearchFilterActivity extends AppCompatActivity {
                 searchResults.putExtra("lowerPrice", searchFilterVM.getLowerPriceRange());
                 searchResults.putExtra("upperPrice", searchFilterVM.getUpperPriceRange());
 
+                searchResults.putExtra("callingActivity","SearchFilterActivity");
                 ArrayList<String> colours = (ArrayList<String>) searchFilterVM.getColours();
                 searchResults.putExtra("colours",colours);
 

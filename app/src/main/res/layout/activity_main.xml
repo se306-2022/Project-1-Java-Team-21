@@ -56,20 +56,20 @@
                 android:textSize="24sp"/>
         </LinearLayout>
 
-
-        <android.widget.SearchView
-            android:id="@+id/menu_search"
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="37dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="5dp"
+            android:hint="Search here..."
+            android:id="@+id/search_bar_main"
             android:background="@drawable/search_style"
-            android:backgroundTint="#EAEAEA"
             android:clickable="true"
             android:visibility="gone"
-            android:paddingVertical="10dp" />
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="13dp"/>
 
         <TextView
             android:id="@+id/textView5"

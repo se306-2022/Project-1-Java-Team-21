@@ -40,6 +40,7 @@ public class SearchResultListActivity extends AppCompatActivity {
     private ArrayList<String> brands;
     private int lowerPrice;
     private int upperPrice;
+    private String callingActivity;
     SearchResultListViewModel searchResultVM;
 
     class ViewHolder{
@@ -74,44 +75,80 @@ public class SearchResultListActivity extends AppCompatActivity {
         brands = intent.getStringArrayListExtra("brands");
         lowerPrice = intent.getIntExtra("lowerPrice",0);
         upperPrice = intent.getIntExtra("upperPrice",1000);
+        callingActivity = intent.getStringExtra("callingActivity");
 
+        if (callingActivity.equals("SearchFilterActivity")) {
+            searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults -> {
 
-        searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults ->{
+                CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results, searchResults);
 
-            CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results,searchResults);
+                // getting a reference to the ListView and setting its adapter
+                vh.listView.setAdapter(itemsAdapter);
 
-            // getting a reference to the ListView and setting its adapter
-            vh.listView.setAdapter(itemsAdapter);
+                // set the header text based on the query
+                vh.collapseItem2.setText("Showing " + searchResults.size() + " search results for");
+                String searchText = query == null ? "Empty Search Input" : "\"" + query + "\"";
+                vh.collapseItem3.setText(searchText);
+                // listener navigates to the detail activity for the specific sneaker than gets clicked on
+                vh.listView.setOnItemClickListener((parent, view, position, id) -> {
+                    // create an intent that navigates to NumbersActivity class
+                    Intent detailPage = new Intent(getBaseContext(), DetailsActivity.class);
 
-            // set the header text based on the query
-            vh.collapseItem2.setText("Showing " + searchResults.size() + " search results for");
-            String searchText = query == null? "Empty Search Input": "\"" + query + "\"";
-            vh.collapseItem3.setText(searchText);
+                    // send the name of the sneaker so the detail activity can load it
+                    detailPage.putExtra("sneakerName", searchResults.get(position).getName());
+                    detailPage.putExtra("currentColour", searchResults.get(position).getColor());
 
-            // listener navigates to the detail activity for the specific sneaker than gets clicked on
-            vh.listView.setOnItemClickListener((parent, view, position, id) -> {
-                // create an intent that navigates to NumbersActivity class
-                Intent detailPage = new Intent(getBaseContext(), DetailsActivity.class);
+                    detailPage.putExtra("callingActivity", "SearchResultListActivity");
 
-                // send the name of the sneaker so the detail activity can load it
-                detailPage.putExtra("sneakerName", searchResults.get(position).getName());
-                detailPage.putExtra("currentColour", searchResults.get(position).getColor());
+                    // sending listview arguments to the details activity, so the details activity can
+                    // send back if and when the back button is pressed
+                    detailPage.putExtra("query", query);
+                    detailPage.putExtra("colours", colours);
+                    detailPage.putExtra("brands", brands);
+                    detailPage.putExtra("lowerPrice", lowerPrice);
+                    detailPage.putExtra("upperPrice", upperPrice);
 
-                detailPage.putExtra("callingActivity", "SearchResultListActivity");
+                    //start the activity
+                    startActivity(detailPage);
+                });
 
-                // sending listview arguments to the details activity, so the details activity can
-                // send back if and when the back button is pressed
-                detailPage.putExtra("query",query);
-                detailPage.putExtra("colours",colours);
-                detailPage.putExtra("brands",brands);
-                detailPage.putExtra("lowerPrice",lowerPrice);
-                detailPage.putExtra("upperPrice",upperPrice);
-
-                //start the activity
-                startActivity(detailPage);
             });
+        } else {
+            searchResultVM.getProductsbySearchString(query).observe(this, searchResults -> {
+                CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results, searchResults);
 
-        });
+                // getting a reference to the ListView and setting its adapter
+                vh.listView.setAdapter(itemsAdapter);
+
+                vh.collapseItem2.setText("Showing " + searchResults.size() + " search results for");
+                String searchText = query == null ? "Empty Search Input" : "\"" + query + "\"";
+                vh.collapseItem3.setText(searchText);
+
+                // listener navigates to the detail activity for the specific sneaker than gets clicked on
+                vh.listView.setOnItemClickListener((parent, view, position, id) -> {
+                    // create an intent that navigates to NumbersActivity class
+                    Intent detailPage = new Intent(getBaseContext(), DetailsActivity.class);
+
+                    // send the name of the sneaker so the detail activity can load it
+                    detailPage.putExtra("sneakerName", searchResults.get(position).getName());
+                    detailPage.putExtra("currentColour", searchResults.get(position).getColor());
+
+                    detailPage.putExtra("callingActivity", "SearchResultListActivity");
+
+                    // sending listview arguments to the details activity, so the details activity can
+                    // send back if and when the back button is pressed
+                    detailPage.putExtra("query", query);
+                    detailPage.putExtra("colours", colours);
+                    detailPage.putExtra("brands", brands);
+                    detailPage.putExtra("lowerPrice", lowerPrice);
+                    detailPage.putExtra("upperPrice", upperPrice);
+
+                    //start the activity
+                    startActivity(detailPage);
+                });
+            });
+        }
+
 
         /**
          * back to the search filter screen button listener
@@ -119,7 +156,11 @@ public class SearchResultListActivity extends AppCompatActivity {
         vh.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
+                if (callingActivity.equals("SearchFilterActivity")) {
+                    startActivity(new Intent(getApplicationContext(), SearchFilterActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
             }
         });
 
