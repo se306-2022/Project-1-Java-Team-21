@@ -238,8 +238,6 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="42dp"
                     android:fontFamily="@font/poppins"
-                    android:justificationMode="inter_word"
-                    android:text="Available sizes: US 9, US 10, US 1 test test asdfjkn faksjdnbf lkadfbh ka;sdjfnb k;asjdf  k;ajsdfhak;jsdh fadkjfhasdk fa;kjsdfh akj;dhf;aj f;ajdf; ;jksadf a; j;afdfajsdf fasd fa dfasd fasdfasd fasd fasd f adf asdfas dfasdfasdfasdfasdfaerfasd fadfas df asdf asdf asdf a dsfas dfa dfas dfa df asdf asdf adfasdfasd fasdfs"
                     android:textColor="#616161"
                     android:textSize="14sp"
                     android:visibility="gone" />
@@ -462,11 +460,16 @@
                     android:layout_marginEnd="40dp"
                     android:background="#EAEAEA" />
 
+
                 <TextView
                     android:id="@+id/RatingText"
                     android:layout_width="wrap_content"
+                    android:layout_marginRight="42dp"
+                    android:justificationMode="inter_word"
+                    android:layout_marginTop="9dp"
+                    android:layout_below="@id/line4"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/line4"
                     android:layout_marginLeft="42dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="42dp"
@@ -476,6 +479,155 @@
                     android:textColor="#616161"
                     android:textSize="14sp"
                     android:visibility="gone" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/line4"
+                    android:layout_marginBottom="30dp"
+                    android:visibility="gone"
+                    android:id="@+id/rating_holder"
+                    >
+                    <RatingBar
+                        android:id="@+id/rating_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="42dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="45dp"
+                        android:numStars="5"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        android:theme="@style/RbBlack"
+                        android:stepSize=".5"
+                        android:outlineAmbientShadowColor="@color/red"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp" />
+
+                    <Button
+                        android:text="RATE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="39dp"
+                        android:layout_marginStart="230dp"
+                        android:fontFamily="@font/poppinsboldsemi"
+                        android:id="@+id/submit_button" />
+
+                    <TextView
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginStart="42dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rating_bar"
+                        android:id="@+id/rating_display_text_View" />
+                </RelativeLayout>
+
+
+
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/line4"
+                    android:layout_marginBottom="30dp"
+                    android:visibility="gone"
+                    android:id="@+id/rating_holder2"
+                    >
+
+
+
+
+                    <RatingBar
+                        android:id="@+id/rating_bar2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="42dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="45dp"
+                        android:numStars="5"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        android:stepSize=".5"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp" />
+
+                    <Button
+                        android:text="RATE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="39dp"
+                        android:layout_marginStart="230dp"
+                        android:fontFamily="@font/poppinsboldsemi"
+                        android:id="@+id/submit_button2" />
+
+                    <TextView
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginStart="42dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rating_bar2"
+                        android:id="@+id/rating_display_text_View2" />
+                </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/line4"
+                    android:layout_marginBottom="30dp"
+                    android:visibility="gone"
+                    android:id="@+id/rating_holder3"
+                    >
+
+
+
+                    <RatingBar
+                        android:id="@+id/rating_bar3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="42dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="45dp"
+                        android:numStars="5"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        android:stepSize=".5"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp" />
+
+                    <Button
+                        android:text="RATE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="39dp"
+                        android:layout_marginStart="230dp"
+                        android:fontFamily="@font/poppinsboldsemi"
+                        android:id="@+id/submit_button3" />
+
+                    <TextView
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginStart="42dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rating_bar3"
+                        android:id="@+id/rating_display_text_View3" />
+                </RelativeLayout>
+
 
             </RelativeLayout>
 

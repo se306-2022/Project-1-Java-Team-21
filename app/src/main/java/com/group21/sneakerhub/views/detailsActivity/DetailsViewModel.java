@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.usecases.addProductToFavourite.AddProductToFavourite;
 import com.group21.sneakerhub.usecases.addProductToFavourite.IAddProductToFavourite;
+import com.group21.sneakerhub.usecases.addRating.AddRating;
+import com.group21.sneakerhub.usecases.addRating.IAddRating;
 import com.group21.sneakerhub.usecases.removeProductFromFavourite.IRemoveProductFromFavourite;
 import com.group21.sneakerhub.usecases.removeProductFromFavourite.RemoveProductFromFavourite;
 import com.group21.sneakerhub.usecases.searchProductByName.ISearchProductByName;
@@ -24,12 +26,14 @@ public class DetailsViewModel extends ViewModel {
     ISearchProductByName searchProductByName;
     IRemoveProductFromFavourite removeProductFromFavourite;
     IAddProductToFavourite addProductToFavourite;
+    IAddRating addRating;
     IToggleProductIsFavourite toggleProductIsFavourite;
 
     public DetailsViewModel(){
         searchProductByName = new SearchProductByName();
         removeProductFromFavourite = new RemoveProductFromFavourite();
         addProductToFavourite = new AddProductToFavourite();
+        addRating = new AddRating();
         toggleProductIsFavourite = new ToggleProductIsFavourite();
     }
 
@@ -71,8 +75,20 @@ public class DetailsViewModel extends ViewModel {
         thread1.start();
     }
 
-    public LiveData<Boolean> toggleProductIsFavourite(Product product) {
 
+    public void addRating(Product product, double rating){
+        Thread thread1 = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                addRating.addRating(product, rating);
+            }
+        });
+
+        thread1.start();
+    }
+
+
+    public LiveData<Boolean> toggleProductIsFavourite(Product product) {
         Thread thread1 = new Thread(new Runnable(){
             @Override
             public void run() {
