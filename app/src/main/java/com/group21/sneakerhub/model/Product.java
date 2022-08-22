@@ -51,9 +51,10 @@ public class Product extends Entity {
     }
 
     public double getRating() {
-        // gets the rating to the nearest 0.5
-        return Math.round(rating * 2) / 2.0;
+        return this.rating;
     }
+
+
 
     public int getNumberOfUsersRated() {
         return numberOfUsersRated;
@@ -76,7 +77,7 @@ public class Product extends Entity {
     }
 
     public void changeRating (double rating) {
-        this.rating = ((this.rating * numberOfUsersRated) + rating) / numberOfUsersRated + 1;
+        this.rating = ((this.rating * numberOfUsersRated) + rating) / (numberOfUsersRated + 1);
         this.numberOfUsersRated++;
     }
 

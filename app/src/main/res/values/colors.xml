@@ -16,4 +16,5 @@
     <color name="yellow">#eadc2b</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Nike">#ff0000</color>
+    <color name="rating_bar_blue">#0026a9</color>
 </resources>

@@ -437,7 +437,9 @@
                     android:layout_width="wrap_content"
                     android:layout_marginRight="42dp"
                     android:justificationMode="inter_word"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_below="@id/line4"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="42dp"
                     android:fontFamily="@font/poppins"
@@ -463,7 +465,9 @@
                         android:numStars="5"
                         android:scaleX="0.7"
                         android:scaleY="0.7"
+                        android:theme="@style/RatingBarTest"
                         android:stepSize=".5"
+                        android:outlineAmbientShadowColor="@color/red"
                         android:transformPivotX="0dp"
                         android:transformPivotY="0dp" />
 
@@ -471,16 +475,16 @@
                         android:text="RATE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_toRightOf="@id/rating_bar"
+                        android:layout_marginTop="39dp"
+                        android:layout_marginStart="230dp"
                         android:fontFamily="@font/poppinsboldsemi"
                         android:id="@+id/submit_button" />
 
                     <TextView
-                        android:text="gadfgadfg"
+                        android:text=""
                         android:layout_width="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginStart="42dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rating_bar"
                         android:id="@+id/rating_display_text_View" />
@@ -523,19 +527,18 @@
                         android:text="RATE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_toRightOf="@id/rating_bar2"
+                        android:layout_marginTop="39dp"
+                        android:layout_marginStart="230dp"
                         android:fontFamily="@font/poppinsboldsemi"
                         android:id="@+id/submit_button2" />
 
                     <TextView
                         android:text=""
                         android:layout_width="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginStart="42dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/submit_button2"
-                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/rating_bar2"
                         android:id="@+id/rating_display_text_View2" />
                 </RelativeLayout>
 
@@ -577,19 +580,18 @@
                         android:text="RATE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_toRightOf="@id/rating_bar3"
+                        android:layout_marginTop="39dp"
+                        android:layout_marginStart="230dp"
                         android:fontFamily="@font/poppinsboldsemi"
                         android:id="@+id/submit_button3" />
 
                     <TextView
                         android:text=""
                         android:layout_width="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginStart="42dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/submit_button3"
-                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/rating_bar3"
                         android:id="@+id/rating_display_text_View3" />
                 </RelativeLayout>
 

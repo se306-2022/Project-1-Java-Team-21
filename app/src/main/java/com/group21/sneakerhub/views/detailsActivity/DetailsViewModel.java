@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.usecases.addProductToFavourite.AddProductToFavourite;
 import com.group21.sneakerhub.usecases.addProductToFavourite.IAddProductToFavourite;
+import com.group21.sneakerhub.usecases.addRating.AddRating;
 import com.group21.sneakerhub.usecases.addRating.IAddRating;
 import com.group21.sneakerhub.usecases.removeProductFromFavourite.IRemoveProductFromFavourite;
 import com.group21.sneakerhub.usecases.removeProductFromFavourite.RemoveProductFromFavourite;
@@ -28,6 +29,7 @@ public class DetailsViewModel extends ViewModel {
         searchProductByName = new SearchProductByName();
         removeProductFromFavourite = new RemoveProductFromFavourite();
         addProductToFavourite = new AddProductToFavourite();
+        addRating = new AddRating();
     }
 
     public LiveData<List<Product>> getDetailPageProduct(String name){
