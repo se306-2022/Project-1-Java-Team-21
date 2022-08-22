@@ -93,8 +93,8 @@ public class FavouriteViewModel extends ViewModel {
         Thread thread1 = new Thread(new Runnable(){
             @Override
             public void run() {
-                productIsFavourite.postValue(!product.getIsFavourite());
                 toggleProductIsFavourite.toggleProductIsFavourite(product);
+                productIsFavourite.postValue(product.getIsFavourite());
             }
         });
 
