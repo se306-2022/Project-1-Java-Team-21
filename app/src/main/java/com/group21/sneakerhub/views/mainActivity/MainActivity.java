@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 if (query != null && !(query.trim().isEmpty())) {
                     Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
                     // remove white spaces on either end on query string
-                    intent.putExtra("query", query);
+                    intent.putExtra("query", query.trim());
                     intent.putExtra("callingActivity", "MainActivity");
                     startActivity(intent);
                 } else {

@@ -70,7 +70,7 @@ public class SearchResultListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        query = intent.getStringExtra("query");
+        query = intent.getStringExtra("query") != null ? intent.getStringExtra("query").trim() : null;
         colours = intent.getStringArrayListExtra("colours");
         brands = intent.getStringArrayListExtra("brands");
         lowerPrice = intent.getIntExtra("lowerPrice",0);
