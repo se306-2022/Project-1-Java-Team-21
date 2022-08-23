@@ -244,10 +244,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-
-        System.out.println("Position: " + position + " Name: " + adapter.getItem(position));
-
         String currentColorInput = adapter.getColourMethod(position);
 
         Intent intent = new Intent(getBaseContext(), DetailsActivity.class);

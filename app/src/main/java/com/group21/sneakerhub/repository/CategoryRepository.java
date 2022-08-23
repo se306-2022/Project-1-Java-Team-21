@@ -99,18 +99,4 @@ public class CategoryRepository implements ICategoryRepository {
         }
     }
 
-    /**
-     * Test method to see that data is actually fetched and stored in the list
-     */
-    private void printCategories(List<Category> categoryList){
-        for (Category category : categoryList){
-            System.out.println(category.getName());
-            System.out.println(category.GetColour());
-            System.out.println(category.getId());
-            System.out.println(category.GetURI());
-            System.out.println(category.getLayoutInformation());
-        }
-    }
-
-
 }
