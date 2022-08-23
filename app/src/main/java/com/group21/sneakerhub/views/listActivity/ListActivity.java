@@ -122,23 +122,6 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-
-        vh.listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (firstVisibleItem != 0){
-                    vh.headerBackground.setVisibility(View.GONE);
-                } else {
-                    vh.headerBackground.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
         vh.bottomNavigationView.setSelectedItemId(R.id.home);
 
         // implement event listener for nav bar

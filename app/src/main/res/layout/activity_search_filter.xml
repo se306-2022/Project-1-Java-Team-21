@@ -52,6 +52,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:orientation="horizontal">
             <ToggleButton
                 android:layout_width="wrap_content"
@@ -78,6 +79,7 @@
         <LinearLayout
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
+            android:paddingLeft="15dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ToggleButton
@@ -116,6 +118,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:orientation="horizontal">
             <ToggleButton
                 android:layout_width="wrap_content"
@@ -154,6 +157,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:orientation="horizontal">
             <ToggleButton
                 android:layout_width="wrap_content"
@@ -192,6 +196,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:orientation="horizontal">
             <ToggleButton
                 android:layout_width="wrap_content"
