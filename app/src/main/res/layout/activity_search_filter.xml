@@ -19,26 +19,15 @@
         android:paddingVertical="10dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_left_arrow"
-                android:scaleType="centerCrop"
-                android:backgroundTint="@color/white"/>
-        </LinearLayout>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search"
             android:paddingLeft="14dp"
+            android:paddingTop="15dp"
             android:textSize="34sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/blackd"
             android:layout_marginBottom="8dp"/>
 
         <android.widget.SearchView
@@ -46,8 +35,7 @@
             android:layout_height="48dp"
             android:id="@+id/menu_search"
             android:background="@drawable/search_style"
-            android:paddingVertical="10dp"
-            android:clickable="true"/>
+            android:paddingVertical="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,7 +44,7 @@
             android:paddingLeft="14dp"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/blackd"
             android:layout_marginTop="20dp"/>
 
         <LinearLayout
@@ -64,6 +52,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:orientation="horizontal">
             <ToggleButton
                 android:layout_width="wrap_content"
@@ -71,6 +60,7 @@
                 android:textOn="Air Jordan"
                 android:textOff="Air Jordan"
                 android:textSize="14dp"
+                android:onClick="brandsEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
                 android:layout_marginRight="20dp"/>
@@ -81,6 +71,7 @@
                 android:textOn="Nike"
                 android:textOff="Nike"
                 android:textSize="14dp"
+                android:onClick="brandsEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
         </LinearLayout>
@@ -88,6 +79,7 @@
         <LinearLayout
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
+            android:paddingLeft="15dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ToggleButton
@@ -95,6 +87,7 @@
                 android:layout_height="35dp"
                 android:textOn="Vans"
                 android:textOff="Vans"
+                android:onClick="brandsEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
@@ -105,6 +98,7 @@
                 android:layout_height="35dp"
                 android:textOn="Adidas"
                 android:textOff="Adidas"
+                android:onClick="brandsEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
@@ -124,6 +118,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:orientation="horizontal">
             <ToggleButton
                 android:layout_width="wrap_content"
@@ -131,6 +126,7 @@
                 android:textOn="White"
                 android:textOff="White"
                 android:textSize="14dp"
+                android:onClick="coloursEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
                 android:layout_marginRight="20dp"/>
@@ -141,6 +137,7 @@
                 android:textOn="Black"
                 android:textOff="Black"
                 android:textSize="14dp"
+                android:onClick="coloursEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
                 android:layout_marginRight="20dp"/>
@@ -150,6 +147,7 @@
                 android:layout_height="35dp"
                 android:textOn="Red"
                 android:textOff="Red"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
@@ -159,6 +157,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:orientation="horizontal">
             <ToggleButton
                 android:layout_width="wrap_content"
@@ -166,6 +165,7 @@
                 android:textOn="Blue"
                 android:textOff="Blue"
                 android:textSize="14dp"
+                android:onClick="coloursEventHandler"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
                 android:layout_marginRight="20dp"/>
@@ -175,6 +175,7 @@
                 android:layout_height="35dp"
                 android:textOn="Yellow"
                 android:textOff="Yellow"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
@@ -185,6 +186,7 @@
                 android:layout_height="35dp"
                 android:textOn="Orange"
                 android:textOff="Orange"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
@@ -194,12 +196,14 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:orientation="horizontal">
             <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:textOn="Purple"
                 android:textOff="Purple"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
@@ -210,6 +214,7 @@
                 android:layout_height="35dp"
                 android:textOn="Green"
                 android:textOff="Green"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"
@@ -220,6 +225,7 @@
                 android:layout_height="35dp"
                 android:textOn="Grey"
                 android:textOff="Grey"
+                android:onClick="coloursEventHandler"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:background="@drawable/button_border"/>
@@ -243,25 +249,31 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$0"
+                android:text="$200.0"
                 android:paddingRight="120dp"
                 android:textSize="14sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:id="@+id/slider_text_min"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$1000"
+                android:text="$800.0"
                 android:paddingLeft="120dp"
                 android:textSize="14sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/blackd"
+                android:id="@+id/slider_text_max"/>
         </LinearLayout>
 
         <com.google.android.material.slider.RangeSlider
             android:id="@+id/range_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stepSize="100.0"
+            android:stepSize="50.0"
             android:valueFrom="0.0"
+            app:tickColor="#3a3b3c"
+            app:thumbColor="@color/black"
+            app:haloColor="@color/black"
+            app:thumbRadius="8dp"
             android:valueTo="1000.0"
             app:values="@array/initial_slider_values" />
 
@@ -274,12 +286,13 @@
                 android:id="@+id/button_id"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Submit"
-                android:textSize="14dp"
+                android:text="SEARCH"
+                android:textSize="18dp"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="10dp"
                 android:textStyle="bold"
-                android:backgroundTint="#ff0000"/>
+                android:backgroundTint="#3A3B3C"/>
         </LinearLayout>
-
 
     </LinearLayout>
 
@@ -288,9 +301,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:itemBackground="@color/black"
+        app:itemBackground="@color/blackd"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menu_navigation"/>
+        app:menu="@menu/menu_navigation"
+        app:labelVisibilityMode="unlabeled"/>
 
 </LinearLayout>

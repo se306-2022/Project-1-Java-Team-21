@@ -1,6 +1,5 @@
 package com.group21.sneakerhub.model;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class Product extends Entity {
@@ -15,12 +14,13 @@ public class Product extends Entity {
     private List<String> imageUrls;
     private String description;
     private List<String> features;
+    private boolean isFirst;
 
     public Product() {}
 
-    public Product(long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features) {
-        this.id = id;
+    public Product(String name, long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isFirst) {
         this.name = name;
+        this.id = id;
         this.categoryId = categoryId;
         this.price = price;
         this.color = color;
@@ -31,6 +31,7 @@ public class Product extends Entity {
         this.imageUrls = imageUrls;
         this.description = description;
         this.features = features;
+        this.isFirst = isFirst;
     }
 
     public long getCategoryId() {
@@ -50,9 +51,10 @@ public class Product extends Entity {
     }
 
     public double getRating() {
-        // gets the rating to the nearest 0.5
-        return Math.round(rating * 2) / 2.0;
+        return this.rating;
     }
+
+
 
     public int getNumberOfUsersRated() {
         return numberOfUsersRated;
@@ -75,15 +77,20 @@ public class Product extends Entity {
     }
 
     public void changeRating (double rating) {
-        this.rating = ((this.rating * numberOfUsersRated) + rating) / numberOfUsersRated + 1;
+        this.rating = ((this.rating * numberOfUsersRated) + rating) / (numberOfUsersRated + 1);
         this.numberOfUsersRated++;
     }
 
-    public boolean changeIsFavourite () {
-        // toggle isFavourite and return the new value
-        this.isFavourite = !this.isFavourite;
-        return this.isFavourite;
+    public boolean getIsFirst() {
+        return isFirst;
     }
 
+    public void setIsFavourite(boolean isFavourite) {
+        this.isFavourite = isFavourite;
+    }
+
+    public void toggleIsFavourite(){
+        this.isFavourite = !this.isFavourite;
+    }
 
 }

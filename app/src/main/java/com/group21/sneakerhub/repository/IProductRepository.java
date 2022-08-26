@@ -6,7 +6,6 @@ import com.group21.sneakerhub.model.Product;
 import java.util.List;
 
 public interface IProductRepository {
-   ProductRepository getInstance();
 
    List<Product> getProducts();
 
@@ -16,7 +15,13 @@ public interface IProductRepository {
 
    List<Product> getFavouriteProducts();
 
+   List<Product> getProductsByName(String name);
+
    void updateProductIsFavourite(Product product);
 
    void updateProductRating(Product product);
+
+   List<Product> getTrendingProducts();
+
+   List<Product> getDefaultColourProducts();
 }

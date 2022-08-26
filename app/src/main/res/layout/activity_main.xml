@@ -4,15 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.mainActivity.MainActivity">
+    tools:context=".views.mainActivity.MainActivity"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:fontFamily="@font/poppinsboldsemi"
+            android:gravity="center"
+            android:paddingTop="30dp"
+            android:text="Sneaker Hub"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="41sp"
+            android:visibility="gone"/>
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="Easily purchase your favourite sneakers."
+            android:textColor="#616161" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/loading_container">
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#a9a9a9"
+                android:gravity="center"
+                android:id="@+id/loading_text"
+                android:textSize="24sp"/>
+        </LinearLayout>
+
+        <android.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/menu_search_main"
+            android:visibility="gone"
+            android:background="@drawable/search_style"
+            android:paddingVertical="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"/>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsboldsemi"
+            android:paddingStart="30dp"
+            android:paddingTop="10dp"
+            android:text="Featured"
+            android:textColor="#000000"
+            android:visibility="gone"
+            android:textSize="30sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBrands"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+           />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsboldsemi"
+            android:paddingStart="30dp"
+            android:paddingTop="20dp"
+            android:text="Categories"
+            android:textColor="#000000"
+            android:visibility="gone"
+            android:textSize="30sp" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBrands2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:visibility="gone"
+            android:layout_marginBottom="60dp"/>
+
+    </LinearLayout>
+
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,10 +116,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/black"
+        android:visibility="visible"
+        app:itemBackground="@color/blackd"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menu_navigation" />
-
+        app:menu="@menu/menu_navigation"
+        app:labelVisibilityMode="unlabeled" />
 
 </RelativeLayout>
