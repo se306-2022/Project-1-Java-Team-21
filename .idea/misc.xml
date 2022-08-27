@@ -40,23 +40,23 @@
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/drawable/splash_background.xml" value="0.1" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_details.xml" value="0.2" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_favourite.xml" value="0.10196406184705391" />
+        <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_list.xml" value="0.12763157894736843" />
+        <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_list.xml" value="0.10400000000000001" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_listview.xml" value="0.2056434373663959" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_search_filter.xml" value="0.10196406184705391" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_search_result_list.xml" value="0.10196406184705391" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/activity_splash.xml" value="0.136" />
-        <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/adidas_list_view.xml" value="0.2056434373663959" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/fragment_footer.xml" value="0.10526315789473684" />
-        <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/list_view_favourites.xml" value="0.136" />
+        <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/list_view_favourites.xml" value="0.1" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/list_view_row_results.xml" value="0.10196406184705391" />
-        <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/nike_list_view.xml" value="0.16047144152311876" />
-        <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/recyclerview_categories.xml" value="0.2056434373663959" />
         <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/recyclerview_featured.xml" value="0.1" />
-        <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/slider_item.xml" value="0.2056434373663959" />
-        <entry key="..\:/Users/harry/Desktop/Projects/Project-1-Java-Team-21/app/src/main/res/layout/video_background.xml" value="0.20478837109876016" />
         <entry key="..\:/Users/ibrah/Desktop/University/2022 Sem 2/SOFTENG 306/Project 1/GitHub Project/Project-1-Java-Team-21/app/src/main/res/drawable/back_arrow.xml" value="0.165" />
+        <entry key="..\:/Users/ibrah/Desktop/University/2022 Sem 2/SOFTENG 306/Project 1/GitHub Project/Project-1-Java-Team-21/app/src/main/res/drawable/button_border.xml" value="0.1655" />
         <entry key="..\:/Users/ibrah/Desktop/University/2022 Sem 2/SOFTENG 306/Project 1/GitHub Project/Project-1-Java-Team-21/app/src/main/res/drawable/ic_baseline_arrow_left_24.xml" value="0.165" />
+        <entry key="..\:/Users/ibrah/Desktop/University/2022 Sem 2/SOFTENG 306/Project 1/GitHub Project/Project-1-Java-Team-21/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1655" />
+        <entry key="..\:/Users/ibrah/Desktop/University/2022 Sem 2/SOFTENG 306/Project 1/GitHub Project/Project-1-Java-Team-21/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1655" />
         <entry key="..\:/Users/ibrah/Desktop/University/2022 Sem 2/SOFTENG 306/Project 1/GitHub Project/Project-1-Java-Team-21/app/src/main/res/drawable/ic_home.xml" value="0.165" />
         <entry key="..\:/Users/ibrah/Desktop/University/2022 Sem 2/SOFTENG 306/Project 1/GitHub Project/Project-1-Java-Team-21/app/src/main/res/drawable/ic_search.xml" value="0.191" />
         <entry key="..\:/Users/ibrah/Desktop/University/2022 Sem 2/SOFTENG 306/Project 1/GitHub Project/Project-1-Java-Team-21/app/src/main/res/drawable/search_style.xml" value="0.191" />

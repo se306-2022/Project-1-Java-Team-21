@@ -111,11 +111,15 @@ public class DetailsActivity extends AppCompatActivity {
         Button expandedDescription = (Button)findViewById(R.id.expandedDescription);
     }
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         getSupportActionBar().hide();
+
 
         vh = new ViewHolder();
         vh.colourRadioButtons.add(vh.firstColourRadioButton);

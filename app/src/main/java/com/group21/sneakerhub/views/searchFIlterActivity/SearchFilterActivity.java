@@ -98,8 +98,8 @@ public class SearchFilterActivity extends AppCompatActivity {
                 List<Float> rangeValues = slider.getValues();
                 searchFilterVM.setLowerPriceRange(Math.round(rangeValues.get(0)));
                 searchFilterVM.setUpperPriceRange(Math.round(rangeValues.get(1)));
-                vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
-                vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
+                vh.sliderMinText.setText("$" + Math.round(rangeValues.get(0)));
+                vh.sliderMaxText.setText("$" + Math.round(rangeValues.get(1)));
             }
         });
 
@@ -107,8 +107,8 @@ public class SearchFilterActivity extends AppCompatActivity {
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
                 List<Float> rangeValues = slider.getValues();
-                vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
-                vh.sliderMaxText.setText("$" + rangeValues.get(1).toString());
+                vh.sliderMinText.setText("$" + Math.round(rangeValues.get(0)));
+                vh.sliderMaxText.setText("$" + Math.round(rangeValues.get(1)));
             }
         });
 
@@ -181,8 +181,7 @@ public class SearchFilterActivity extends AppCompatActivity {
         // Inflate the options menu from XML
         //MenuInflater inflater = getMenuInflater();
         //inflater.inflate(R.menu.options_menu, menu);
-
-        vh.searchView.setQueryHint("Search for sneaker...");
+        vh.searchView.setQueryHint("");
         vh.searchView.setSubmitButtonEnabled(false);
 
         vh.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
