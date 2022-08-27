@@ -62,16 +62,16 @@ public class CategoryRepository implements ICategoryRepository {
             for (Category categoryItem : categories) {
                 switch (categoryItem.getName()) {
                     case "Nike":
-                        categoryList.add(new Nike(categoryItem.getName(), categoryItem.getId(), categoryItem.getURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new Nike(categoryItem.getName(), categoryItem.getId(), categoryItem.getImageURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                     case "Adidas":
-                        categoryList.add(new Adidas(categoryItem.getName(), categoryItem.getId(), categoryItem.getURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new Adidas(categoryItem.getName(), categoryItem.getId(), categoryItem.getImageURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                     case "Vans":
-                        categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.getURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.getImageURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                     case "Air Jordan":
-                        categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.getURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.getImageURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                 }
             }

@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     List<String> categoryNames;
     List<String> categoryColours;
+    List<Integer> brandImages;
     List<String> productNames ;
     List<String> productColours;
     List<Double> productPrices;
@@ -85,12 +86,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
         // retrieve all data from splash activity
         Intent intent = getIntent();
-
-        ArrayList<Integer> brandImages = new ArrayList<>();
-        brandImages.add(R.drawable.airjordan_logo);
-        brandImages.add(R.drawable.nike_logo);
-        brandImages.add(R.drawable.adidas_logo);
-        brandImages.add(R.drawable.vans_logo);
+        brandImages = new ArrayList<>();
 
         if (!"SplashActivity".equals(intent.getStringExtra("callingActivity"))){
             // retrieve all needed data from ViewModel
@@ -101,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                         for (Category category : categories) {
                             categoryNames.add(category.getName());
                             categoryColours.add(category.getColour());
+                            brandImages.add(this.getResources().getIdentifier(category.getImageURI(), "drawable", this.getPackageName()));
                         }
 
                         // set adapter for categories recycler view
@@ -155,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         } else {
             categoryNames = intent.getStringArrayListExtra("categoryNames");
             categoryColours = intent.getStringArrayListExtra("categoryColours");
+            brandImages = intent.getIntegerArrayListExtra("brandImages");
             productNames = intent.getStringArrayListExtra("productNames");
             productColours = intent.getStringArrayListExtra("productColours");
             productPrices = (ArrayList<Double>) intent.getSerializableExtra("productPrices");

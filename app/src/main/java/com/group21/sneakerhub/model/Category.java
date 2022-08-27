@@ -22,7 +22,7 @@ public class Category extends Entity {
         this.layout = layout;
     }
 
-    public String getURI() {
+    public String getImageURI() {
         return this.imageURI;
     }
 

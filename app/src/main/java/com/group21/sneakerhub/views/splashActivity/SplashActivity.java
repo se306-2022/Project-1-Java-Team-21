@@ -51,11 +51,13 @@ public class SplashActivity extends AppCompatActivity {
         // retrieve all needed data from ViewModel
         ArrayList<String> categoryNames = new ArrayList<>();
         ArrayList<String> categoryColours = new ArrayList<>();
+        ArrayList<Integer> brandImages = new ArrayList<>();
         viewHolder.viewModel.getCategories().observe( this, categories ->
             {
                 for (Category category : categories) {
                     categoryNames.add(category.getName());
                     categoryColours.add(category.getColour());
+                    brandImages.add(this.getResources().getIdentifier(category.getImageURI(), "drawable", this.getPackageName()));
                 }
             }
         );
@@ -79,6 +81,7 @@ public class SplashActivity extends AppCompatActivity {
                 i.putExtra("callingActivity", "SplashActivity");
                 i.putStringArrayListExtra("categoryNames", categoryNames);
                 i.putStringArrayListExtra("categoryColours", categoryColours);
+                i.putIntegerArrayListExtra("brandImages", brandImages);
                 i.putStringArrayListExtra("productNames", productNames);
                 i.putStringArrayListExtra("productColours", productColours);
                 i.putExtra("productPrices", productPrices);
