@@ -85,18 +85,4 @@ public class CategoryRepository implements ICategoryRepository {
         return categoryList;
     }
 
-    /**
-     * Get a specific Category document by querying its id field
-     * and map it to a single Category object
-     */
-    @Override
-    public Category getCategoryById(String inputId){
-        try {
-            return Tasks.await(db.collection("Categories").document(inputId).get()).toObject(Category.class);
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 }

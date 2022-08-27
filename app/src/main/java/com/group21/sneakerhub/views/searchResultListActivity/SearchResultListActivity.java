@@ -70,6 +70,9 @@ public class SearchResultListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        /**
+         * Getting the user input data from the previous activity which is the searchfilter activity
+         */
         query = intent.getStringExtra("query") != null ? intent.getStringExtra("query").trim() : null;
         colours = intent.getStringArrayListExtra("colours");
         brands = intent.getStringArrayListExtra("brands");
@@ -189,7 +192,10 @@ public class SearchResultListActivity extends AppCompatActivity {
         });
 
 
-
+        /**
+         * Implementation of logic to switch activities on click of the buttons of the navigation bar,
+         * fixed to the bottom of the activity.
+         */
         vh.bottomNavigationView.setSelectedItemId(R.id.search);
 
         // implement event listener for nav bar
@@ -215,6 +221,12 @@ public class SearchResultListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Toggling the visibility of the navbar at the bottom of the activity when the user changes
+     * the orientation to landscape, this is to ensure the screen has more real estate to show the
+     * items in the list view.
+     * @param newConfig
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -222,12 +234,10 @@ public class SearchResultListActivity extends AppCompatActivity {
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // change visibility of toolbar
-            // reference has to be here, cant be in viewholder
-            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
-            navBarWrapper.setVisibility(View.GONE);
+            vh.navBarWrapper.setVisibility(View.GONE);
         } else {
-            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
-            navBarWrapper.setVisibility(View.VISIBLE);
+
+            vh.navBarWrapper.setVisibility(View.VISIBLE);
         }
     }
 

@@ -6,10 +6,4 @@ public class AirJordan extends Category {
         super(name, Id, URI, colour,layout);
 
     }
-
-    public void AirJordanLayoutInformation(){
-
-    }
-
-
 }

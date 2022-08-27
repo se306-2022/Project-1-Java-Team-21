@@ -15,8 +15,8 @@ public class SearchFilterViewModel extends ViewModel {
     private int UpperPriceRange;
 
     public SearchFilterViewModel(){
-        brandNames = new ArrayList<String>();
-        colours = new ArrayList<String>();
+        brandNames = new ArrayList<>();
+        colours = new ArrayList<>();
     }
 
     public String getLiveQueryString() {

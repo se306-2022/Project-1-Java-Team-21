@@ -35,16 +35,6 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public Product getProductById(long id) {
-        try {
-            return Tasks.await(db.collection(COLLECTION_NAME).document(String.valueOf(id)).get()).toObject(Product.class);
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
     public List<Product> getProductsByCategoryId(long id) {
         try {
             return Tasks.await(db.collection(COLLECTION_NAME).whereEqualTo("categoryId", id).get()).toObjects(Product.class);

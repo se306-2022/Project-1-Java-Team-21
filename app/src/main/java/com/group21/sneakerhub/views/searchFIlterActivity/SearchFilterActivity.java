@@ -37,7 +37,6 @@ public class SearchFilterActivity extends AppCompatActivity {
     ViewHolder vh;
     SearchFilterViewModel searchFilterVM;
     Animation shakeAnimation;
-    float x1, x2, y1, y2;
 
     class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -97,7 +96,6 @@ public class SearchFilterActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
                 List<Float> rangeValues = slider.getValues();
-                System.out.println(rangeValues.get(0) + " " + rangeValues.get(1));
                 searchFilterVM.setLowerPriceRange(Math.round(rangeValues.get(0)));
                 searchFilterVM.setUpperPriceRange(Math.round(rangeValues.get(1)));
                 vh.sliderMinText.setText("$" + rangeValues.get(0).toString());
@@ -171,6 +169,13 @@ public class SearchFilterActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Logic to handle how the data collected from the toggle buttons and
+     * the searchview will be passed to the searchresults list activity when
+     * the return key is pressed by the user on the physical keyboard.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the options menu from XML
@@ -251,7 +256,6 @@ public class SearchFilterActivity extends AppCompatActivity {
     /**
      * Generic event handler for all the toggle buttons of the colours
      */
-
     public void coloursEventHandler(View v){
 
         // use typecast to change v from a generic view to of type CheckBox

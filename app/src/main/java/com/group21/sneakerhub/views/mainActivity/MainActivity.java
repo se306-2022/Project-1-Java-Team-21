@@ -50,11 +50,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener, CategoriesAdapter.ItemClickListener2 {
 
-
     private RecyclerViewAdapter adapter;
     private CategoriesAdapter adapter2;
-    private List<Product> featured;
+    private ArrayList<String> countryList;
+    private ArrayList<String> brandNames;
+    private ArrayList<String> productColors;
+    private ArrayList<Double> productPrices;
+    private ArrayList<Integer> brandImages;
+
     ViewHolder vh;
+    MainViewModel mainViewModel;
 
     float x1, x2, y1, y2;
 
@@ -68,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         RecyclerView rv1 = (RecyclerView) findViewById(R.id.rvBrands);
         RecyclerView rv2 = (RecyclerView) findViewById(R.id.rvBrands2);
         SearchView searchbar = (SearchView) findViewById(R.id.menu_search_main);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
     }
 
     @Override
@@ -77,13 +83,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         getSupportActionBar().hide();
 
         vh = new ViewHolder();
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-
-        ArrayList<String> countryList = new ArrayList<>();
-        countryList.add("Air Jordan");
-        countryList.add("Nike");
-        countryList.add("Adidas");
-        countryList.add("Vans");
+        /**
+         * populating the category recycler view with data from the database.
+         */
+        countryList = new ArrayList<>();
+        mainViewModel.getCategories().observe( this, categoryList -> {
+            for (Category c : categoryList){
+                countryList.add(c.getName());
+            }
+        });
 
         ArrayList<Integer> colorsListView = new ArrayList<>();
         colorsListView.add(Color.rgb(242,228,255));
@@ -97,16 +107,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         imagesListView.add(R.drawable.adidas_logo);
         imagesListView.add(R.drawable.vans_logo);
 
-
-
-        MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        /**
+         * Populating the Trending/ featured products recycler view with data from the
+         * db.
+         */
         mainViewModel.getTrendingProducts().observe(this, productList -> {
 
-
-            ArrayList<String> brandNames = new ArrayList<>();
-            ArrayList<String> productColors = new ArrayList<>();
-            ArrayList<Double> productPrices = new ArrayList<>();
-            ArrayList<Integer> brandImages = new ArrayList<>();
+            brandNames = new ArrayList<>();
+            productColors = new ArrayList<>();
+            productPrices = new ArrayList<>();
+            brandImages = new ArrayList<>();
 
             for (Product p : productList) {
                 brandNames.add(p.getName());
@@ -115,44 +125,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 brandImages.add(getResources().getIdentifier("s" + p.getImageUrls().get(0), "drawable", getPackageName()));
             }
 
-
-            RecyclerView recyclerView = findViewById(R.id.rvBrands);
             LinearLayoutManager horizontalLayoutManager
                     = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-            recyclerView.setLayoutManager(horizontalLayoutManager);
+            vh.rv1.setLayoutManager(horizontalLayoutManager);
             adapter = new RecyclerViewAdapter(this, productColors, brandNames, brandImages, productPrices);
-            //adapter = new RecyclerViewAdapter(this, productImages, productNames, productColors, productPrices);
             adapter.setClickListener(this);
-            recyclerView.setAdapter(adapter);
+            vh.rv1.setAdapter(adapter);
         });
 
 
-        ArrayList<Product> products = new ArrayList<>();
-        List<Integer> sizes = new ArrayList<Integer>() {{
-            add(7);
-            add(8);
-        } };
-
-        List<String> featuress = new ArrayList<String>() {{
-            add("z");
-            add("b");
-        } };
-
-        List<String> images = new ArrayList<String>() {{
-            add("test_1");
-            add("test_11");
-        } };
-
-        List<String> images2 = new ArrayList<String>() {{
-            add("test_2");
-            add("test_11");
-        } };
-
-        List<String> images3 = new ArrayList<String>() {{
-            add("test_3");
-            add("test_11");
-        } };
-
+        /**
+         * Toggling the visibility of all the views in the main activity,
+         * while the data is being fetched from the database.
+         */
         // set up the loading screen
         mainViewModel.isLoading.observe(this, isLoading -> {
             if (isLoading) {
@@ -180,48 +165,24 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         });
 
 
-        RecyclerView recyclerView2 = findViewById(R.id.rvBrands2);
+
         LinearLayoutManager verticalLayoutManager
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
-        recyclerView2.setLayoutManager(verticalLayoutManager);
+        vh.rv2.setLayoutManager(verticalLayoutManager);
         adapter2 = new CategoriesAdapter(this, colorsListView, countryList, imagesListView);
         adapter2.setClickListener2(this);
-        recyclerView2.setAdapter(adapter2);
+        vh.rv2.setAdapter(adapter2);
 
-        // searchbar edit text listener
-        /*
-        vh.searchbar.setOnKeyListener(new View.OnKeyListener() {
 
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // keyevent on return key pressed by user
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // checks whether the search is empty
-                    if (vh.searchbar.getText().toString() != null && !(vh.searchbar.getText().toString().trim().isEmpty())) {
-                        Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
-                        // remove white spaces on either end on query string
-                        intent.putExtra("query", vh.searchbar.getText().toString().trim());
-                        intent.putExtra("callingActivity", "MainActivity");
-                        startActivity(intent);
-                    } else {
-                        // informs user that search is empty
-                        Toast.makeText(getApplicationContext(), "Search query is empty", Toast.LENGTH_LONG).show();
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-        */
-
-        // Initialize and assign object for nav bar
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
+        /**
+         * Implementation of logic to switch activities on click of the buttons of the navigation bar,
+         * fixed to the bottom of the activity.
+         */
         // Set Home selected
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        vh.bottomNavigationView.setSelectedItemId(R.id.home);
 
         // implement event listener
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        vh.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -242,6 +203,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     }
 
+    /**
+     * On click event listener for the featured sneakers recycler view in the main activity,
+     * clicking on a sneaker takes you to the details page of the sneaker.
+     * @param view
+     * @param position
+     */
     @Override
     public void onItemClick(View view, int position) {
         String currentColorInput = adapter.getColourMethod(position);
@@ -254,12 +221,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         startActivity(intent);
     }
 
-
+    /**
+     * Method handles the configuration of the searchbar at the top of the main activity.
+     * Pressing the enter button on the physical keyboard takes you to the searchresults list
+     * activity for that query string.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        vh.searchbar.setQueryHint("Search for sneaker...");
         vh.searchbar.setSubmitButtonEnabled(false);
-
+        vh.searchbar.setQueryHint("Search for sneaker here...");
         vh.searchbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // when user hits return the final search string is returned
             @Override
@@ -294,6 +266,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         return true;
     }
 
+    /**
+     * On click event listener for the categories recycler view, clickin on a category, takes you
+     * to the list activity for that category.
+     * @param view
+     * @param position
+     */
     @Override
     public void onItemClick2(View view, int position) {
         Intent intent = new Intent(getBaseContext(), ListActivity.class);
@@ -302,6 +280,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     }
 
+    /**
+     * event listener which takes you to the searchfilter activity when the user performs a
+     * slide motion with their finger on the screen.
+     * @param touchEvent
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent touchEvent){
         switch(touchEvent.getAction()){

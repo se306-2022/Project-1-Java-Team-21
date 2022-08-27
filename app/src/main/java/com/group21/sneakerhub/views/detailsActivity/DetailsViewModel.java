@@ -20,7 +20,6 @@ import java.util.List;
 
 public class DetailsViewModel extends ViewModel {
     MutableLiveData<List<Product>> detailProduct;
-    MutableLiveData<Product> currentlySelectedProduct;
     MutableLiveData<Boolean> productIsFavourite = new MutableLiveData<>();
 
     ISearchProductByName searchProductByName;
@@ -51,30 +50,6 @@ public class DetailsViewModel extends ViewModel {
         }
         return detailProduct;
     }
-
-    public void removeProductFromFavourite(Product product){
-
-        Thread thread1 = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                removeProductFromFavourite.removeProductFromFavourite(product);
-            }
-        });
-
-        thread1.start();
-    }
-
-    public void addProductToFavourite(Product product){
-        Thread thread1 = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                addProductToFavourite.addProductToFavourite(product);
-            }
-        });
-
-        thread1.start();
-    }
-
 
     public void addRating(Product product, double rating){
         Thread thread1 = new Thread(new Runnable(){

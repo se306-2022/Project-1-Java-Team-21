@@ -9,8 +9,6 @@ public interface IProductRepository {
 
    List<Product> getProducts();
 
-   Product getProductById(long id);
-
    List<Product> getProductsByCategoryId(long id);
 
    List<Product> getFavouriteProducts();

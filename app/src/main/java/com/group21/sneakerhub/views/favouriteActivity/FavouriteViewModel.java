@@ -22,14 +22,10 @@ public class FavouriteViewModel extends ViewModel {
     MutableLiveData<Boolean> productIsFavourite = new MutableLiveData<>();
 
     IGetFavouriteProducts getFavouriteProducts;
-    IRemoveProductFromFavourite removeProductFromFavourite;
-    IAddProductToFavourite addProductToFavourite;
     IToggleProductIsFavourite toggleProductIsFavourite;
 
     public FavouriteViewModel(){
         getFavouriteProducts = new GetFavouriteProducts();
-        removeProductFromFavourite = new RemoveProductFromFavourite();
-        addProductToFavourite = new AddProductToFavourite();
         toggleProductIsFavourite = new ToggleProductIsFavourite();
     }
 
@@ -53,39 +49,6 @@ public class FavouriteViewModel extends ViewModel {
 
         }
         return favouriteProducts;
-    }
-
-    /**
-     * When the user 'unhearts' a product from the favourite activity, the isFavourite boolean
-     * for that product in the db is changed to false, so next time favourite activity is loaded
-     * up that that product wont be on it.
-     * @param product
-     */
-    public void removeProductFromFavourite(Product product){
-
-        Thread thread1 = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                removeProductFromFavourite.removeProductFromFavourite(product);
-            }
-        });
-
-        thread1.start();
-    }
-
-    /**
-     * Setting the value for isFavourite for product in db to true, this is incase the user unhearts
-     * then hearts again in same session on activity.
-     */
-    public void addProductToFavourite(Product product){
-        Thread thread1 = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                addProductToFavourite.addProductToFavourite(product);
-            }
-        });
-
-        thread1.start();
     }
 
     public LiveData<Boolean> toggleProductIsFavourite(Product product) {

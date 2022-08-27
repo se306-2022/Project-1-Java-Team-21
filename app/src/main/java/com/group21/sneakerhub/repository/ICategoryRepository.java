@@ -8,5 +8,4 @@ public interface ICategoryRepository {
 
     public List<Category> getCategories();
 
-    public Category getCategoryById(String inputId);
 }

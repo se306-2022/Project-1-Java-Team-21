@@ -33,9 +33,9 @@ public class CustomListAdaptor extends ArrayAdapter {
 
     public CustomListAdaptor(@NonNull Context context, int resource, @NonNull List<Product> objects) {
         super(context, resource, objects);
-        mLayoutId = resource; // layout xml file we made (custom)
-        mContext = context; // the class it is in
-        products = objects; // the data to show in the list view
+        mLayoutId = resource;
+        mContext = context;
+        products = objects;
     }
 
     @NonNull
@@ -47,11 +47,11 @@ public class CustomListAdaptor extends ArrayAdapter {
         // checks if the view that the list view is about to show has been created already, and
         // therefore just needs to be recycled or does it need to be created from scratch
 
-        // Check if the existing view is being reused, otherwise inflate the view
         if (currentListViewItem == null) {
             currentListViewItem = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
         }
-        //Get the Number object for the current position
+
+        //Get the product object for the current position
         // if the view is already been created and just needs to be recycled
         Product currentProduct = products.get(position);
 

@@ -19,13 +19,10 @@ import java.util.List;
 
 public class MainViewModel extends ViewModel {
     MutableLiveData<List<Product>> trendingProducts;
-    MutableLiveData<List<Product>> searchedProducts;
     MutableLiveData<List<Category>> categories;
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
-    MutableLiveData<List<Product>> products;
     IGetProductsByCategoryId getProductsByCategoryId;
-
     IGetTrendingProducts getTrendingProducts;
     ISearchProducts searchProducts;
     IGetCategories getCategories;
@@ -37,21 +34,6 @@ public class MainViewModel extends ViewModel {
         getCategories = new GetCategories();
 
         getProductsByCategoryId = new GetProductsByCategoryId();
-    }
-
-    public LiveData<List<Product>> getProductsByCategoryId(long id){
-        if (products == null) {
-            products = new MutableLiveData<>();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    isLoading.postValue(true);
-                    products.postValue(getProductsByCategoryId.getProductsByCategoryId(id));
-                    isLoading.postValue(false);
-                }
-            }).start();
-        }
-        return products;
     }
 
     public LiveData<List<Product>> getTrendingProducts() {
@@ -67,21 +49,6 @@ public class MainViewModel extends ViewModel {
             }).start();
         }
         return trendingProducts;
-    }
-
-    public LiveData<List<Product>> getSearchedProducts(String search) {
-        if (searchedProducts == null) {
-            searchedProducts = new MutableLiveData<>();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    isLoading.postValue(true);
-                    searchedProducts.postValue(searchProducts.searchProducts(search));
-                    isLoading.postValue(false);
-                }
-            }).start();
-        }
-        return searchedProducts;
     }
 
     public LiveData<List<Category>> getCategories() {

@@ -41,6 +41,7 @@ import java.util.List;
 public class ListActivity extends AppCompatActivity {
     ViewHolder vh;
     CustomListAdaptor itemsAdapter;
+    ListViewModel listViewModel;
 
     class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -49,6 +50,7 @@ public class ListActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list_activity);
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button_list);
         LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
+        LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
     }
 
     @Override
@@ -59,7 +61,7 @@ public class ListActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        ListViewModel listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
 
         Intent intent = getIntent();
         String brandName = intent.getStringExtra("brandName");
@@ -79,7 +81,9 @@ public class ListActivity extends AppCompatActivity {
         vh.listView.setAdapter(itemsAdapter);
 
 
-        // listener navigates to the detail activity for the specific sneaker than gets clicked on
+        /**
+         * listener navigates to the detail activity for the specific sneaker than gets clicked on
+         */
         vh.listView.setOnItemClickListener((parent, view, position, id) -> {
             // create an intent that navigates to NumbersActivity class
             Intent detailPage = new Intent(getBaseContext(), DetailsActivity.class);
@@ -122,8 +126,12 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        vh.bottomNavigationView.setSelectedItemId(R.id.home);
 
+        /**
+         * Implementation of logic to switch activities on click of the buttons of the navigation bar,
+         * fixed to the bottom of the activity.
+         */
+        vh.bottomNavigationView.setSelectedItemId(R.id.home);
         // implement event listener for nav bar
         vh.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -153,17 +161,18 @@ public class ListActivity extends AppCompatActivity {
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // change visibility of toolbar
-            // reference has to be here, cant be in viewholder
-            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
-            navBarWrapper.setVisibility(View.GONE);
+            vh.navBarWrapper.setVisibility(View.GONE);
 
         } else {
-            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
-            navBarWrapper.setVisibility(View.VISIBLE);
-
+            vh.navBarWrapper.setVisibility(View.VISIBLE);
         }
     }
 
+    /**
+     * Inserting the xml for items for the list view adaptor according to the current category
+     * @param name
+     * @param products
+     */
     private void setAdaptorXmlByCategory(String name, List<Product> products){
 
         if (name.equals("Nike")){
@@ -177,6 +186,11 @@ public class ListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Setting the background colour of the back arrow button according to the category, as the top
+     * banner has a distinct colour for each category
+     * @param brand
+     */
     private void setBackButtonColorByCategory(String brand){
         if (brand.equals("Air Jordan")){
             vh.backButton.setBackgroundResource(R.drawable.aj_back_button);

@@ -23,7 +23,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     private LayoutInflater mInflater;
     private ItemClickListener2 mClickListener2;
 
-    // data is passed into the constructor
+    /** data is passed into the constructor */
     CategoriesAdapter(Context context, List<Integer> colors, List<String> brands, List<Integer> images) {
         this.mInflater = LayoutInflater.from(context);
         this.mViewColors = colors;
@@ -31,7 +31,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         this.mImages = images;
     }
 
-    // inflates the row layout from xml when needed
+    /** inflates the row layout from xml when needed */
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,8 +39,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         return new ViewHolder(view);
     }
 
-
-    // binds the data to the view and textview in each row
+    /** binds the data to the view and textview in each row */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int color = mViewColors.get(position);
@@ -51,13 +50,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         holder.myImageView.setImageResource(image);
     }
 
-    // total number of rows
+    /** total number of rows */
     @Override
     public int getItemCount() {
         return mBrands.size();
     }
 
-    // stores and recycles views as they are scrolled off screen
+    /** stores and recycles views as they are scrolled off screen */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView myView;
         TextView myTextView;
@@ -77,17 +76,17 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         }
     }
 
-    // convenience method for getting data at click position
+    /** convenience method for getting data at click position */
     public String getItem(int id) {
         return mBrands.get(id);
     }
 
-    // allows clicks events to be caught
+    /** allows clicks events to be caught */
     public void setClickListener2(ItemClickListener2 itemClickListener2) {
         this.mClickListener2 = itemClickListener2;
     }
 
-    // parent activity will implement this method to respond to click events
+    /** parent activity will implement this method to respond to click events */
     public interface ItemClickListener2 {
         void onItemClick2(View view, int position);
     }

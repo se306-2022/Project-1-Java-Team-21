@@ -11,9 +11,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder>{
     int[] images;
 
     public SliderAdapter(int[] images){
-
         this.images = images;
-
     }
 
     @Override
@@ -26,9 +24,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder>{
 
     @Override
     public void onBindViewHolder(Holder viewHolder, int position) {
-
         viewHolder.imageView.setImageResource(images[position]);
-
     }
 
     @Override

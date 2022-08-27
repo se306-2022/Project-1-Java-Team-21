@@ -107,24 +107,6 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         getSupportActionBar().hide();
 
-
-
-
-        //sliderView.startAutoCycle();
-
-
-//        ArrayList<Integer> colours; // [white, black, red]
-//        ArrayList<ArrayList<String>> allImages; // [ [20_1, 20_2, 20_3], [21_1, 21_2, 21_3], [22_1, 22_2, 22_3] ]
-//        ArrayList<ArrayList<String>> features; // [ [synthetic, fast], [authentic, limited], [synthetic, slow] ]
-//        String description; // fast shoe created in ...
-//        ArrayList<ArrayList<Integer>> availableSizes; // [ [8,9], [10, 11, 12], [8, 11] ]
-//        ArrayList<Integer> rating; // [4.5, 3.5, 5]
-//        ArrayList<Integer> numberOfUsersRated; // [17, 11, 4]
-        //double price;
-
-
-
-
         vh = new ViewHolder();
 
         Intent intent = getIntent();
@@ -258,9 +240,6 @@ public class DetailsActivity extends AppCompatActivity {
             TextView descriptionText = (TextView)findViewById(R.id.DescriptionText);
             TextView featuresText = (TextView)findViewById(R.id.DetailsText);
             TextView ratingText = (TextView)findViewById(R.id.RatingText);
-            RelativeLayout r1 = (RelativeLayout)findViewById(R.id.rating_holder);
-            RelativeLayout r2 = (RelativeLayout)findViewById(R.id.rating_holder2);
-            RelativeLayout r3 = (RelativeLayout)findViewById(R.id.rating_holder3);
 
             if (defaultColour.equals(colours2.get(indexOfSecond))) {
                 raPrivate2.setChecked(true);
@@ -297,13 +276,9 @@ public class DetailsActivity extends AppCompatActivity {
                 descriptionText.setText(description.get(indexOfFirst));
                 featuresText.setText(parseFeature(features.get(indexOfFirst)));
                 ratingText.setText(parseRating(rating.get(indexOfFirst)));
-//                r1.setVisibility(View.VISIBLE);
-//                r2.setVisibility(View.GONE);
-//                r3.setVisibility(View.GONE);
                 p1selected = true;
                 p2selected = false;
                 p3selected = false;
-                //detailsVM.addRating(favProducts.get(indexOfFirst), ratingGiven);
 
             } else if (raPrivate2.isChecked()) {
                 sliderView.setSliderAdapter(sliderAdapter2);
@@ -315,13 +290,9 @@ public class DetailsActivity extends AppCompatActivity {
                 favCurrentColor = colours2.get(indexOfSecond);
                 favCurrentName = names.get(indexOfSecond);
                 ratingText.setText(parseRating(rating.get(indexOfSecond)));
-//                r1.setVisibility(View.GONE);
-//                r2.setVisibility(View.VISIBLE);
-//                r3.setVisibility(View.GONE);
                 p1selected = false;
                 p2selected = true;
                 p3selected = false;
-                //detailsVM.addRating(favProducts.get(indexOfSecond), ratingGiven2);
 
             } else {
                 sliderView.setSliderAdapter(sliderAdapter3);
@@ -333,13 +304,9 @@ public class DetailsActivity extends AppCompatActivity {
                 favCurrentColor = colours2.get(indexOfThird);
                 favCurrentName = names.get(indexOfThird);
                 ratingText.setText(parseRating(rating.get(indexOfThird)));
-//                r1.setVisibility(View.GONE);
-//                r2.setVisibility(View.GONE);
-//                r3.setVisibility(View.VISIBLE);
                 p1selected = false;
                 p2selected = false;
                 p3selected = true;
-                //detailsVM.addRating(favProducts.get(indexOfThird), ratingGiven3);
             }
         });
 
@@ -555,7 +522,7 @@ public class DetailsActivity extends AppCompatActivity {
                     sliderView.setCurrentPagePosition(page);
                     productName.setText(names.get(indexOfFirst));
                     currentColor.setText(colours2.get(indexOfFirst));
-                //currentPrice.setText("$" + String.format("%.2f",prices.get(indexOfFirst).toString()));
+
                 currentPrice.setText("$" + String.format("%.2f", prices.get(indexOfFirst)));
                 sizingText.setText(parseSize(availableSizes.get(indexOfFirst)));
                 descriptionText.setText(description.get(indexOfFirst));
@@ -714,8 +681,6 @@ public class DetailsActivity extends AppCompatActivity {
         ratingExpanded = true;
         Button expanded = (Button)findViewById(R.id.expandedRating);
         expanded.setVisibility(View.VISIBLE);
-//        RelativeLayout ratingHolder = (RelativeLayout)findViewById(R.id.rating_holder);
-//        ratingHolder.setVisibility(View.VISIBLE);
         TextView ratingText = (TextView)findViewById(R.id.RatingText);
         ratingText.setVisibility(View.VISIBLE);
 
