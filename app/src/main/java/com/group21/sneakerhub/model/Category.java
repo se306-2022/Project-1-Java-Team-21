@@ -9,7 +9,7 @@ public class Category extends Entity {
     public String layout;
 
     /**
-     * No argument, empty constructor as required by firestone
+     * No argument, empty constructor as required by firestore
      */
     public Category(){
     }
@@ -22,11 +22,11 @@ public class Category extends Entity {
         this.layout = layout;
     }
 
-    public String GetURI() {
+    public String getURI() {
         return this.imageURI;
     }
 
-    public String GetColour(){
+    public String getColour(){
         return this.colour;
     }
 

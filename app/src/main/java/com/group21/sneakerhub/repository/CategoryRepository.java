@@ -1,11 +1,7 @@
 package com.group21.sneakerhub.repository;
 
-import androidx.annotation.NonNull;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.group21.sneakerhub.model.Adidas;
 import com.group21.sneakerhub.model.AirJordan;
 import com.group21.sneakerhub.model.Category;
@@ -66,16 +62,16 @@ public class CategoryRepository implements ICategoryRepository {
             for (Category categoryItem : categories) {
                 switch (categoryItem.getName()) {
                     case "Nike":
-                        categoryList.add(new Nike(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new Nike(categoryItem.getName(), categoryItem.getId(), categoryItem.getURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                     case "Adidas":
-                        categoryList.add(new Adidas(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new Adidas(categoryItem.getName(), categoryItem.getId(), categoryItem.getURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                     case "Vans":
-                        categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.getURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                     case "Air Jordan":
-                        categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.getURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                 }
             }

@@ -1,5 +1,6 @@
 package com.group21.sneakerhub.views.mainActivity;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,10 +18,10 @@ import com.group21.sneakerhub.usecases.searchProducts.SearchProducts;
 
 import java.util.List;
 
-public class MainViewModel extends ViewModel {
+public class SplashViewModel extends ViewModel {
     MutableLiveData<List<Product>> trendingProducts;
     MutableLiveData<List<Category>> categories;
-    MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isFinished = new MutableLiveData<>(false);
 
     IGetProductsByCategoryId getProductsByCategoryId;
     IGetTrendingProducts getTrendingProducts;
@@ -28,7 +29,7 @@ public class MainViewModel extends ViewModel {
     IGetCategories getCategories;
 
 
-    public MainViewModel() {
+    public SplashViewModel() {
         getTrendingProducts = new GetTrendingProducts();
         searchProducts = new SearchProducts();
         getCategories = new GetCategories();
@@ -42,9 +43,8 @@ public class MainViewModel extends ViewModel {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    isLoading.postValue(true);
                     trendingProducts.postValue(getTrendingProducts.getTrendingProducts());
-                    isLoading.postValue(false);
+                    isFinished.postValue(true);
                 }
             }).start();
         }
@@ -57,9 +57,7 @@ public class MainViewModel extends ViewModel {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    isLoading.postValue(true);
                     categories.postValue(getCategories.getCategories());
-                    isLoading.postValue(false);
                 }
             }).start();
         }

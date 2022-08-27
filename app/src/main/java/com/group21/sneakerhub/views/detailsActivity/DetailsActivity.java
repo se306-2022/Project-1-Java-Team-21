@@ -45,7 +45,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    ViewHolder vh;
+    private ViewHolder vh;
 
     private String query;
     private ArrayList<String> colours;
@@ -248,6 +248,8 @@ public class DetailsActivity extends AppCompatActivity {
 
                 if (favProducts.get(indexOfSecond).getIsFavourite()){
                     vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }else{
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
                 }
             } else if (defaultColour.equals(colours2.get(indexOfThird))) {
                 raPrivate3.setChecked(true);
@@ -256,6 +258,8 @@ public class DetailsActivity extends AppCompatActivity {
 
                 if (favProducts.get(indexOfThird).getIsFavourite()){
                     vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }else{
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
                 }
             } else {
                 raPrivate.setChecked(true);
@@ -264,6 +268,8 @@ public class DetailsActivity extends AppCompatActivity {
 
                 if (favProducts.get(indexOfFirst).getIsFavourite()){
                     vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                }else{
+                    vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
                 }
             }
 
@@ -609,10 +615,13 @@ public class DetailsActivity extends AppCompatActivity {
                 break;
             }
         }
+
         if (currentProduct.getIsFavourite()) {
             vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
         } else {
             vh.heartButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+            vh.likeAnimation.setVisibility(View.INVISIBLE);
+
         }
     }
 
@@ -651,7 +660,6 @@ public class DetailsActivity extends AppCompatActivity {
         Button expand = (Button)findViewById(R.id.expandDescription);
         expand.setVisibility(View.VISIBLE);
     }
-
 
     public void detailsClicked(View view) {
         TextView sizing = (TextView)findViewById(R.id.DetailsText);
@@ -725,8 +733,6 @@ public class DetailsActivity extends AppCompatActivity {
         ratingExpanded = false;
     }
 
-
-
     public static int[] convertIntegers(ArrayList<Integer> integers)
     {
         int[] ret = new int[integers.size()];
@@ -762,7 +768,6 @@ public class DetailsActivity extends AppCompatActivity {
         return ratingString;
     }
 
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -771,13 +776,12 @@ public class DetailsActivity extends AppCompatActivity {
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // change visibility of toolbar
             // reference has to be here, cant be in viewholder
-            vh.bottomNavigationView.setVisibility(View.GONE);
+            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
         } else {
 
             vh.bottomNavigationView.setVisibility(View.VISIBLE);
         }
     }
-
 
     public String returnColorValue(String colorString) {
         switch (colorString.toLowerCase()) {
