@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.List;
+
 public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder>{
 
-    int[] images;
+    List<Integer> images;
 
-    public SliderAdapter(int[] images){
+    public SliderAdapter(List<Integer> images){
         this.images = images;
     }
 
@@ -24,12 +26,12 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder>{
 
     @Override
     public void onBindViewHolder(Holder viewHolder, int position) {
-        viewHolder.imageView.setImageResource(images[position]);
+        viewHolder.imageView.setImageResource(images.get(position));
     }
 
     @Override
     public int getCount() {
-        return images.length;
+        return images.size();
     }
 
     public class Holder extends  SliderViewAdapter.ViewHolder{
