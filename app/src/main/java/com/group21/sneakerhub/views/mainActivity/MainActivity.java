@@ -265,6 +265,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void onItemClick2(View view, int position) {
         Intent intent = new Intent(getBaseContext(), ListActivity.class);
         intent.putExtra("brandName", vh.categoriesAdapter.getItem(position));
+        intent.putExtra("brandLogo", vh.categoriesAdapter.getLogoResource(position));
         startActivity(intent);
 
     }

@@ -81,6 +81,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     public String getItem(int id) {
         return mBrands.get(id);
     }
+    public int getLogoResource(int id) {
+        return mImages.get(id);
+    }
 
     /** allows clicks events to be caught */
     public void setClickListener(ItemClickListener2 itemClickListener2) {
