@@ -231,7 +231,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         vh.searchbar.setSubmitButtonEnabled(false);
-        vh.searchbar.setQueryHint("Search for sneaker here...");
         vh.searchbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // when user hits return the final search string is returned
             @Override

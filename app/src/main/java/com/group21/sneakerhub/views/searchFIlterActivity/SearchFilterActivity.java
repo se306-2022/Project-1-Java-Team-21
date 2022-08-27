@@ -181,8 +181,7 @@ public class SearchFilterActivity extends AppCompatActivity {
         // Inflate the options menu from XML
         //MenuInflater inflater = getMenuInflater();
         //inflater.inflate(R.menu.options_menu, menu);
-
-        vh.searchView.setQueryHint("Search for sneaker...");
+        vh.searchView.setQueryHint("");
         vh.searchView.setSubmitButtonEnabled(false);
 
         vh.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
