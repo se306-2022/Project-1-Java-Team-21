@@ -494,7 +494,6 @@
                         android:numStars="5"
                         android:scaleX="0.7"
                         android:scaleY="0.7"
-                        android:theme="@style/RbBlack"
                         android:stepSize=".5"
                         android:outlineAmbientShadowColor="@color/red"
                         android:transformPivotX="0dp"
