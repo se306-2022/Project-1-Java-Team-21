@@ -101,11 +101,15 @@ public class DetailsActivity extends AppCompatActivity {
     ArrayList<Double> prices = new ArrayList<>();
     ArrayList<Boolean> isFirst = new ArrayList<>();
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         getSupportActionBar().hide();
+
 
         vh = new ViewHolder();
 
