@@ -1,6 +1,7 @@
 package com.group21.sneakerhub.views.mainActivity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,14 @@ import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
-    private List<Integer> mViewColors;
+    private List<String> mViewColors;
     private List<String> mBrands;
     private List<Integer> mImages;
     private LayoutInflater mInflater;
     private ItemClickListener2 mClickListener2;
 
     /** data is passed into the constructor */
-    CategoriesAdapter(Context context, List<Integer> colors, List<String> brands, List<Integer> images) {
+    CategoriesAdapter(Context context, List<String> colors, List<String> brands, List<Integer> images) {
         this.mInflater = LayoutInflater.from(context);
         this.mViewColors = colors;
         this.mBrands = brands;
@@ -42,10 +43,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     /** binds the data to the view and textview in each row */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int color = mViewColors.get(position);
+        String color = mViewColors.get(position);
         String brand = mBrands.get(position);
         int image = mImages.get(position);
-        holder.myView.setCardBackgroundColor(color);
+        holder.myView.setCardBackgroundColor(Color.parseColor(color));
         holder.myTextView.setText(brand);
         holder.myImageView.setImageResource(image);
     }
@@ -82,7 +83,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     }
 
     /** allows clicks events to be caught */
-    public void setClickListener2(ItemClickListener2 itemClickListener2) {
+    public void setClickListener(ItemClickListener2 itemClickListener2) {
         this.mClickListener2 = itemClickListener2;
     }
 

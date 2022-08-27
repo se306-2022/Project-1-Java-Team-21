@@ -4,35 +4,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.slider.RangeSlider;
 import com.group21.sneakerhub.R;
-import com.group21.sneakerhub.model.AirJordan;
 import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.model.Product;
-import com.group21.sneakerhub.usecases.getCategories.GetCategories;
-import com.group21.sneakerhub.usecases.getCategories.IGetCategories;
 import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
-import com.group21.sneakerhub.views.mainActivity.MainViewModel;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import com.group21.sneakerhub.views.searchResultListActivity.CustomListAdaptor;
 
@@ -71,7 +61,7 @@ public class ListActivity extends AppCompatActivity {
         // set the header text
         vh.brandNameHeader.setText(currentCategory.getName());
         // set header background color as a hex
-        vh.headerBackground.setBackgroundColor(Color.parseColor(currentCategory.GetColour()));
+        vh.headerBackground.setBackgroundColor(Color.parseColor(currentCategory.getColour()));
         setBackButtonColorByCategory(currentCategory.getName());
 
 

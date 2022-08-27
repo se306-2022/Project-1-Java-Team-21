@@ -9,18 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 
 import android.widget.LinearLayout;
 
@@ -34,46 +28,44 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.model.Product;
-import com.group21.sneakerhub.repository.CategoryRepository;
-import com.group21.sneakerhub.repository.ProductRepository;
 import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
-import com.group21.sneakerhub.views.favouriteActivity.FavouriteViewModel;
 import com.group21.sneakerhub.views.listActivity.ListActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
+import com.group21.sneakerhub.views.splashActivity.SplashActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener, CategoriesAdapter.ItemClickListener2 {
 
-    private RecyclerViewAdapter adapter;
-    private CategoriesAdapter adapter2;
-    private ArrayList<String> countryList;
-    private ArrayList<String> brandNames;
-    private ArrayList<String> productColors;
-    private ArrayList<Double> productPrices;
-    private ArrayList<Integer> brandImages;
-
     ViewHolder vh;
-    MainViewModel mainViewModel;
+
+    List<String> categoryNames;
+    List<String> categoryColours;
+    List<String> productNames ;
+    List<String> productColours;
+    List<Double> productPrices;
+    List<Integer> productsDefaultImage;
 
     float x1, x2, y1, y2;
 
     class ViewHolder {
-        TextView textView1 = (TextView) findViewById(R.id.textView);
-        TextView textView2 = (TextView) findViewById(R.id.textView4);
-        TextView textView3 = (TextView) findViewById(R.id.textView5);
-        TextView textView4 = (TextView) findViewById(R.id.textView6);
+        SplashViewModel viewModel = new ViewModelProvider(MainActivity.this).get(SplashViewModel.class);
+        TextView appName = (TextView) findViewById(R.id.app_name);
+        TextView appDesc = (TextView) findViewById(R.id.app_desc);
+        TextView featuredTitle = (TextView) findViewById(R.id.featured_title);
+        TextView categoriesTitle = (TextView) findViewById(R.id.categories_title);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
-        RecyclerView rv1 = (RecyclerView) findViewById(R.id.rvBrands);
-        RecyclerView rv2 = (RecyclerView) findViewById(R.id.rvBrands2);
+        RecyclerView featuredRecyclerView = (RecyclerView) findViewById(R.id.featured_recyclerview);
+        RecyclerView categoriesRecyclerView = (RecyclerView) findViewById(R.id.categories_recyclerview);
         SearchView searchbar = (SearchView) findViewById(R.id.menu_search_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        RecyclerViewAdapter trendingProductsAdapter;
+        CategoriesAdapter categoriesAdapter;
     }
 
     @Override
@@ -83,95 +75,102 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         getSupportActionBar().hide();
 
         vh = new ViewHolder();
-        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-        /**
-         * populating the category recycler view with data from the database.
-         */
-        countryList = new ArrayList<>();
-        mainViewModel.getCategories().observe( this, categoryList -> {
-            for (Category c : categoryList){
-                countryList.add(c.getName());
-            }
-        });
-
-        ArrayList<Integer> colorsListView = new ArrayList<>();
-        colorsListView.add(Color.rgb(242,228,255));
-        colorsListView.add(Color.rgb(255,199,195));
-        colorsListView.add(Color.rgb(218,255,208));
-        colorsListView.add(Color.rgb(195,226,255));
-
-        ArrayList<Integer> imagesListView = new ArrayList<>();
-        imagesListView.add(R.drawable.airjordan_logo);
-        imagesListView.add(R.drawable.nike_logo);
-        imagesListView.add(R.drawable.adidas_logo);
-        imagesListView.add(R.drawable.vans_logo);
-
-        /**
-         * Populating the Trending/ featured products recycler view with data from the
-         * db.
-         */
-        mainViewModel.getTrendingProducts().observe(this, productList -> {
-
-            brandNames = new ArrayList<>();
-            productColors = new ArrayList<>();
-            productPrices = new ArrayList<>();
-            brandImages = new ArrayList<>();
-
-            for (Product p : productList) {
-                brandNames.add(p.getName());
-                productColors.add(p.getColor());
-                productPrices.add(p.getPrice());
-                brandImages.add(getResources().getIdentifier("s" + p.getImageUrls().get(0), "drawable", getPackageName()));
-            }
-
-            LinearLayoutManager horizontalLayoutManager
-                    = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-            vh.rv1.setLayoutManager(horizontalLayoutManager);
-            adapter = new RecyclerViewAdapter(this, productColors, brandNames, brandImages, productPrices);
-            adapter.setClickListener(this);
-            vh.rv1.setAdapter(adapter);
-        });
-
-
-        /**
-         * Toggling the visibility of all the views in the main activity,
-         * while the data is being fetched from the database.
-         */
-        // set up the loading screen
-        mainViewModel.isLoading.observe(this, isLoading -> {
-            if (isLoading) {
-                // set screen to progress bar
-                vh.textView1.setVisibility(View.GONE);
-                vh.textView2.setVisibility(View.GONE);
-                vh.textView3.setVisibility(View.GONE);
-                vh.textView4.setVisibility(View.GONE);
-                vh.searchbar.setVisibility(View.GONE);
-                vh.loadingContainer.setVisibility(View.VISIBLE);
-                vh.rv1.setVisibility(View.GONE);
-                vh.rv2.setVisibility(View.GONE);
-
-            } else {
-                // change from progress bar back to the activity
-                vh.textView1.setVisibility(View.VISIBLE);
-                vh.textView2.setVisibility(View.VISIBLE);
-                vh.textView3.setVisibility(View.VISIBLE);
-                vh.textView4.setVisibility(View.VISIBLE);
-                vh.loadingContainer.setVisibility(View.GONE);
-                vh.searchbar.setVisibility(View.VISIBLE);
-                vh.rv1.setVisibility(View.VISIBLE);
-                vh.rv2.setVisibility(View.VISIBLE);
-            }
-        });
-
-
+        LinearLayoutManager horizontalLayoutManager
+                = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        vh.featuredRecyclerView.setLayoutManager(horizontalLayoutManager);
 
         LinearLayoutManager verticalLayoutManager
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
-        vh.rv2.setLayoutManager(verticalLayoutManager);
-        adapter2 = new CategoriesAdapter(this, colorsListView, countryList, imagesListView);
-        adapter2.setClickListener2(this);
-        vh.rv2.setAdapter(adapter2);
+        vh.categoriesRecyclerView.setLayoutManager(verticalLayoutManager);
+
+        // retrieve all data from splash activity
+        Intent intent = getIntent();
+
+        ArrayList<Integer> brandImages = new ArrayList<>();
+        brandImages.add(R.drawable.airjordan_logo);
+        brandImages.add(R.drawable.nike_logo);
+        brandImages.add(R.drawable.adidas_logo);
+        brandImages.add(R.drawable.vans_logo);
+
+        if (!"SplashActivity".equals(intent.getStringExtra("callingActivity"))){
+            // retrieve all needed data from ViewModel
+            categoryNames = new ArrayList<>();
+            categoryColours = new ArrayList<>();
+            vh.viewModel.getCategories().observe( this, categories ->
+                    {
+                        for (Category category : categories) {
+                            categoryNames.add(category.getName());
+                            categoryColours.add(category.getColour());
+                        }
+
+                        // set adapter for categories recycler view
+                        vh.categoriesAdapter = new CategoriesAdapter(this, categoryColours, categoryNames, brandImages);
+                        vh.categoriesAdapter.setClickListener(this);
+                        vh.categoriesRecyclerView.setAdapter(vh.categoriesAdapter);                    }
+            );
+
+            productNames = new ArrayList<>();
+            productColours = new ArrayList<>();
+            productPrices = new ArrayList<>();
+            productsDefaultImage = new ArrayList<>();
+            vh.viewModel.getTrendingProducts().observe(this, products -> {
+                for (Product p : products) {
+                    productNames.add(p.getName());
+                    productColours.add(p.getColor());
+                    productPrices.add(p.getPrice());
+                    productsDefaultImage.add(getResources().getIdentifier("s" + p.getImageUrls().get(0), "drawable", getPackageName()));
+                }
+
+                // set adapter for featured products recycler view
+                vh.trendingProductsAdapter = new RecyclerViewAdapter(this, productColours, productNames, productsDefaultImage, productPrices);
+                vh.trendingProductsAdapter.setClickListener(this);
+                vh.featuredRecyclerView.setAdapter(vh.trendingProductsAdapter);
+            });
+
+            vh.viewModel.isFinished.observe(this, isFinished -> {
+                if (!isFinished) {
+                    // set screen to progress bar
+                    vh.appName.setVisibility(View.GONE);
+                    vh.appDesc.setVisibility(View.GONE);
+                    vh.featuredTitle.setVisibility(View.GONE);
+                    vh.categoriesTitle.setVisibility(View.GONE);
+                    vh.searchbar.setVisibility(View.GONE);
+                    vh.loadingContainer.setVisibility(View.VISIBLE);
+                    vh.featuredRecyclerView.setVisibility(View.GONE);
+                    vh.categoriesRecyclerView.setVisibility(View.GONE);
+
+                } else {
+                    // change from progress bar back to the activity
+                    vh.appName.setVisibility(View.VISIBLE);
+                    vh.appDesc.setVisibility(View.VISIBLE);
+                    vh.featuredTitle.setVisibility(View.VISIBLE);
+                    vh.categoriesTitle.setVisibility(View.VISIBLE);
+                    vh.loadingContainer.setVisibility(View.GONE);
+                    vh.searchbar.setVisibility(View.VISIBLE);
+                    vh.featuredRecyclerView.setVisibility(View.VISIBLE);
+                    vh.categoriesRecyclerView.setVisibility(View.VISIBLE);
+                }
+            });
+
+        } else {
+            categoryNames = intent.getStringArrayListExtra("categoryNames");
+            categoryColours = intent.getStringArrayListExtra("categoryColours");
+            productNames = intent.getStringArrayListExtra("productNames");
+            productColours = intent.getStringArrayListExtra("productColours");
+            productPrices = (ArrayList<Double>) intent.getSerializableExtra("productPrices");
+            productsDefaultImage = intent.getIntegerArrayListExtra("productsDefaultImage");
+
+            // set adapter for featured products recycler view
+            vh.trendingProductsAdapter = new RecyclerViewAdapter(this, productColours, productNames, productsDefaultImage, productPrices);
+            vh.trendingProductsAdapter.setClickListener(this);
+            vh.featuredRecyclerView.setAdapter(vh.trendingProductsAdapter);
+
+
+            // set adapter for categories recycler view
+            vh.categoriesAdapter = new CategoriesAdapter(this, categoryColours, categoryNames, brandImages);
+            vh.categoriesAdapter.setClickListener(this);
+            vh.categoriesRecyclerView.setAdapter(vh.categoriesAdapter);
+        }
 
 
         /**
@@ -211,10 +210,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
      */
     @Override
     public void onItemClick(View view, int position) {
-        String currentColorInput = adapter.getColourMethod(position);
+        String currentColorInput = vh.trendingProductsAdapter.getColourMethod(position);
 
         Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
-        intent.putExtra("sneakerName", adapter.getItem(position));
+        intent.putExtra("sneakerName", vh.trendingProductsAdapter.getItem(position));
         intent.putExtra("callingActivity", "MainActivity");
         intent.putExtra("currentColour", currentColorInput);
 
@@ -235,24 +234,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             // when user hits return the final search string is returned
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-                if (query != null && !(query.trim().isEmpty())) {
-                    Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
-                    // remove white spaces on either end on query string
-                    intent.putExtra("query", query.trim());
-                    intent.putExtra("callingActivity", "MainActivity");
-                    startActivity(intent);
-                } else {
-                    // informs user that search is empty
-                    Toast.makeText(getApplicationContext(), "Search query is empty", Toast.LENGTH_LONG).show();
-                }
+                Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
+                // remove white spaces on either end on query string
+                intent.putExtra("query", query.trim());
+                intent.putExtra("callingActivity", "MainActivity");
+                startActivity(intent);
                 return true;
             }
 
             // updates everytime a character changes in the searchbox
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 return false;
             }
         });
@@ -266,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     }
 
     /**
-     * On click event listener for the categories recycler view, clickin on a category, takes you
+     * On click event listener for the categories recycler view, clicking on a category, takes you
      * to the list activity for that category.
      * @param view
      * @param position
@@ -274,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void onItemClick2(View view, int position) {
         Intent intent = new Intent(getBaseContext(), ListActivity.class);
-        intent.putExtra("brandName", adapter2.getItem(position));
+        intent.putExtra("brandName", vh.categoriesAdapter.getItem(position));
         startActivity(intent);
 
     }
