@@ -60,12 +60,16 @@
 
             <android.widget.SearchView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="37dp"
                 android:id="@+id/menu_search_main"
+                android:visibility="gone"
+                android:queryBackground="@android:color/transparent"
+                app:queryBackground="@null"
                 android:background="@drawable/search_style"
+                android:backgroundTint="#EAEAEA"
                 android:paddingVertical="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="20dp"/>
+                android:layout_marginHorizontal="30dp"/>
 
             <TextView
                 android:id="@+id/featured_title"
