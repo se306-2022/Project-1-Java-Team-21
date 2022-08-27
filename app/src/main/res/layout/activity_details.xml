@@ -52,6 +52,7 @@
                     android:layout_marginTop="26dp"
                     android:layout_marginEnd="19dp"
                     android:visibility="invisible"
+                    app:lottie_enableMergePathsForKitKatAndAbove="true"
                     app:lottie_autoPlay="false"
                     app:lottie_rawRes="@raw/like" />
 
@@ -64,8 +65,10 @@
                     android:layout_marginTop="27dp"
                     android:layout_marginEnd="19dp"
                     android:visibility="invisible"
+                    app:lottie_enableMergePathsForKitKatAndAbove="true"
                     app:lottie_autoPlay="false"
-                    app:lottie_rawRes="@raw/unlike" />
+                    app:lottie_rawRes="@raw/unlike"
+                    />
 
 
                 <ToggleButton
@@ -494,7 +497,6 @@
                         android:numStars="5"
                         android:scaleX="0.7"
                         android:scaleY="0.7"
-                        android:theme="@style/RbBlack"
                         android:stepSize=".5"
                         android:outlineAmbientShadowColor="@color/red"
                         android:transformPivotX="0dp"
