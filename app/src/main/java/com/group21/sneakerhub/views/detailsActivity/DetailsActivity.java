@@ -600,8 +600,6 @@ public class DetailsActivity extends AppCompatActivity {
                     r3.setVisibility(View.VISIBLE);
                 }
 
-                //System.out.println("third colour given a rating of " + ratingGiven3);
-                //detailsVM.addRating(favProducts.get(indexOfThird), ratingGiven3);
                 break;
         }
         Product currentProduct = favProducts.get(0);

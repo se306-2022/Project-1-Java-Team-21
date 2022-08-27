@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.group21.sneakerhub.R;
@@ -83,6 +85,11 @@ public class SearchResultListActivity extends AppCompatActivity {
         if (callingActivity.equals("SearchFilterActivity")) {
             searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults -> {
 
+                // Add a toast message if the search result is empty
+                if (searchResults.size() == 0){
+                    Toast.makeText(getApplicationContext(), "There are no sneakers matching query", Toast.LENGTH_LONG).show();
+                }
+
                 CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results, searchResults);
 
                 // getting a reference to the ListView and setting its adapter
@@ -120,6 +127,11 @@ public class SearchResultListActivity extends AppCompatActivity {
             searchResultVM.getProductsbySearchString(query).observe(this, searchResults -> {
                 CustomListAdaptor itemsAdapter = new CustomListAdaptor(this, R.layout.list_view_row_results, searchResults);
 
+                // Add a toast message if the search result is empty
+                if (searchResults.size() == 0){
+                    Toast.makeText(getApplicationContext(), "There are no sneakers matching query", Toast.LENGTH_LONG).show();
+                }
+                
                 // getting a reference to the ListView and setting its adapter
                 vh.listView.setAdapter(itemsAdapter);
 
