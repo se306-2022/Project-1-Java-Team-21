@@ -2,8 +2,13 @@ package com.group21.sneakerhub.model;
 
 import java.util.List;
 
+/**
+ * Parent product class
+ */
+
 public class Product extends Entity {
 
+    // Variables
     private long categoryId;
     private double price;
     private String color;
@@ -16,6 +21,7 @@ public class Product extends Entity {
     private List<String> features;
     private boolean isFirst;
 
+    // Constructors
     public Product() {}
 
     public Product(String name, long id, long categoryId, double price, String color, List<Integer> availableSizes, double rating, int numberOfUsersRated, boolean isFavourite, List<String> imageUrls, String description, List<String> features, boolean isFirst) {
@@ -33,6 +39,8 @@ public class Product extends Entity {
         this.features = features;
         this.isFirst = isFirst;
     }
+
+    // Getters and setters
 
     public long getCategoryId() {
         return categoryId;

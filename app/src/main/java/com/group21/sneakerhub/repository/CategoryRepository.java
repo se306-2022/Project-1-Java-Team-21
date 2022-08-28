@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Category repository class which implements methods from the category database
+ */
+
 public class CategoryRepository implements ICategoryRepository {
 
     private List<Category> categoryList;

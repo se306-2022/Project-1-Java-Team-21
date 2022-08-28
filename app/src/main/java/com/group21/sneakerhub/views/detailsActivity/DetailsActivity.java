@@ -37,8 +37,15 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for UI implementation of Details Activity
+ */
+
 public class DetailsActivity extends AppCompatActivity {
 
+    /**
+     * Variables
+     */
     private ViewHolder vh;
     private List<Product> selectedProducts = new ArrayList<>();
     private Product selectedProduct;
@@ -55,9 +62,11 @@ public class DetailsActivity extends AppCompatActivity {
 
     boolean[] rated = new boolean[3];
     double[] newRatings = new double[3];
-        boolean ratingExpanded = false;
+    boolean ratingExpanded = false;
 
-
+    /**
+     * ViewHolder initialization
+     */
     class ViewHolder{
         DetailsViewModel viewModel = new ViewModelProvider(DetailsActivity.this).get(DetailsViewModel.class);;
         TextView productName = (TextView) findViewById(R.id.productName);
@@ -357,6 +366,11 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Methods for toggling sizing, description, features and rating
+     * @param view
+     */
+
     public void sizingClicked(View view) {
         vh.sizingText.setVisibility(View.VISIBLE);
         vh.expandSize.setVisibility(View.GONE);
@@ -417,6 +431,11 @@ public class DetailsActivity extends AppCompatActivity {
         ratingExpanded = false;
     }
 
+    /**
+     * Method that
+     * @param sizeList
+     * @return sizeString
+     */
     public String parseSize(List<Integer> sizeList) {
         String sizeString = "Available sizes:";
         for (Integer size : sizeList) {

@@ -1,5 +1,9 @@
 package com.group21.sneakerhub.model;
 
+/**
+ * Abstract entity class
+ */
+
 public abstract class Entity {
 
     public String name;
