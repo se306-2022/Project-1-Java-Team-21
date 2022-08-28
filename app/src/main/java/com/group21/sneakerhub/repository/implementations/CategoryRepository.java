@@ -1,4 +1,4 @@
-package com.group21.sneakerhub.repository;
+package com.group21.sneakerhub.repository.implementations;
 
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -7,6 +7,8 @@ import com.group21.sneakerhub.model.AirJordan;
 import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.model.Nike;
 import com.group21.sneakerhub.model.Vans;
+import com.group21.sneakerhub.repository.abstractions.ICategoryRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;

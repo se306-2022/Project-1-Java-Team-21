@@ -1,12 +1,10 @@
 package com.group21.sneakerhub.usecases.searchProductByName;
 
 import com.group21.sneakerhub.model.Product;
-import com.group21.sneakerhub.repository.IProductRepository;
-import com.group21.sneakerhub.repository.ProductRepository;
+import com.group21.sneakerhub.repository.abstractions.IProductRepository;
+import com.group21.sneakerhub.repository.implementations.ProductRepository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SearchProductByName implements ISearchProductByName{
     private static final IProductRepository productRepository = ProductRepository.getInstance();
