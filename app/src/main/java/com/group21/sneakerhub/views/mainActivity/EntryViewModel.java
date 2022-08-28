@@ -22,7 +22,7 @@ import java.util.List;
  * ViewModel for Splash Screen
  */
 
-public class SplashViewModel extends ViewModel {
+public class EntryViewModel extends ViewModel {
     MutableLiveData<List<Product>> trendingProducts;
     MutableLiveData<List<Category>> categories;
     public MutableLiveData<Boolean> isFinished = new MutableLiveData<>(false);
@@ -33,7 +33,7 @@ public class SplashViewModel extends ViewModel {
     IGetCategories getCategories;
 
     // Constructor
-    public SplashViewModel() {
+    public EntryViewModel() {
         getTrendingProducts = new GetTrendingProducts();
         searchProducts = new SearchProducts();
         getCategories = new GetCategories();

@@ -67,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
     /**
      * ViewHolder initialization
      */
-    class ViewHolder{
+    private class ViewHolder{
         DetailsViewModel viewModel = new ViewModelProvider(DetailsActivity.this).get(DetailsViewModel.class);;
         TextView productName = (TextView) findViewById(R.id.productName);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
