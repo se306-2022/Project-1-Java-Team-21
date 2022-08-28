@@ -9,11 +9,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:descendantFocusability="blocksDescendants" >
+        android:descendantFocusability="blocksDescendants"
+        android:paddingVertical="15dp">
 
         <TextView
             android:id="@+id/shoe_name"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/poppinsboldsemi"
             android:layout_height="wrap_content"
             android:text="Yeezy Boost 350"
             android:textColor="@color/blackd"
@@ -38,6 +40,7 @@
         <TextView
             android:id="@+id/shoe_description"
             android:layout_width="match_parent"
+            android:fontFamily="@font/poppins"
             android:layout_height="wrap_content"
             android:layout_below="@+id/shoe_name"
             android:layout_alignParentLeft="true"
@@ -55,6 +58,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsboldsemi"
             android:text="$450.00 +"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="15dp"

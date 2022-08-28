@@ -34,6 +34,10 @@ import com.group21.sneakerhub.views.searchResultListActivity.CustomListAdaptor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for UI implementation of Favourite Activity
+ */
+
 public class FavouriteActivity extends AppCompatActivity {
 
     ViewHolder vh;
@@ -47,6 +51,7 @@ public class FavouriteActivity extends AppCompatActivity {
         TextView loadingText = (TextView)  findViewById(R.id.loading_text);
         LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper_fav);
     }
 
 
@@ -160,18 +165,21 @@ public class FavouriteActivity extends AppCompatActivity {
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // change visibility of toolbar
-            // reference has to be here, cant be in viewholder
-            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper_fav);
-            navBarWrapper.setVisibility(View.GONE);
+            vh.navBarWrapper.setVisibility(View.GONE);
             vh.header.setVisibility(View.GONE);
 
         } else {
-            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper_fav);
-            navBarWrapper.setVisibility(View.VISIBLE);
+            vh.navBarWrapper.setVisibility(View.VISIBLE);
             vh.header.setVisibility(View.VISIBLE);
         }
     }
 
+    /**
+     * event listener which takes you to the searchfilter activity when the user performs a
+     * slide motion with their finger on the screen.
+     * @param touchEvent
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent touchEvent){
         switch(touchEvent.getAction()){

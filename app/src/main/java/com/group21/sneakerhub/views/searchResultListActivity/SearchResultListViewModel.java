@@ -16,10 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * View Model class for Search Results List Activity
+ */
+
 public class SearchResultListViewModel extends ViewModel {
     // fields
     MutableLiveData<List<Product>> searchResults;
-    Map<String,Integer> colorsMap;
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     MutableLiveData<List<Product>> nameSearchResult;
 
@@ -81,20 +84,5 @@ public class SearchResultListViewModel extends ViewModel {
 
         }
         return nameSearchResult;
-    }
-
-
-    public Map<String,Integer> colorAvailability(List<Product> products){
-
-        Thread thread1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                colorsMap = searchProductByName.colorAvailabilityBulk(products);
-            }
-        });
-
-        thread1.start();
-
-        return colorsMap;
     }
 }

@@ -14,11 +14,14 @@ import com.group21.sneakerhub.usecases.getProductsByCategoryId.IGetProductsByCat
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * View Model Class for List Activity
+ */
+
 public class ListViewModel extends ViewModel {
     /**
      * fields
      */
-    private List<Category> categoryList;
     private List<Product> productsPerCategory;
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private Category confirmedCategory;
@@ -75,8 +78,6 @@ public class ListViewModel extends ViewModel {
             @Override
             public void run() {
                 isLoading.postValue(true);
-                System.out.println("-------------brand name -------------------");
-                System.out.println(brandName);
                 for (Category c : getCategories.getCategories()){
                     if (c.getName().equals(brandName)){
                         confirmedCategory = c;
@@ -97,22 +98,4 @@ public class ListViewModel extends ViewModel {
         System.out.println(confirmedCategory.getName());
         return confirmedCategory;
     }
-
-    /**
-     * Use the name of the category to get its object
-     * public Category getCategory(){
-     *
-     *         for (Category category : getCategories()){
-     *             if (category.getName().equals(currentBrandName)){
-     *                 return category;
-     *             }
-     *         }
-     *
-     *         return null;
-     *     }
-     */
-
-
-
-
 }

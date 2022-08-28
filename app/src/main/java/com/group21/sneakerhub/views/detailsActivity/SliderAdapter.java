@@ -6,14 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.List;
+
 public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder>{
 
-    int[] images;
+    /**
+     * Adapter for image slider used in Details Activity
+     */
 
-    public SliderAdapter(int[] images){
+    List<Integer> images;
 
+    public SliderAdapter(List<Integer> images){
         this.images = images;
-
     }
 
     @Override
@@ -26,14 +30,14 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder>{
 
     @Override
     public void onBindViewHolder(Holder viewHolder, int position) {
-
-        viewHolder.imageView.setImageResource(images[position]);
-
+        // Setting image based on the position
+        viewHolder.imageView.setImageResource(images.get(position));
     }
 
+    // Getting the count of how many images there are per slider
     @Override
     public int getCount() {
-        return images.length;
+        return images.size();
     }
 
     public class Holder extends  SliderViewAdapter.ViewHolder{

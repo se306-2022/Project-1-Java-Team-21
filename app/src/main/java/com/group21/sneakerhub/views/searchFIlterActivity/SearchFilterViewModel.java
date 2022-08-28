@@ -5,8 +5,15 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * View Model for Search Filter Activity
+ */
+
 public class SearchFilterViewModel extends ViewModel {
 
+    /**
+     * Variables
+     */
     private volatile String liveQueryString;
     private String finalQueryString;
     private List<String> brandNames;
@@ -14,9 +21,10 @@ public class SearchFilterViewModel extends ViewModel {
     private int lowerPriceRange;
     private int UpperPriceRange;
 
+    // Constructor
     public SearchFilterViewModel(){
-        brandNames = new ArrayList<String>();
-        colours = new ArrayList<String>();
+        brandNames = new ArrayList<>();
+        colours = new ArrayList<>();
     }
 
     public String getLiveQueryString() {

@@ -13,80 +13,83 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/app_name"
             android:layout_width="match_parent"
             android:layout_height="88dp"
+            android:baselineAligned="false"
             android:fontFamily="@font/poppinsboldsemi"
             android:gravity="center"
             android:paddingTop="30dp"
             android:text="Sneaker Hub"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="41sp"
-            android:visibility="gone"/>
+            android:textSize="41sp" />
 
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/app_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:gravity="center"
-            android:visibility="gone"
             android:text="Easily purchase your favourite sneakers."
             android:textColor="#616161" />
 
         <LinearLayout
+            android:id="@+id/loading_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
-            android:id="@+id/loading_container">
+            android:orientation="vertical"
+            android:visibility="gone">
+
             <ProgressBar
                 android:id="@+id/progress_bar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:layout_margin="10dp" />
+
             <TextView
+                android:id="@+id/loading_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Loading..."
                 android:textColor="#a9a9a9"
-                android:gravity="center"
-                android:id="@+id/loading_text"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
         </LinearLayout>
 
         <android.widget.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:id="@+id/menu_search_main"
-            android:visibility="gone"
-            android:background="@drawable/search_style"
-            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="20dp"/>
+            android:background="@drawable/search_style"
+            android:backgroundTint="#D5D5D5"
+            android:paddingVertical="10dp"
+            android:queryBackground="@android:color/transparent"
+            app:queryBackground="@null" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/featured_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsboldsemi"
             android:paddingStart="30dp"
             android:paddingTop="10dp"
-            android:text="Featured"
+            android:text="Top rated"
             android:textColor="#000000"
-            android:visibility="gone"
             android:textSize="30sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBrands"
+            android:id="@+id/featured_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-           />
+            android:layout_marginStart="20dp" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/categories_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsboldsemi"
@@ -94,18 +97,17 @@
             android:paddingTop="20dp"
             android:text="Categories"
             android:textColor="#000000"
-            android:visibility="gone"
             android:textSize="30sp" />
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBrands2"
+            android:id="@+id/categories_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
             android:layout_marginStart="30dp"
-            android:visibility="gone"
-            android:layout_marginBottom="60dp"/>
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="60dp"
+            android:scrollbars="vertical" />
 
     </LinearLayout>
 
@@ -116,11 +118,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:visibility="visible"
         app:itemBackground="@color/blackd"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation"
-        app:labelVisibilityMode="unlabeled" />
+        app:labelVisibilityMode="unlabeled"
+        />
 
 </RelativeLayout>

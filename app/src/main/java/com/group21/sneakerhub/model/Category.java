@@ -2,6 +2,10 @@ package com.group21.sneakerhub.model;
 
 import com.google.firebase.firestore.Exclude;
 
+/**
+ * Parent category class
+ */
+
 public class Category extends Entity {
 
     public String imageURI;
@@ -9,7 +13,7 @@ public class Category extends Entity {
     public String layout;
 
     /**
-     * No argument, empty constructor as required by firestone
+     * No argument, empty constructor as required by firestore
      */
     public Category(){
     }
@@ -22,11 +26,11 @@ public class Category extends Entity {
         this.layout = layout;
     }
 
-    public String GetURI() {
+    public String getImageURI() {
         return this.imageURI;
     }
 
-    public String GetColour(){
+    public String getColour(){
         return this.colour;
     }
 

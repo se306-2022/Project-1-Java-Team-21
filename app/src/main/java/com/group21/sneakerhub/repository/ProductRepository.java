@@ -9,6 +9,10 @@ import com.group21.sneakerhub.model.Product;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Product repository class which implements methods from the product database
+ */
+
 public class ProductRepository implements IProductRepository{
     private final FirebaseFirestore db;
     private static ProductRepository instance;
@@ -24,20 +28,15 @@ public class ProductRepository implements IProductRepository{
         return instance;
     }
 
+    /**
+     * Methods to retrieve and update the database
+     *
+     */
+
     @Override
     public List<Product> getProducts() {
         try {
             return Tasks.await(db.collection(COLLECTION_NAME).get()).toObjects(Product.class);
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public Product getProductById(long id) {
-        try {
-            return Tasks.await(db.collection(COLLECTION_NAME).document(String.valueOf(id)).get()).toObject(Product.class);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;

@@ -18,7 +18,13 @@ import com.group21.sneakerhub.usecases.toggleProductIsFavourite.ToggleProductIsF
 
 import java.util.List;
 
+/**
+ * Class for View Model of Details Activity
+ */
+
 public class DetailsViewModel extends ViewModel {
+
+    // Variables
     MutableLiveData<List<Product>> detailProduct;
     MutableLiveData<Product> currentlySelectedProduct;
     MutableLiveData<Boolean> productIsFavourite = new MutableLiveData<>();
@@ -29,6 +35,7 @@ public class DetailsViewModel extends ViewModel {
     IAddRating addRating;
     IToggleProductIsFavourite toggleProductIsFavourite;
 
+    // Constructor
     public DetailsViewModel(){
         searchProductByName = new SearchProductByName();
         removeProductFromFavourite = new RemoveProductFromFavourite();
@@ -37,6 +44,7 @@ public class DetailsViewModel extends ViewModel {
         toggleProductIsFavourite = new ToggleProductIsFavourite();
     }
 
+    // Live data method
     public LiveData<List<Product>> getDetailPageProduct(String name){
         if (detailProduct == null) {
             detailProduct = new MutableLiveData<>();
@@ -52,6 +60,10 @@ public class DetailsViewModel extends ViewModel {
         return detailProduct;
     }
 
+    /**
+     * Removes product from favourites in the database
+     * @param product
+     */
     public void removeProductFromFavourite(Product product){
 
         Thread thread1 = new Thread(new Runnable(){
@@ -64,6 +76,10 @@ public class DetailsViewModel extends ViewModel {
         thread1.start();
     }
 
+    /**
+     * Adds the product to favourite in the database
+     * @param product
+     */
     public void addProductToFavourite(Product product){
         Thread thread1 = new Thread(new Runnable(){
             @Override
@@ -75,7 +91,11 @@ public class DetailsViewModel extends ViewModel {
         thread1.start();
     }
 
-
+    /**
+     * Adds a rating to the product
+     * @param product
+     * @param rating
+     */
     public void addRating(Product product, double rating){
         Thread thread1 = new Thread(new Runnable(){
             @Override
@@ -87,7 +107,11 @@ public class DetailsViewModel extends ViewModel {
         thread1.start();
     }
 
-
+    /**
+     * Toggle functionality for favourites
+     * @param product
+     * @return isFavourite boolean
+     */
     public LiveData<Boolean> toggleProductIsFavourite(Product product) {
         Thread thread1 = new Thread(new Runnable(){
             @Override

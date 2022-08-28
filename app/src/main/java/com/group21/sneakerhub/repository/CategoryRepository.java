@@ -1,11 +1,7 @@
 package com.group21.sneakerhub.repository;
 
-import androidx.annotation.NonNull;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.group21.sneakerhub.model.Adidas;
 import com.group21.sneakerhub.model.AirJordan;
 import com.group21.sneakerhub.model.Category;
@@ -14,6 +10,10 @@ import com.group21.sneakerhub.model.Vans;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+/**
+ * Category repository class which implements methods from the category database
+ */
 
 public class CategoryRepository implements ICategoryRepository {
 
@@ -66,16 +66,16 @@ public class CategoryRepository implements ICategoryRepository {
             for (Category categoryItem : categories) {
                 switch (categoryItem.getName()) {
                     case "Nike":
-                        categoryList.add(new Nike(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new Nike(categoryItem.getName(), categoryItem.getId(), categoryItem.getImageURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                     case "Adidas":
-                        categoryList.add(new Adidas(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new Adidas(categoryItem.getName(), categoryItem.getId(), categoryItem.getImageURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                     case "Vans":
-                        categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new Vans(categoryItem.getName(), categoryItem.getId(), categoryItem.getImageURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                     case "Air Jordan":
-                        categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.GetURI(), categoryItem.GetColour(), categoryItem.getLayoutInformation()));
+                        categoryList.add(new AirJordan(categoryItem.getName(), categoryItem.getId(), categoryItem.getImageURI(), categoryItem.getColour(), categoryItem.getLayoutInformation()));
                         break;
                 }
             }
@@ -83,20 +83,6 @@ public class CategoryRepository implements ICategoryRepository {
             e.printStackTrace();
         }
         return categoryList;
-    }
-
-    /**
-     * Get a specific Category document by querying its id field
-     * and map it to a single Category object
-     */
-    @Override
-    public Category getCategoryById(String inputId){
-        try {
-            return Tasks.await(db.collection("Categories").document(inputId).get()).toObject(Category.class);
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
 }

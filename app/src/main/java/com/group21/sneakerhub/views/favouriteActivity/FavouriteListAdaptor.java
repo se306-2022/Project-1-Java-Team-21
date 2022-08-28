@@ -20,6 +20,10 @@ import com.group21.sneakerhub.usecases.searchProductByName.SearchProductByName;
 
 import java.util.List;
 
+/**
+ * List Adaptor for the favourites activity
+ */
+
 public class FavouriteListAdaptor extends ArrayAdapter {
     int mLayoutId;
     List<Product> products;

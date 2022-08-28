@@ -5,11 +5,13 @@ import com.group21.sneakerhub.model.Product;
 
 import java.util.List;
 
+/**
+ * Interface for ProductRepository
+ */
+
 public interface IProductRepository {
 
    List<Product> getProducts();
-
-   Product getProductById(long id);
 
    List<Product> getProductsByCategoryId(long id);
 

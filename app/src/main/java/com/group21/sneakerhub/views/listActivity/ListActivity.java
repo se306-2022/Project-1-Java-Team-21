@@ -4,43 +4,39 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.slider.RangeSlider;
 import com.group21.sneakerhub.R;
-import com.group21.sneakerhub.model.AirJordan;
 import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.model.Product;
-import com.group21.sneakerhub.usecases.getCategories.GetCategories;
-import com.group21.sneakerhub.usecases.getCategories.IGetCategories;
 import com.group21.sneakerhub.views.detailsActivity.DetailsActivity;
 import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
-import com.group21.sneakerhub.views.mainActivity.MainViewModel;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import com.group21.sneakerhub.views.searchResultListActivity.CustomListAdaptor;
 
 import java.util.List;
 
+/**
+ * UI Implementation class for List Activity
+ */
+
 public class ListActivity extends AppCompatActivity {
     ViewHolder vh;
     CustomListAdaptor itemsAdapter;
+    ListViewModel listViewModel;
 
     class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -49,6 +45,8 @@ public class ListActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list_activity);
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button_list);
         LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
+        LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
+        ImageView brandLogo = (ImageView) findViewById(R.id.list_brand_logo);
     }
 
     @Override
@@ -59,19 +57,21 @@ public class ListActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        ListViewModel listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
 
         Intent intent = getIntent();
         String brandName = intent.getStringExtra("brandName");
+        int brandLogoImage = intent.getIntExtra("brandLogo",0);
 
         Category currentCategory = listViewModel.getCategory(brandName);
 
         // set the header text
         vh.brandNameHeader.setText(currentCategory.getName());
         // set header background color as a hex
-        vh.headerBackground.setBackgroundColor(Color.parseColor(currentCategory.GetColour()));
+        vh.headerBackground.setBackgroundColor(Color.parseColor(currentCategory.getColour()));
         setBackButtonColorByCategory(currentCategory.getName());
-
+        // set the brand logo image
+        vh.brandLogo.setBackgroundResource(brandLogoImage);
 
         //populate the list view
         List<Product> productFromCategory = listViewModel.getProductsByCategoryId(currentCategory.getId());
@@ -79,7 +79,9 @@ public class ListActivity extends AppCompatActivity {
         vh.listView.setAdapter(itemsAdapter);
 
 
-        // listener navigates to the detail activity for the specific sneaker than gets clicked on
+        /**
+         * listener navigates to the detail activity for the specific sneaker than gets clicked on
+         */
         vh.listView.setOnItemClickListener((parent, view, position, id) -> {
             // create an intent that navigates to NumbersActivity class
             Intent detailPage = new Intent(getBaseContext(), DetailsActivity.class);
@@ -122,8 +124,12 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        vh.bottomNavigationView.setSelectedItemId(R.id.home);
 
+        /**
+         * Implementation of logic to switch activities on click of the buttons of the navigation bar,
+         * fixed to the bottom of the activity.
+         */
+        vh.bottomNavigationView.setSelectedItemId(R.id.home);
         // implement event listener for nav bar
         vh.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -153,17 +159,20 @@ public class ListActivity extends AppCompatActivity {
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // change visibility of toolbar
-            // reference has to be here, cant be in viewholder
-            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
-            navBarWrapper.setVisibility(View.GONE);
+            vh.navBarWrapper.setVisibility(View.GONE);
+            vh.headerBackground.setVisibility(View.GONE);
 
         } else {
-            LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
-            navBarWrapper.setVisibility(View.VISIBLE);
-
+            vh.navBarWrapper.setVisibility(View.VISIBLE);
+            vh.headerBackground.setVisibility(View.VISIBLE);
         }
     }
 
+    /**
+     * Inserting the xml for items for the list view adaptor according to the current category
+     * @param name
+     * @param products
+     */
     private void setAdaptorXmlByCategory(String name, List<Product> products){
 
         if (name.equals("Nike")){
@@ -177,6 +186,11 @@ public class ListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Setting the background colour of the back arrow button according to the category, as the top
+     * banner has a distinct colour for each category
+     * @param brand
+     */
     private void setBackButtonColorByCategory(String brand){
         if (brand.equals("Air Jordan")){
             vh.backButton.setBackgroundResource(R.drawable.aj_back_button);
