@@ -49,7 +49,7 @@ public class SearchResultListActivity extends AppCompatActivity {
     private String callingActivity;
     SearchResultListViewModel searchResultVM;
 
-    class ViewHolder{
+    private class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
         LinearLayout collapseItem1 = (LinearLayout) findViewById(R.id.collapse_item_1);
