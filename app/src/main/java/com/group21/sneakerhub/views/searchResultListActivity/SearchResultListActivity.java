@@ -49,7 +49,7 @@ public class SearchResultListActivity extends AppCompatActivity {
     private String callingActivity;
     SearchResultListViewModel searchResultVM;
 
-    class ViewHolder{
+    private class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
         LinearLayout collapseItem1 = (LinearLayout) findViewById(R.id.collapse_item_1);
@@ -86,7 +86,7 @@ public class SearchResultListActivity extends AppCompatActivity {
         upperPrice = intent.getIntExtra("upperPrice",1000);
         callingActivity = intent.getStringExtra("callingActivity");
 
-        if (callingActivity.equals("SearchFilterActivity")) {
+        if ("SearchFilterActivity".equals(callingActivity) || ("DetailsActivity".equals(callingActivity))) {
             searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults -> {
 
                 // Add a toast message if the search result is empty
@@ -135,7 +135,7 @@ public class SearchResultListActivity extends AppCompatActivity {
                 if (searchResults.size() == 0){
                     Toast.makeText(getApplicationContext(), "There are no sneakers matching query", Toast.LENGTH_LONG).show();
                 }
-                
+
                 // getting a reference to the ListView and setting its adapter
                 vh.listView.setAdapter(itemsAdapter);
 

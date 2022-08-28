@@ -14,7 +14,7 @@ import com.group21.sneakerhub.R;
 import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.model.Product;
 import com.group21.sneakerhub.views.mainActivity.MainActivity;
-import com.group21.sneakerhub.views.mainActivity.SplashViewModel;
+import com.group21.sneakerhub.views.mainActivity.EntryViewModel;
 
 import java.util.ArrayList;
 
@@ -27,12 +27,12 @@ public class SplashActivity extends AppCompatActivity {
     private class ViewHolder{
         Animation animation;
         TextView textView;
-        SplashViewModel viewModel;
+        EntryViewModel viewModel;
 
         public ViewHolder() {
             this.animation = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.fade_in);
             this.textView = findViewById(R.id.title);
-            viewModel = new ViewModelProvider(SplashActivity.this).get(SplashViewModel.class);
+            viewModel = new ViewModelProvider(SplashActivity.this).get(EntryViewModel.class);
         }
     }
 

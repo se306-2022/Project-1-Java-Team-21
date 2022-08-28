@@ -38,7 +38,7 @@ public class ListActivity extends AppCompatActivity {
     CustomListAdaptor itemsAdapter;
     ListViewModel listViewModel;
 
-    class ViewHolder{
+    private class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         LinearLayout headerBackground = (LinearLayout) findViewById(R.id.list_header_background);
         TextView brandNameHeader = (TextView) findViewById(R.id.brand_name_header);

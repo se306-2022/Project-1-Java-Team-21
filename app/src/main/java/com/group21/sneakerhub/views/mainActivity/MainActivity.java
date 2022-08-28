@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +19,6 @@ import android.widget.LinearLayout;
 
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,7 +31,6 @@ import com.group21.sneakerhub.views.favouriteActivity.FavouriteActivity;
 import com.group21.sneakerhub.views.listActivity.ListActivity;
 import com.group21.sneakerhub.views.searchFIlterActivity.SearchFilterActivity;
 import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListActivity;
-import com.group21.sneakerhub.views.splashActivity.SplashActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     float x1, x2, y1, y2;
 
     class ViewHolder {
-        SplashViewModel viewModel = new ViewModelProvider(MainActivity.this).get(SplashViewModel.class);
+        EntryViewModel viewModel = new ViewModelProvider(MainActivity.this).get(EntryViewModel.class);
         TextView appName = (TextView) findViewById(R.id.app_name);
         TextView appDesc = (TextView) findViewById(R.id.app_desc);
         TextView featuredTitle = (TextView) findViewById(R.id.featured_title);

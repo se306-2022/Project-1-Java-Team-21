@@ -1,10 +1,10 @@
-package com.group21.sneakerhub.repository;
+package com.group21.sneakerhub.repository.implementations;
 
 import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.group21.sneakerhub.model.Product;
+import com.group21.sneakerhub.repository.abstractions.IProductRepository;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
  * Product repository class which implements methods from the product database
  */
 
-public class ProductRepository implements IProductRepository{
+public class ProductRepository implements IProductRepository {
     private final FirebaseFirestore db;
     private static ProductRepository instance;
     private static final String COLLECTION_NAME = "Products";

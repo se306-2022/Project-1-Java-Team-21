@@ -42,7 +42,7 @@ public class SearchFilterActivity extends AppCompatActivity {
     SearchFilterViewModel searchFilterVM;
     Animation shakeAnimation;
 
-    class ViewHolder{
+    private class ViewHolder{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         SearchView searchView = (SearchView) findViewById(R.id.menu_search);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);

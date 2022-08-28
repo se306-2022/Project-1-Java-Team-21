@@ -26,7 +26,6 @@ public class DetailsViewModel extends ViewModel {
 
     // Variables
     MutableLiveData<List<Product>> detailProduct;
-    MutableLiveData<Product> currentlySelectedProduct;
     MutableLiveData<Boolean> productIsFavourite = new MutableLiveData<>();
 
     ISearchProductByName searchProductByName;

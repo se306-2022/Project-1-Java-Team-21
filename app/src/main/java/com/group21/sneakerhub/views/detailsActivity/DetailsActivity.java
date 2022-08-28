@@ -67,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
     /**
      * ViewHolder initialization
      */
-    class ViewHolder{
+    private class ViewHolder{
         DetailsViewModel viewModel = new ViewModelProvider(DetailsActivity.this).get(DetailsViewModel.class);;
         TextView productName = (TextView) findViewById(R.id.productName);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -220,6 +220,7 @@ public class DetailsActivity extends AppCompatActivity {
                 switch (callingActivity) {
                     case "SearchResultListActivity": {
                         Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
+                        intent.putExtra("callingActivity","DetailsActivity");
                         intent.putExtra("query", query);
                         intent.putExtra("lowerPrice", lowerPrice);
                         intent.putExtra("upperPrice", upperPrice);

@@ -1,4 +1,4 @@
-package com.group21.sneakerhub.repository;
+package com.group21.sneakerhub.repository.abstractions;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.group21.sneakerhub.model.Product;

@@ -2,10 +2,10 @@ package com.group21.sneakerhub.usecases.searchProducts;
 
 import com.group21.sneakerhub.model.Category;
 import com.group21.sneakerhub.model.Product;
-import com.group21.sneakerhub.repository.CategoryRepository;
-import com.group21.sneakerhub.repository.ICategoryRepository;
-import com.group21.sneakerhub.repository.IProductRepository;
-import com.group21.sneakerhub.repository.ProductRepository;
+import com.group21.sneakerhub.repository.implementations.CategoryRepository;
+import com.group21.sneakerhub.repository.abstractions.ICategoryRepository;
+import com.group21.sneakerhub.repository.abstractions.IProductRepository;
+import com.group21.sneakerhub.repository.implementations.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +18,12 @@ public class SearchProducts implements ISearchProducts{
 
     @Override
     public List<Product> searchProducts(String search) {
+        // for other searches, return all products that match the search
+        List<Product> products = productRepository.getDefaultColourProducts();
+        if(search == null || search.isEmpty()){
+            return products;
+        }
+
         // if the search was a brand name, return all products in that brand
         List<Category> categories = categoryRepository.getCategories();
         Map<String,Long> brandNameToIdMap = new HashMap<>();
@@ -27,14 +33,6 @@ public class SearchProducts implements ISearchProducts{
 
         if(brandNameToIdMap.containsKey(search.toLowerCase())) {
             return productRepository.getProductsByCategoryId(brandNameToIdMap.get(search.toLowerCase()));
-        }
-
-
-        // for other searches, return all products that match the search
-        List<Product> products = productRepository.getDefaultColourProducts();
-
-        if(search.isEmpty()){
-            return products;
         }
 
         List<Product> searchProducts = new ArrayList<>();
