@@ -32,6 +32,10 @@ import com.group21.sneakerhub.views.searchResultListActivity.SearchResultListAct
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * UI Implementation for Search Filter Activity
+ */
+
 public class SearchFilterActivity extends AppCompatActivity {
 
     ViewHolder vh;

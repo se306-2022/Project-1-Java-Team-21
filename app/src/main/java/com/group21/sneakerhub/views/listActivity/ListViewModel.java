@@ -14,6 +14,10 @@ import com.group21.sneakerhub.usecases.getProductsByCategoryId.IGetProductsByCat
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * View Model Class for List Activity
+ */
+
 public class ListViewModel extends ViewModel {
     /**
      * fields

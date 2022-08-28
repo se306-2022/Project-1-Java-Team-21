@@ -18,6 +18,10 @@ import com.group21.sneakerhub.usecases.searchProducts.SearchProducts;
 
 import java.util.List;
 
+/**
+ * ViewModel for Splash Screen
+ */
+
 public class SplashViewModel extends ViewModel {
     MutableLiveData<List<Product>> trendingProducts;
     MutableLiveData<List<Category>> categories;
@@ -28,7 +32,7 @@ public class SplashViewModel extends ViewModel {
     ISearchProducts searchProducts;
     IGetCategories getCategories;
 
-
+    // Constructor
     public SplashViewModel() {
         getTrendingProducts = new GetTrendingProducts();
         searchProducts = new SearchProducts();
@@ -37,6 +41,7 @@ public class SplashViewModel extends ViewModel {
         getProductsByCategoryId = new GetProductsByCategoryId();
     }
 
+    // Getting the top rated products
     public LiveData<List<Product>> getTrendingProducts() {
         if (trendingProducts == null) {
             trendingProducts = new MutableLiveData<>();
@@ -51,6 +56,7 @@ public class SplashViewModel extends ViewModel {
         return trendingProducts;
     }
 
+    // Getting the categories
     public LiveData<List<Category>> getCategories() {
         if (categories == null) {
             categories = new MutableLiveData<>();

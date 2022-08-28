@@ -38,6 +38,9 @@ import com.group21.sneakerhub.views.splashActivity.SplashActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * UI implementation for Main Activity
+ */
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener, CategoriesAdapter.ItemClickListener2 {
 

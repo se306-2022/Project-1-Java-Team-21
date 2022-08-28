@@ -34,6 +34,10 @@ import com.group21.sneakerhub.views.searchResultListActivity.CustomListAdaptor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for UI implementation of Favourite Activity
+ */
+
 public class FavouriteActivity extends AppCompatActivity {
 
     ViewHolder vh;

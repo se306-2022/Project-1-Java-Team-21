@@ -30,9 +30,11 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder>{
 
     @Override
     public void onBindViewHolder(Holder viewHolder, int position) {
+        // Setting image based on the position
         viewHolder.imageView.setImageResource(images.get(position));
     }
 
+    // Getting the count of how many images there are per slider
     @Override
     public int getCount() {
         return images.size();

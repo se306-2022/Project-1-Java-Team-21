@@ -16,6 +16,10 @@ import com.group21.sneakerhub.usecases.toggleProductIsFavourite.ToggleProductIsF
 
 import java.util.List;
 
+/**
+ * Class for View Model of Favourites Activity
+ */
+
 public class FavouriteViewModel extends ViewModel {
     MutableLiveData<List<Product>> favouriteProducts;
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
