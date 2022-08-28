@@ -148,16 +148,12 @@ public class FavouriteActivity extends AppCompatActivity {
         // use typecast to change v from a generic view to of type togglebutton
         ToggleButton toggleButton = (ToggleButton) v;
         int index = Integer.parseInt(toggleButton.getTag().toString());
-       favouriteViewModel.toggleProductIsFavourite(products.get(index)).observe(this, isFavourite -> {
-           if (products.get(index).getIsFavourite()){
-               toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-           } else {
-               toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
-           }
-
-       });
-
-
+        if (products.get(index).getIsFavourite()){
+            toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+        } else {
+            toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+        }
+       favouriteViewModel.toggleProductIsFavourite(products.get(index));
     }
 
     @Override
