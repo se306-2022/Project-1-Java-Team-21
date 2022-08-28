@@ -10,6 +10,10 @@ import java.util.List;
 
 public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder>{
 
+    /**
+     * Adapter for image slider used in Details Activity
+     */
+
     List<Integer> images;
 
     public SliderAdapter(List<Integer> images){

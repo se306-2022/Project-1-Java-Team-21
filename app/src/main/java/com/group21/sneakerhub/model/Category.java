@@ -2,6 +2,10 @@ package com.group21.sneakerhub.model;
 
 import com.google.firebase.firestore.Exclude;
 
+/**
+ * Parent category class
+ */
+
 public class Category extends Entity {
 
     public String imageURI;
