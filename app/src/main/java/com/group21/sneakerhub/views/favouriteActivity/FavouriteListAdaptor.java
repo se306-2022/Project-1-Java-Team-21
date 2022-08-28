@@ -25,6 +25,7 @@ import java.util.List;
  */
 
 public class FavouriteListAdaptor extends ArrayAdapter {
+    ViewHolder vh;
     int mLayoutId;
     List<Product> products;
     Context mContext;
@@ -34,20 +35,31 @@ public class FavouriteListAdaptor extends ArrayAdapter {
         mLayoutId = resource; // layout xml file we made (custom)
         mContext = context; // the class it is in
         products = objects; // the data to show in the list view
+        vh = new ViewHolder();
     }
+
+    static class ViewHolder{
+        ImageView iconImageView;
+        View currentListViewItem;
+        TextView nameTextView;
+        TextView descriptionTextView;
+        TextView priceTextView;
+        ToggleButton favButton;
+    }
+
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         //Get a reference to the current ListView item
-        View currentListViewItem = convertView;
+        vh.currentListViewItem = convertView;
 
         // checks if the view that the list view is about to show has been created already, and
         // therefore just needs to be recycled or does it need to be created from scratch
 
         // Check if the existing view is being reused, otherwise inflate the view
-        if (currentListViewItem == null) {
-            currentListViewItem = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
+        if (vh.currentListViewItem == null) {
+            vh.currentListViewItem = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
         }
         //Get the Number object for the current position
         // if the view is already been created and just needs to be recycled
@@ -55,40 +67,40 @@ public class FavouriteListAdaptor extends ArrayAdapter {
 
         //Set the attributed of list_view_number_item views
         //setting the image view for the icon inside the about to be displayed list view
-        ImageView iconImageView = (ImageView) currentListViewItem.findViewById(R.id.sneaker_preview_img);
+        vh.iconImageView = (ImageView) vh.currentListViewItem.findViewById(R.id.sneaker_preview_img);
         int i = mContext.getResources().getIdentifier(
                 "s" + currentProduct.getImageUrls().get(0), "drawable",
                 mContext.getPackageName());
 
         //Setting the icon
-        iconImageView.setImageResource(i);
+        vh.iconImageView.setImageResource(i);
 
         // display the number of colors the shoe is available in
-        TextView nameTextView = (TextView) currentListViewItem.findViewById(R.id.shoe_description);
-        nameTextView.setText(currentProduct.getColor());
+        vh.nameTextView = (TextView) vh.currentListViewItem.findViewById(R.id.shoe_description);
+        vh.nameTextView.setText(currentProduct.getColor());
 
         // set the description of the shoe
-        TextView descriptionTextView = (TextView) currentListViewItem.findViewById(R.id.shoe_name);
-        descriptionTextView.setText(currentProduct.getName());
+        vh.descriptionTextView = (TextView) vh.currentListViewItem.findViewById(R.id.shoe_name);
+        vh.descriptionTextView.setText(currentProduct.getName());
 
         // set the price
-        TextView priceTextView = (TextView) currentListViewItem.findViewById(R.id.price_text);
-        priceTextView.setText("$" + String.format("%.2f", currentProduct.getPrice()));
+        vh.priceTextView = (TextView) vh.currentListViewItem.findViewById(R.id.price_text);
+        vh.priceTextView.setText("$" + String.format("%.2f", currentProduct.getPrice()));
 
         // set tag for favourite button
-        ToggleButton favButton = (ToggleButton) currentListViewItem.findViewById(R.id.heart_button);
-        favButton.setTag(position);
+        vh.favButton = (ToggleButton) vh.currentListViewItem.findViewById(R.id.heart_button);
+        vh.favButton.setTag(position);
         if (products.get(position).getIsFavourite()){
-            favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+            vh.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
         } else {
-            favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+            vh.favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
         }
 
 
         // set animation for card view
-        currentListViewItem.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.list));
+        vh.currentListViewItem.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.list));
 
-        return currentListViewItem;
+        return vh.currentListViewItem;
     }
 
 }
