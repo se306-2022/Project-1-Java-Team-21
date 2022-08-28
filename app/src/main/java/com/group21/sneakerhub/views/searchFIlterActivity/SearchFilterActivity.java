@@ -178,9 +178,6 @@ public class SearchFilterActivity extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the options menu from XML
-        //MenuInflater inflater = getMenuInflater();
-        //inflater.inflate(R.menu.options_menu, menu);
         vh.searchView.setQueryHint("");
         vh.searchView.setSubmitButtonEnabled(false);
 

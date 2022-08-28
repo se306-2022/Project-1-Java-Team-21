@@ -36,8 +36,7 @@
             android:id="@+id/menu_search"
             android:queryBackground="@android:color/transparent"
             app:queryBackground="@null"
-            android:backgroundTint="#EAEAEA"
-            android:background="@drawable/search_style"
+            android:backgroundTint="#d3d3d3"
             android:layout_marginHorizontal="10dp"
             android:paddingVertical="10dp"/>
 

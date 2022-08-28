@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ public class ListActivity extends AppCompatActivity {
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button_list);
         LinearLayout loadingContainer = (LinearLayout) findViewById(R.id.loading_container);
         LinearLayout navBarWrapper = (LinearLayout) findViewById(R.id.nav_bar_wrapper);
+        ImageView brandLogo = (ImageView) findViewById(R.id.list_brand_logo);
     }
 
     @Override
@@ -55,6 +57,7 @@ public class ListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String brandName = intent.getStringExtra("brandName");
+        int brandLogoImage = intent.getIntExtra("brandLogo",0);
 
         Category currentCategory = listViewModel.getCategory(brandName);
 
@@ -63,7 +66,8 @@ public class ListActivity extends AppCompatActivity {
         // set header background color as a hex
         vh.headerBackground.setBackgroundColor(Color.parseColor(currentCategory.getColour()));
         setBackButtonColorByCategory(currentCategory.getName());
-
+        // set the brand logo image
+        vh.brandLogo.setBackgroundResource(brandLogoImage);
 
         //populate the list view
         List<Product> productFromCategory = listViewModel.getProductsByCategoryId(currentCategory.getId());
@@ -152,9 +156,11 @@ public class ListActivity extends AppCompatActivity {
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // change visibility of toolbar
             vh.navBarWrapper.setVisibility(View.GONE);
+            vh.headerBackground.setVisibility(View.GONE);
 
         } else {
             vh.navBarWrapper.setVisibility(View.VISIBLE);
+            vh.headerBackground.setVisibility(View.VISIBLE);
         }
     }
 
