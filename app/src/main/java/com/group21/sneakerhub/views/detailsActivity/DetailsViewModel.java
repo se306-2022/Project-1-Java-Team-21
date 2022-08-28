@@ -92,7 +92,7 @@ public class DetailsViewModel extends ViewModel {
     }
 
     /**
-     * 
+     * Adds a rating to the product
      * @param product
      * @param rating
      */
@@ -107,7 +107,11 @@ public class DetailsViewModel extends ViewModel {
         thread1.start();
     }
 
-
+    /**
+     * Toggle functionality for favourites
+     * @param product
+     * @return isFavourite boolean
+     */
     public LiveData<Boolean> toggleProductIsFavourite(Product product) {
         Thread thread1 = new Thread(new Runnable(){
             @Override

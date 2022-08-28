@@ -29,6 +29,10 @@ import com.group21.sneakerhub.views.searchResultListActivity.CustomListAdaptor;
 
 import java.util.List;
 
+/**
+ * UI Implementation class for List Activity
+ */
+
 public class ListActivity extends AppCompatActivity {
     ViewHolder vh;
     CustomListAdaptor itemsAdapter;

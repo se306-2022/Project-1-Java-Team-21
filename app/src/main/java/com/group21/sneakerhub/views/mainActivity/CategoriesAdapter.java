@@ -16,6 +16,10 @@ import com.group21.sneakerhub.R;
 
 import java.util.List;
 
+/**
+ * Categories Adapter for Displaying the different categories in the Main Activity
+ */
+
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
     private List<String> mViewColors;

@@ -15,6 +15,10 @@ import com.group21.sneakerhub.R;
 
 import java.util.List;
 
+/**
+ * Recycler View Adapter for Top Rated products in Main Activity
+ */
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private List<String> mViewColors;
