@@ -154,7 +154,9 @@ public class FavouriteActivity extends AppCompatActivity {
            } else {
                toggleButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
            }
+
        });
+
 
     }
 

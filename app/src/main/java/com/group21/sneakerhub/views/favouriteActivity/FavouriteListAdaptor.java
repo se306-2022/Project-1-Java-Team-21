@@ -78,6 +78,12 @@ public class FavouriteListAdaptor extends ArrayAdapter {
         // set tag for favourite button
         ToggleButton favButton = (ToggleButton) currentListViewItem.findViewById(R.id.heart_button);
         favButton.setTag(position);
+        if (products.get(position).getIsFavourite()){
+            favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+        } else {
+            favButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+        }
+
 
         // set animation for card view
         currentListViewItem.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.list));
