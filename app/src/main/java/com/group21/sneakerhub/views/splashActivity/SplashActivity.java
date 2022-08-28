@@ -18,6 +18,10 @@ import com.group21.sneakerhub.views.mainActivity.SplashViewModel;
 
 import java.util.ArrayList;
 
+/**
+ * Splash activity loading screen
+ */
+
 public class SplashActivity extends AppCompatActivity {
 
     private class ViewHolder{

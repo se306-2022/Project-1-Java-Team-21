@@ -25,6 +25,10 @@ import org.w3c.dom.Text;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * List adaptor for Search Result List Activity
+ */
+
 public class CustomListAdaptor extends ArrayAdapter {
 
     int mLayoutId;
