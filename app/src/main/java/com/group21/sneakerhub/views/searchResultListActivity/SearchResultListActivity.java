@@ -86,7 +86,7 @@ public class SearchResultListActivity extends AppCompatActivity {
         upperPrice = intent.getIntExtra("upperPrice",1000);
         callingActivity = intent.getStringExtra("callingActivity");
 
-        if ("SearchFilterActivity".equals(callingActivity)) {
+        if ("SearchFilterActivity".equals(callingActivity) || ("DetailsActivity".equals(callingActivity))) {
             searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults -> {
 
                 // Add a toast message if the search result is empty
