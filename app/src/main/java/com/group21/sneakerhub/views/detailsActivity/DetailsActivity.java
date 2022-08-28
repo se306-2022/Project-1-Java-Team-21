@@ -220,6 +220,7 @@ public class DetailsActivity extends AppCompatActivity {
                 switch (callingActivity) {
                     case "SearchResultListActivity": {
                         Intent intent = new Intent(getApplicationContext(), SearchResultListActivity.class);
+                        intent.putExtra("callingActivity","DetailsActivity");
                         intent.putExtra("query", query);
                         intent.putExtra("lowerPrice", lowerPrice);
                         intent.putExtra("upperPrice", upperPrice);

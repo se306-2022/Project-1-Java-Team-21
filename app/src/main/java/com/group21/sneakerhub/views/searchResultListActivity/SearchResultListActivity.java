@@ -86,7 +86,7 @@ public class SearchResultListActivity extends AppCompatActivity {
         upperPrice = intent.getIntExtra("upperPrice",1000);
         callingActivity = intent.getStringExtra("callingActivity");
 
-        if (callingActivity.equals("SearchFilterActivity")) {
+        if ("SearchFilterActivity".equals(callingActivity)) {
             searchResultVM.getProductsBySearchFilter(query, brands, colours, lowerPrice, upperPrice).observe(this, searchResults -> {
 
                 // Add a toast message if the search result is empty
@@ -135,7 +135,7 @@ public class SearchResultListActivity extends AppCompatActivity {
                 if (searchResults.size() == 0){
                     Toast.makeText(getApplicationContext(), "There are no sneakers matching query", Toast.LENGTH_LONG).show();
                 }
-                
+
                 // getting a reference to the ListView and setting its adapter
                 vh.listView.setAdapter(itemsAdapter);
 
