@@ -1,8 +1,8 @@
 package com.group21.sneakerhub.usecases.getTrendingProducts;
 
 import com.group21.sneakerhub.model.Product;
-import com.group21.sneakerhub.repository.IProductRepository;
-import com.group21.sneakerhub.repository.ProductRepository;
+import com.group21.sneakerhub.repository.abstractions.IProductRepository;
+import com.group21.sneakerhub.repository.implementations.ProductRepository;
 
 import java.util.List;
 
